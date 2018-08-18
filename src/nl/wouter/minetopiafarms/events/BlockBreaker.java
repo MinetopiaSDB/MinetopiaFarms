@@ -40,7 +40,7 @@ public class BlockBreaker implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			if (CustomFlags.isAllowed(p, "mijn")) {
+			if (!CustomFlags.isAllowed(p, "mijn")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "mijn"));
 				e.setCancelled(true);
 				return;

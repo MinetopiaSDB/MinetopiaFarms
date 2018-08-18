@@ -39,7 +39,7 @@ public class FarmListener implements Listener {
 				return;
 			}
 			
-			if (CustomFlags.isAllowed(p, "farm")) {
+			if (!CustomFlags.isAllowed(p, "farm")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "farm"));
 				return;
 			}
