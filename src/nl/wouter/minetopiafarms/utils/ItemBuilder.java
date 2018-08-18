@@ -132,6 +132,7 @@ public class ItemBuilder {
 	 * @param owner
 	 *            The name of the skull's owner.
 	 */
+	@SuppressWarnings("deprecation")
 	public ItemBuilder setSkullOwner(String owner) {
 		try {
 			SkullMeta im = (SkullMeta) is.getItemMeta();

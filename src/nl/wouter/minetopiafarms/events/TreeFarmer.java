@@ -19,14 +19,13 @@ public class TreeFarmer implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
-		// GMC -> no effects
-		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-			return;
-		}	
-		
 		Player p = e.getPlayer();
-			
-		if (e.getBlock().getType() == Material.LOG || e.getBlock().getType() == Material.LOG_2) {
+
+		if (e.getBlock().getType().toString().contains("_LOG")) {
+			if (p.getGameMode() == GameMode.CREATIVE) {
+				p.sendMessage(Main.getMessage("Creative"));
+				return;
+			}
 			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Houthakker")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "houthakker"));
 				e.setCancelled(true);
@@ -37,12 +36,12 @@ public class TreeFarmer implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			
-			if (!CustomFlags.isAllowed(p, "houthakker")) {
+
+			if (CustomFlags.isAllowed(p, "houthakker")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "houthakker"));
 				return;
 			}
-			
+
 			Material blockType = e.getBlock().getType();
 			byte blockData = e.getBlock().getData();
 
@@ -59,7 +58,17 @@ public class TreeFarmer implements Listener {
 				@Override
 				public void run() {
 					e.getBlock().setType(blockType);
-					e.getBlock().setData((byte) blockData);
+					if (Utils.is113orUp()) {
+						//Is this efficient? No. 
+						//Is this good? No.
+						
+						//Feel free to fix it.
+						try {
+							e.getBlock().getClass().getMethod("setData", byte.class).invoke(e.getBlock(), blockData);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
 				}
 			}, 30 * 20);
 		}

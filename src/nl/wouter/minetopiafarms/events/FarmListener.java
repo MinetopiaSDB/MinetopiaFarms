@@ -21,13 +21,11 @@ public class FarmListener implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		// GMC -> no effects
-		if (p.getGameMode() == GameMode.CREATIVE) {
-			return;
-		}
-		
-
-		if (e.getBlock().getType() == Material.CROPS) {
+		if (e.getBlock().getType() == Utils.getCropsMaterial()) {
+			if (p.getGameMode() == GameMode.CREATIVE) {
+				p.sendMessage(Main.getMessage("Creative"));
+				return;
+			}
 			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Boer")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer"));
 				e.setCancelled(true);
@@ -54,9 +52,10 @@ public class FarmListener implements Listener {
 			e.setCancelled(true);
 			p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
 			Utils.wheatPlaces.add(e.getBlock().getLocation());
-			e.getBlock().setType(Material.CROPS);
-
-			e.getBlock().setData((byte) 0);
+			e.getBlock().setType(Utils.getCropsMaterial());
+			//Crops crop = (Crops) l.getBlock().getState().getData();
+			//crop.setState(CropState.SEEDED);
+			
 		}
 	}
 }

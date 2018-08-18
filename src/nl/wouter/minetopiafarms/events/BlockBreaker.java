@@ -12,17 +12,13 @@ import org.bukkit.inventory.ItemStack;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
+import nl.wouter.minetopiafarms.utils.XMaterial;
 import wouter.is.cool.SDBPlayer;
 
 public class BlockBreaker implements Listener {
 
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
-		// GMC -> no effects
-		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-			return;
-		}
-		
 		Player p = e.getPlayer();
 		
 		if (CustomFlags.hasFlag(p) && !p.hasPermission("minetopiafarms.bypassregions")) {
@@ -30,6 +26,10 @@ public class BlockBreaker implements Listener {
 		}
 
 		if (e.getBlock().getType().toString().contains("_ORE")) {
+			if (p.getGameMode() == GameMode.CREATIVE) {
+				p.sendMessage(Main.getMessage("Creative"));
+				return;
+			}
 			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Mijnwerker")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "mijnwerker"));
 				e.setCancelled(true);
@@ -62,8 +62,8 @@ public class BlockBreaker implements Listener {
 			} else if (blockType == Material.IRON_ORE) {
 				e.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT));
 			} else if (blockType == Material.LAPIS_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.INK_SACK, 1, (byte) 4));
-			} else if (blockType == Material.REDSTONE_ORE || blockType == Material.GLOWING_REDSTONE_ORE) {
+				e.getPlayer().getInventory().addItem(XMaterial.LAPIS_LAZULI.parseItem());
+			} else if (blockType == Material.REDSTONE_ORE) {
 				e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
 			}
 			e.getBlock().getDrops().clear();

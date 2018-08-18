@@ -1,5 +1,6 @@
 name: MinetopiaFarms
-version: 1.3
+version: 1.4
+api-version: 1.13
 author: MrWouter
 description: Farms en Mines
 main: nl.wouter.minetopiafarms.Main

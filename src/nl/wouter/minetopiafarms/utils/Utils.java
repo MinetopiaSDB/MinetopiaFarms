@@ -43,4 +43,11 @@ public class Utils {
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_");
 	}
+	
+	public static Material getCropsMaterial() {
+		if (is113orUp()) {
+			return Material.valueOf("WHEAT");
+		}
+		return Material.valueOf("CROPS");
+	}
 }
