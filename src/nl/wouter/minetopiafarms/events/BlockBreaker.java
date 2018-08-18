@@ -20,8 +20,8 @@ public class BlockBreaker implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		
-		if (CustomFlags.hasFlag(p) && !p.hasPermission("minetopiafarms.bypassregions")) {
+		if (CustomFlags.hasFlag(p)
+				&& (!p.hasPermission("minetopiafarms.bypassregions") && p.getGameMode() != GameMode.CREATIVE)) {
 			e.setCancelled(true);
 		}
 
@@ -45,8 +45,6 @@ public class BlockBreaker implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-
-			
 
 			Material blockType = e.getBlock().getType();
 			e.setCancelled(true);

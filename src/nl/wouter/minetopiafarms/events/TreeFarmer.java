@@ -1,7 +1,6 @@
 package nl.wouter.minetopiafarms.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,10 +21,6 @@ public class TreeFarmer implements Listener {
 		Player p = e.getPlayer();
 
 		if (e.getBlock().getType().toString().contains("_LOG")) {
-			if (p.getGameMode() == GameMode.CREATIVE) {
-				p.sendMessage(Main.getMessage("Creative"));
-				return;
-			}
 			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Houthakker")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "houthakker"));
 				e.setCancelled(true);
