@@ -41,23 +41,18 @@ public class TreeFarmer implements Listener {
 			byte blockData = e.getBlock().getData();
 
 			e.setCancelled(true);
-
 			for (ItemStack drop : e.getBlock().getDrops()) {
 				e.getPlayer().getInventory().addItem(drop);
 			}
 
 			e.getBlock().setType(Material.AIR);
-
 			Utils.handleToolDurability(e.getPlayer());
+			
 			Bukkit.getScheduler().runTaskLater(Main.pl, new Runnable() {
 				@Override
 				public void run() {
 					e.getBlock().setType(blockType);
 					if (Utils.is113orUp()) {
-						//Is this efficient? No. 
-						//Is this good? No.
-						
-						//Feel free to fix it.
 						try {
 							e.getBlock().getClass().getMethod("setData", byte.class).invoke(e.getBlock(), blockData);
 						} catch (Exception ex) {
