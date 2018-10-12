@@ -9,12 +9,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import nl.wouter.minetopiafarms.Main;
-import wouter.is.cool.API;
-import wouter.is.cool.DataType;
+import nl.minetopiasdb.api.API;
+import nl.minetopiasdb.api.enums.DataType;
 
 public class InventoryClickListener implements Listener {
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
 		if (e.getInventory().getName().equalsIgnoreCase(Main.getMessage("InventoryTitle"))) {

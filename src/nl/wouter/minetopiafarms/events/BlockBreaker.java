@@ -49,21 +49,31 @@ public class BlockBreaker implements Listener {
 			Material blockType = e.getBlock().getType();
 			e.setCancelled(true);
 			e.getBlock().getLocation().getBlock().setType(Material.COBBLESTONE);
-			if (blockType == Material.COAL_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.COAL));
-			} else if (blockType == Material.DIAMOND_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.DIAMOND));
-			} else if (blockType == Material.EMERALD_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.EMERALD));
-			} else if (blockType == Material.GOLD_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.GOLD_INGOT));
-			} else if (blockType == Material.IRON_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT));
-			} else if (blockType == Material.LAPIS_ORE) {
-				e.getPlayer().getInventory().addItem(XMaterial.LAPIS_LAZULI.parseItem());
-			} else if (blockType == Material.REDSTONE_ORE) {
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
+
+			switch(blockType) {
+				case COAL_ORE:
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.COAL));
+					break;
+				case DIAMOND_ORE:
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.DIAMOND));
+					break;
+				case EMERALD_ORE:
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.EMERALD));
+					break;
+				case GOLD_ORE:
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.GOLD_INGOT));
+					break;
+				case IRON_ORE:
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT));
+					break;
+				case LAPIS_ORE:
+					e.getPlayer().getInventory().addItem(XMaterial.LAPIS_LAZULI.parseItem());
+					break;
+				case REDSTONE_ORE:
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
+					break;
 			}
+
 			e.getBlock().getDrops().clear();
 			Utils.ironOres.add(e.getBlock().getLocation());
 			Utils.handleToolDurability(e.getPlayer());
@@ -73,7 +83,7 @@ public class BlockBreaker implements Listener {
 					e.getBlock().setType(blockType);
 					Utils.ironOres.remove(e.getBlock().getLocation());
 				}
-			}, /* seconds * 20 */ 120 * 20);
+			}, /* seconds multiplied by 20 */ 120 * 20);
 		}
 	}
 }
