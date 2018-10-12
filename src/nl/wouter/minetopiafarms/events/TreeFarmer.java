@@ -11,11 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
-import wouter.is.cool.SDBPlayer;
+import nl.minetopiasdb.api.SDBPlayer;
 
 public class TreeFarmer implements Listener {
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
