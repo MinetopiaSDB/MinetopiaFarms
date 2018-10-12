@@ -83,7 +83,7 @@ public class BlockBreaker implements Listener {
 					e.getBlock().setType(blockType);
 					Utils.ironOres.remove(e.getBlock().getLocation());
 				}
-			}, /* seconds * 20 */ 120 * 20);
+			}, /* seconds multiplied by 20 */ 120 * 20);
 		}
 	}
 }
