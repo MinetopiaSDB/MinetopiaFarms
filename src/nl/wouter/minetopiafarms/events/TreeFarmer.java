@@ -60,7 +60,7 @@ public class TreeFarmer implements Listener {
 						}
 					}
 				}
-			}, 30 * 20);
+			}, /* 30 seconds multiplied by 20 */30 * 20);
 		}
 	}
 }
