@@ -5,6 +5,10 @@ import java.util.HashMap;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * PLAYER_HEAD REMOVED BECAUSE OF {@link LegacyVersionManager#getSkullMaterial()}
+ *
+ */
 public enum XMaterial {
 	
 	ACACIA_BOAT("BOAT_ACACIA", 0),
@@ -333,11 +337,11 @@ public enum XMaterial {
 	GRAY_DYE("INK_SACK", 8),
 	GRAY_GLAZED_TERRACOTTA("GRAY_GLAZED_TERRACOTTA", 0),
 	GRAY_SHULKER_BOX("GRAY_SHULKER_BOX", 0),
-	GRAY_STAINED_GLASS("STAINED_GLASS", 8),
-	GRAY_STAINED_GLASS_PANE("STAINED_GLASS_PANE", 8),
-	GRAY_TERRACOTTA("STAINED_CLAY", 8),
+	GRAY_STAINED_GLASS("STAINED_GLASS", 7),
+	GRAY_STAINED_GLASS_PANE("STAINED_GLASS_PANE", 7),
+	GRAY_TERRACOTTA("STAINED_CLAY", 7),
 	GRAY_WALL_BANNER("WALL_BANNER", 0),
-	GRAY_WOOL("WOOL", 8),
+	GRAY_WOOL("WOOL", 7),
 	GREEN_BANNER("BANNER", 2),
 	GREEN_BED("BED", 13),
 	GREEN_CARPET("CARPET", 13),
@@ -581,8 +585,6 @@ public enum XMaterial {
 	PINK_WOOL("WOOL", 6),
 	PISTON("PISTON_BASE", 0),
 	PISTON_HEAD("PISTON_EXTENSION", 0),
-	PLAYER_HEAD("SKULL", 0),
-	PLAYER_WALL_HEAD("SKULL", 0),
 	PODZOL("DIRT", 2),
 	POISONOUS_POTATO("POISONOUS_POTATO", 0),
 	POLAR_BEAR_SPAWN_EGG("MONSTER_EGG", 0),
@@ -866,6 +868,7 @@ public enum XMaterial {
 		this.data = data;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public ItemStack parseItem(){
 		Material mat = parseMaterial();
 		if(isNewVersion()){
@@ -949,7 +952,9 @@ public enum XMaterial {
 	}
 	
 	public boolean isDamageable(XMaterial type){
-		switch(type.toString()){
+        String[] split = type.toString().split("_");
+        int length = split.length;
+		switch(split[length-1]){
 		case "HELMET":
 			return true;
 		case "CHESTPLATE":

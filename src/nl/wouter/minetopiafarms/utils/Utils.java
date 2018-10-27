@@ -26,6 +26,8 @@ public class Utils {
 		return is;
 	}
 
+
+	@SuppressWarnings("deprecation")
 	public static void handleToolDurability(Player p) {
 		if ((short) (p.getInventory().getItemInMainHand().getDurability() + 2) >= p.getInventory().getItemInMainHand()
 				.getType().getMaxDurability()) {

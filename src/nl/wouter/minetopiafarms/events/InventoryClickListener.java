@@ -8,9 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import nl.wouter.minetopiafarms.Main;
 import nl.minetopiasdb.api.API;
-import nl.minetopiasdb.api.enums.DataType;
+import nl.minetopiasdb.api.SDBPlayer;
+import nl.wouter.minetopiafarms.Main;
 
 public class InventoryClickListener implements Listener {
 
@@ -39,9 +39,9 @@ public class InventoryClickListener implements Listener {
 
 				API.getEcon().withdrawPlayer(((Player) e.getWhoClicked()),
 						Main.pl.getConfig().getInt("KostenVoorEenBaan"));
-				API.getFile(DataType.PLAYER).set(e.getWhoClicked().getUniqueId() + ".Baan", beroep);
-				// Caching support :)
-				API.clearCacheKey(e.getWhoClicked().getUniqueId() + ".Baan");
+				SDBPlayer pl = SDBPlayer.createSDBPlayer(((Player) e.getWhoClicked()));
+				pl.setPrefix(beroep);
+				
 				API.updateScoreboard(((Player) e.getWhoClicked()));
 
 				if (beroep.equalsIgnoreCase("mijnwerker")) {

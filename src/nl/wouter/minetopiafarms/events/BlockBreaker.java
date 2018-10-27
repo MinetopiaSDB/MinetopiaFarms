@@ -9,18 +9,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import nl.minetopiasdb.api.SDBPlayer;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.XMaterial;
-import wouter.is.cool.SDBPlayer;
 
 public class BlockBreaker implements Listener {
 
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if (CustomFlags.hasFlag(p)
+		if (CustomFlags.hasFlag(p, e.getBlock().getLocation())
 				&& (!p.hasPermission("minetopiafarms.bypassregions") && p.getGameMode() != GameMode.CREATIVE)) {
 			e.setCancelled(true);
 		}
@@ -40,7 +40,7 @@ public class BlockBreaker implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			if (!CustomFlags.isAllowed(p, "mijn")) {
+			if (!CustomFlags.isAllowed(p, e.getBlock().getLocation(), "mijn")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "mijn"));
 				e.setCancelled(true);
 				return;
@@ -48,7 +48,6 @@ public class BlockBreaker implements Listener {
 
 			Material blockType = e.getBlock().getType();
 			e.setCancelled(true);
-			e.getBlock().getLocation().getBlock().setType(Material.COBBLESTONE);
 
 			switch(blockType) {
 				case COAL_ORE:
@@ -72,8 +71,13 @@ public class BlockBreaker implements Listener {
 				case REDSTONE_ORE:
 					e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
 					break;
+				default:
+					//Not important & should be unreachable
+					return;
 			}
 
+			e.getBlock().getLocation().getBlock().setType(Material.COBBLESTONE);
+			
 			e.getBlock().getDrops().clear();
 			Utils.ironOres.add(e.getBlock().getLocation());
 			Utils.handleToolDurability(e.getPlayer());

@@ -10,10 +10,10 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Crops;
 
+import nl.minetopiasdb.api.SDBPlayer;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
-import wouter.is.cool.SDBPlayer;
 
 public class FarmListener implements Listener {
 
@@ -37,7 +37,7 @@ public class FarmListener implements Listener {
 				return;
 			}
 			
-			if (!CustomFlags.isAllowed(p, "farm")) {
+			if (!CustomFlags.isAllowed(p, e.getBlock().getLocation(), "farm")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "farm"));
 				return;
 			}
@@ -53,9 +53,6 @@ public class FarmListener implements Listener {
 			p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
 			Utils.wheatPlaces.add(e.getBlock().getLocation());
 			e.getBlock().setType(Utils.getCropsMaterial());
-			//Crops crop = (Crops) l.getBlock().getState().getData();
-			//crop.setState(CropState.SEEDED);
-			
 		}
 	}
 }
