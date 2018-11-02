@@ -8,10 +8,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import nl.minetopiasdb.api.SDBPlayer;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
-import nl.minetopiasdb.api.SDBPlayer;
+import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class TreeFarmer implements Listener {
 
@@ -48,12 +49,15 @@ public class TreeFarmer implements Listener {
 
 			e.getBlock().setType(Material.AIR);
 			Utils.handleToolDurability(e.getPlayer());
+			Utils.treePlaces.put(e.getBlock().getLocation(), new TreeObj(blockType, blockData));
+			
 			
 			Bukkit.getScheduler().runTaskLater(Main.pl, new Runnable() {
 				@Override
 				public void run() {
 					e.getBlock().setType(blockType);
-					if (Utils.is113orUp()) {
+					Utils.treePlaces.remove(e.getBlock().getLocation());
+					if (!Utils.is113orUp()) {
 						try {
 							e.getBlock().getClass().getMethod("setData", byte.class).invoke(e.getBlock(), blockData);
 						} catch (Exception ex) {

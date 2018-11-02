@@ -24,6 +24,7 @@ import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.UpdateChecker;
 import nl.wouter.minetopiafarms.utils.Utils;
+import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class Main extends JavaPlugin {
 	public static Plugin pl;
@@ -44,7 +45,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag> ,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4ï¿½ <Bedrag> ,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -54,7 +55,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.TarweNietVolgroeid", "&4ERROR: &cDeze tarwe is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag>,- &cnodig!");
+				"&4ERROR: &cOm van baan te veranderen heb je &4ï¿½ <Bedrag>,- &cnodig!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
@@ -111,8 +112,19 @@ public class Main extends JavaPlugin {
 		for (Location l : Utils.ironOres) {
 			l.getBlock().setType(Material.IRON_ORE);
 		}
-		for (Location l : Utils.ironOres) {
+		for (Location l : Utils.wheatPlaces) {
 			l.getBlock().setType(Utils.getCropsMaterial());
+		}
+		for (Location l: Utils.treePlaces.keySet()) {
+			TreeObj obj = Utils.treePlaces.get(l);
+			l.getBlock().setType(obj.getMaterial());
+			if (!Utils.is113orUp()) {
+				try {
+					l.getBlock().getClass().getMethod("setData", byte.class).invoke(l.getBlock(), obj.getData());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
 		}
 	}
 

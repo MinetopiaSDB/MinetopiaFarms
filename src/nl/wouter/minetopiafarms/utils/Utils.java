@@ -1,15 +1,22 @@
 package nl.wouter.minetopiafarms.utils;
 
-import org.bukkit.*;
-import java.util.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
-import org.bukkit.entity.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 	
 	public static ArrayList<Location> ironOres = new ArrayList<>();
 	public static ArrayList<Location> wheatPlaces = new ArrayList<>();
+	public static HashMap<Location, TreeObj> treePlaces = new HashMap<>();
 	
 	public static String color(String input) {
 		return ChatColor.translateAlternateColorCodes('&', input);
@@ -51,5 +58,24 @@ public class Utils {
 			return Material.valueOf("WHEAT");
 		}
 		return Material.valueOf("CROPS");
+	}
+	
+	public static class TreeObj {
+		
+		Material mat;
+		byte data;
+		
+		public TreeObj(Material mat, byte data) {
+			this.mat = mat;
+			this.data = data;
+		}
+		
+		public byte getData() {
+			return data;
+		}
+		
+		public Material getMaterial() {
+			return mat;
+		}
 	}
 }
