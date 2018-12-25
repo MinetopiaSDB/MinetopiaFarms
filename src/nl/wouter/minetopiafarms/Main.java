@@ -100,10 +100,11 @@ public class Main extends JavaPlugin {
 			}
 		}, 6 * 20l, 6 * 20l);
 
+		UpdateChecker.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
 			public void onJoin(PlayerJoinEvent e) {
-				UpdateChecker.sendUpdateMessageLater(e.getPlayer());
+				UpdateChecker.getInstance().sendUpdateMessageLater(e.getPlayer());
 			}
 		}, this);
 	}
