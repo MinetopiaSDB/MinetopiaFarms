@@ -36,6 +36,14 @@ import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class WG {
+	/**
+	 * WorldGuard class to make the usage of WorldGuard easy. This is the 1.13.x version! <i>Note that if you do
+	 * use this in one of your projects, leave this notice.</i> <i>Please do credit
+	 * me if you do use this in one of your projects.</i>
+	 * 
+	 * @author SBDeveloper [Fixed 1.13.x support]
+	 */
+	
 	public static WorldGuardPlugin wgp;
 	public static WorldEditPlugin wep;
 

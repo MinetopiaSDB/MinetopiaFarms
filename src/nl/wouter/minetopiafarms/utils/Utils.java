@@ -37,13 +37,15 @@ public class Utils {
 
 	public static void handleToolDurability(Player p) {
 		ItemStack item = p.getInventory().getItemInMainHand();
-		if (item.getItemMeta() instanceof Damageable) {
-			Damageable dam = (Damageable) item.getItemMeta();
+		ItemMeta meta = item.getItemMeta();
+		if (meta instanceof Damageable) {
+			Damageable dam = (Damageable) meta;
 			if (dam.getDamage() + 2 >= item.getType().getMaxDurability()) {
 				p.getInventory().remove(p.getInventory().getItemInMainHand());
 			} else {
 				dam.setDamage(dam.getDamage() + 2);
 			}
+			item.setItemMeta(meta);
 			p.updateInventory();
 		}
 	}
