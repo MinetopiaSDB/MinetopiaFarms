@@ -14,7 +14,7 @@ import nl.wouter.minetopiafarms.Main;
 
 public class InventoryClickListener implements Listener {
 
-//	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
 		if (e.getInventory().getName().equalsIgnoreCase(Main.getMessage("InventoryTitle"))) {
