@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.UpdateChecker;
 import nl.wouter.minetopiafarms.utils.Utils;
 
 public class MTFarmsCMD implements CommandExecutor {
@@ -24,11 +23,8 @@ public class MTFarmsCMD implements CommandExecutor {
 		sender.sendMessage("\n ");
 		sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
 		
-		//More or less just for debug reasons.
 		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
-			sender.sendMessage(Utils.color("&3Cached 'latest': &b" + UpdateChecker.getInstance().getVersion()));
-			sender.sendMessage(Utils.color("&3Latest: &b" + UpdateChecker.getInstance().getLatestVersion()));
-			sender.sendMessage(Utils.color("&3Actual version: &b" + Main.pl.getDescription().getVersion()));
+			sender.sendMessage(Utils.color("&3Plugin version: &b" + Main.pl.getDescription().getVersion()));
 		}
 		return true;
 	}

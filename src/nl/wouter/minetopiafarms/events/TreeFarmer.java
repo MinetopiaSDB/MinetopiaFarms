@@ -2,6 +2,7 @@ package nl.wouter.minetopiafarms.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +17,6 @@ import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class TreeFarmer implements Listener {
 
-//	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
@@ -39,8 +39,7 @@ public class TreeFarmer implements Listener {
 			}
 
 			Material blockType = e.getBlock().getType();
-			@SuppressWarnings("deprecation")
-			byte blockData = e.getBlock().getData();
+			BlockData blockData = e.getBlock().getBlockData();
 
 			e.setCancelled(true);
 			for (ItemStack drop : e.getBlock().getDrops()) {
@@ -57,13 +56,6 @@ public class TreeFarmer implements Listener {
 				public void run() {
 					e.getBlock().setType(blockType);
 					Utils.treePlaces.remove(e.getBlock().getLocation());
-					if (!Utils.is113orUp()) {
-						try {
-							e.getBlock().getClass().getMethod("setData", byte.class).invoke(e.getBlock(), blockData);
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
-					}
 				}
 			}, /* 30 seconds multiplied by 20 */30 * 20);
 		}

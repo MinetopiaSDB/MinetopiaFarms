@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import nl.minetopiasdb.api.API;
@@ -14,10 +15,10 @@ import nl.wouter.minetopiafarms.Main;
 
 public class InventoryClickListener implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
-		if (e.getInventory().getName().equalsIgnoreCase(Main.getMessage("InventoryTitle"))) {
+		InventoryView view = e.getView();
+		if (view.getTitle().equalsIgnoreCase(Main.getMessage("InventoryTitle"))) {
 			e.setCancelled(true);
 			String beroep = "none";
 			if (e.getSlot() == 10) {

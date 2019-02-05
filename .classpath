@@ -3,9 +3,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/Stijn/Documents/Checks/spigot.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Stijn/Downloads/worldedit-bukkit-6.1.7.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Stijn/Downloads/worldguard-6.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Stijn/Downloads/MinetopiaSDBRel (8).jar"/>
 	<classpathentry kind="lib" path="C:/Users/Stijn/Downloads/Vault-1.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Stijn/Downloads/worldedit-bukkit-7.0.0-SNAPSHOT-dist.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Stijn/Downloads/worldguard-legacy-7.0.0-SNAPSHOT-dist (2).jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

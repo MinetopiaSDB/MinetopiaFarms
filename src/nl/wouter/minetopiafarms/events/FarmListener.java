@@ -21,7 +21,7 @@ public class FarmListener implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if (e.getBlock().getType() == Utils.getCropsMaterial()) {
+		if (e.getBlock().getType() == Material.WHEAT) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
@@ -52,7 +52,7 @@ public class FarmListener implements Listener {
 			e.setCancelled(true);
 			p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
 			Utils.wheatPlaces.add(e.getBlock().getLocation());
-			e.getBlock().setType(Utils.getCropsMaterial());
+			e.getBlock().setType(Material.WHEAT);
 		}
 	}
 }

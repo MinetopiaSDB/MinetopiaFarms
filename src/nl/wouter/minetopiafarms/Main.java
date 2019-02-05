@@ -8,9 +8,6 @@ import org.bukkit.CropState;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,7 +19,6 @@ import nl.wouter.minetopiafarms.events.FarmListener;
 import nl.wouter.minetopiafarms.events.InventoryClickListener;
 import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
-import nl.wouter.minetopiafarms.utils.UpdateChecker;
 import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
@@ -73,7 +69,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
 				for (Location l : new ArrayList<Location>(Utils.wheatPlaces)) {
-					if (Utils.getCropsMaterial() == l.getBlock().getType()) {
+					if (Material.WHEAT == l.getBlock().getType()) {
 						BlockState state = l.getBlock().getState();
 						Crops crop = (Crops) state.getData();
 						if (crop.getState() == CropState.SEEDED) {
@@ -99,14 +95,6 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}, 6 * 20l, 6 * 20l);
-
-		UpdateChecker.getInstance().startTask();
-		Bukkit.getPluginManager().registerEvents(new Listener() {
-			@EventHandler
-			public void onJoin(PlayerJoinEvent e) {
-				UpdateChecker.getInstance().sendUpdateMessageLater(e.getPlayer());
-			}
-		}, this);
 	}
 
 	public void onDisable() {
@@ -114,18 +102,11 @@ public class Main extends JavaPlugin {
 			l.getBlock().setType(Material.IRON_ORE);
 		}
 		for (Location l : Utils.wheatPlaces) {
-			l.getBlock().setType(Utils.getCropsMaterial());
+			l.getBlock().setType(Material.WHEAT);
 		}
 		for (Location l: Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);
 			l.getBlock().setType(obj.getMaterial());
-			if (!Utils.is113orUp()) {
-				try {
-					l.getBlock().getClass().getMethod("setData", byte.class).invoke(l.getBlock(), obj.getData());
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
 		}
 	}
 

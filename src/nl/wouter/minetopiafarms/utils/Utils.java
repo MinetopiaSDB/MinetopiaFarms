@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
@@ -34,43 +35,30 @@ public class Utils {
 	}
 
 
-	@SuppressWarnings("deprecation")
 	public static void handleToolDurability(Player p) {
-		if ((short) (p.getInventory().getItemInMainHand().getDurability() + 2) >= p.getInventory().getItemInMainHand()
-				.getType().getMaxDurability()) {
-			p.getInventory().remove(p.getInventory().getItemInMainHand());
-		} else {
-			p.getInventory().getItemInMainHand()
-					.setDurability((short) (p.getInventory().getItemInMainHand().getDurability() + 2));
+		ItemStack item = p.getInventory().getItemInMainHand();
+		if (item.getItemMeta() instanceof Damageable) {
+			Damageable dam = (Damageable) item.getItemMeta();
+			if (dam.getDamage() + 2 >= item.getType().getMaxDurability()) {
+				p.getInventory().remove(p.getInventory().getItemInMainHand());
+			} else {
+				dam.setDamage(dam.getDamage() + 2);
+			}
+			p.updateInventory();
 		}
-		p.updateInventory();
-	}
-	
-	public static boolean is113orUp() {
-		String nmsver = Bukkit.getServer().getClass().getPackage().getName();
-		nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
-		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
-				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_");
-	}
-	
-	public static Material getCropsMaterial() {
-		if (is113orUp()) {
-			return Material.valueOf("WHEAT");
-		}
-		return Material.valueOf("CROPS");
 	}
 	
 	public static class TreeObj {
 		
 		Material mat;
-		byte data;
+		BlockData data;
 		
-		public TreeObj(Material mat, byte data) {
+		public TreeObj(Material mat, BlockData data) {
 			this.mat = mat;
 			this.data = data;
 		}
 		
-		public byte getData() {
+		public BlockData getData() {
 			return data;
 		}
 		
