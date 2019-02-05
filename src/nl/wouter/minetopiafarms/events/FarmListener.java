@@ -17,10 +17,9 @@ import nl.wouter.minetopiafarms.utils.Utils;
 
 public class FarmListener implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
-		Player p = e.getPlayer();
+		Player p = (Player) e.getPlayer();
 		if (e.getBlock().getType() == Material.WHEAT) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
@@ -31,7 +30,7 @@ public class FarmListener implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			if (!p.getItemInHand().getType().toString().contains("HOE")) {
+			if (!p.getInventory().getItemInMainHand().getType().toString().contains("HOE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "hoe"));
 				e.setCancelled(true);
 				return;

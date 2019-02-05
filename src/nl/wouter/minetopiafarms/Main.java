@@ -39,8 +39,12 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Arrays.asList("Typ hier jouw commands"));
+		getConfig().addDefault("MogelijkeItemsBijVangst", Arrays.asList("Typ hier welke materials de persoon krijgt."));
+		getConfig().addDefault("VangstItemNaam", "&6Vangst");
+		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4ï¿½ <Bedrag> ,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4€<Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -50,7 +54,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.TarweNietVolgroeid", "&4ERROR: &cDeze tarwe is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4ï¿½ <Bedrag>,- &cnodig!");
+				"&4ERROR: &cOm van baan te veranderen heb je &4€<Bedrag>,- &cnodig!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
