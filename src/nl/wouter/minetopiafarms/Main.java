@@ -20,6 +20,7 @@ import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
+import nl.wouter.minetopiafarms.utils.WG;
 
 public class Main extends JavaPlugin {
 	private static Main plugin;
@@ -66,6 +67,8 @@ public class Main extends JavaPlugin {
 		saveConfig();
 
 		plugin = this;
+		
+		setupPlugins();
 
 		CustomFlags.loadCustomFlag();
 
@@ -99,6 +102,17 @@ public class Main extends JavaPlugin {
 			}
 		}, 6 * 20l, 6 * 20l);
 	}
+	
+	private boolean setupPlugins() {
+        if (hasWorldGuardOnServer()) {
+            WG.setWorldGuard(getServer().getPluginManager().getPlugin("WorldGuard"));
+            return true;
+        }
+        return false;
+    }
+    private static boolean hasWorldGuardOnServer() {
+        return Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
+    }
 
 	public void onDisable() {
 		for (Location l : Utils.ironOres) {
