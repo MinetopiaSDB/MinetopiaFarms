@@ -20,7 +20,7 @@ public class KiesCMD implements CommandExecutor {
 		Player p = (Player) sender;
 
 		p.sendMessage(Main.getMessage("VeranderenVanEenBaan").replaceAll("<Bedrag>",
-				"" + Main.pl.getConfig().getInt("KostenVoorEenBaan")));
+				"" + Main.getPlugin().getConfig().getInt("KostenVoorEenBaan")));
 
 		Inventory inv = Bukkit.createInventory(null, 9 * 3, Main.getMessage("InventoryTitle"));
 

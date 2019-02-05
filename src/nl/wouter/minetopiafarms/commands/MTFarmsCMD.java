@@ -24,7 +24,7 @@ public class MTFarmsCMD implements CommandExecutor {
 		sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
 		
 		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
-			sender.sendMessage(Utils.color("&3Plugin version: &b" + Main.pl.getDescription().getVersion()));
+			sender.sendMessage(Utils.color("&3Plugin version: &b" + Main.getPlugin().getDescription().getVersion()));
 		}
 		return true;
 	}

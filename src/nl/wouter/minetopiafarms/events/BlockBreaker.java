@@ -80,7 +80,7 @@ public class BlockBreaker implements Listener {
 			e.getBlock().getDrops().clear();
 			Utils.ironOres.add(e.getBlock().getLocation());
 			Utils.handleToolDurability(e.getPlayer());
-			Bukkit.getScheduler().runTaskLater(Main.pl, new Runnable() {
+			Bukkit.getScheduler().runTaskLater(Main.getPlugin(), new Runnable() {
 				@Override
 				public void run() {
 					e.getBlock().setType(blockType);

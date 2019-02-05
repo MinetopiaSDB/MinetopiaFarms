@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.material.Crops;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import nl.wouter.minetopiafarms.commands.KiesCMD;
@@ -23,7 +22,7 @@ import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class Main extends JavaPlugin {
-	public static Plugin pl;
+	private static Main plugin;
 
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new BlockBreaker(), this);
@@ -62,7 +61,7 @@ public class Main extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
-		pl = this;
+		plugin = this;
 
 		CustomFlags.loadCustomFlag();
 
@@ -109,8 +108,12 @@ public class Main extends JavaPlugin {
 			l.getBlock().setType(obj.getMaterial());
 		}
 	}
+	
+	public static Main getPlugin() {
+		return plugin;
+	}
 
 	public static String getMessage(String path) {
-		return Utils.color(pl.getConfig().getString("Messages." + path));
+		return Utils.color(getPlugin().getConfig().getString("Messages." + path));
 	}
 }
