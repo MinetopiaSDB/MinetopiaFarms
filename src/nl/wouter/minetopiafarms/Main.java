@@ -1,3 +1,5 @@
+package nl.wouter.minetopiafarms;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
