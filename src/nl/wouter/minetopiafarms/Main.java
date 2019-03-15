@@ -1,5 +1,3 @@
-package nl.wouter.minetopiafarms;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -53,6 +51,11 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.BeroepNodig", "&4ERROR: &cHiervoor heb je het beroep &4<Beroep> &cnodig!");
 		getConfig().addDefault("Messages.ToolNodig", "&4ERROR: &cHiervoor heb je een &4<Tool> &cnodig!");
 		getConfig().addDefault("Messages.TarweNietVolgroeid", "&4ERROR: &cDeze tarwe is niet volgroeid!");
+		getConfig().addDefault("Messages.PompoenNietVolgroeid", "&4ERROR: &cDeze pompoen is niet volgroeid!");
+		getConfig().addDefault("Messages.BietenNietVolgroeid", "&4ERROR: &cDeze bieten zijn niet volgroeid!");
+		getConfig().addDefault("Messages.MeloenNietVolgroeid", "&4ERROR: &cDeze meloen is niet volgroeid!");
+		getConfig().addDefault("Messages.WortelNietVolgroeid", "&4ERROR: &cDeze wortel is niet volgroeid!");
+		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
 				"&4ERROR: &cOm van baan te veranderen heb je &4� <Bedrag>,- &cnodig!");
@@ -60,9 +63,9 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
 		getConfig().addDefault("Messages.GeenRegion", "&4ERROR: &cDeze region moet de tag &4'<Tag>' &chebben.");
-		getConfig().addDefault("Messages.Creative", "&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass..");
+		getConfig().addDefault("Messages.Creative",
+				"&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass..");
 
-		
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
@@ -116,7 +119,7 @@ public class Main extends JavaPlugin {
 		for (Location l : Utils.wheatPlaces) {
 			l.getBlock().setType(Utils.getCropsMaterial());
 		}
-		for (Location l: Utils.treePlaces.keySet()) {
+		for (Location l : Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);
 			l.getBlock().setType(obj.getMaterial());
 			if (!Utils.is113orUp()) {
