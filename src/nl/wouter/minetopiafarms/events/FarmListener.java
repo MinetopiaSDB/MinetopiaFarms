@@ -41,7 +41,6 @@ public class FarmListener implements Listener {
 				return;
 			}
 
-			// Wheat / Tarwe (voor die ekte Nederlanders
 			Crops crops = (Crops) e.getBlock().getState().getData();
 			if (Utils.getCropsMaterial() == Material.WHEAT_SEEDS) {
 				if (crops.getState() != CropState.RIPE) {
@@ -56,7 +55,7 @@ public class FarmListener implements Listener {
 				e.getBlock().setType(Utils.getCropsMaterial());
 			} else if (Utils.getCropsMaterial() == Material.PUMPKIN_SEEDS) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("PompoenNietVolgroeid")); // need to make a message
+					e.getPlayer().sendMessage(Main.getMessage("PompoenNietVolgroeid")); 
 					e.setCancelled(true);
 					return;
 				}
@@ -67,7 +66,7 @@ public class FarmListener implements Listener {
 				e.getBlock().setType(Utils.getCropsMaterial());
 			} else if (Utils.getCropsMaterial() == Material.BEETROOT_SEEDS) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("BietenNietVolgroeid")); // need to make a message
+					e.getPlayer().sendMessage(Main.getMessage("BietenNietVolgroeid")); 
 					e.setCancelled(true);
 					return;
 				}
@@ -78,7 +77,7 @@ public class FarmListener implements Listener {
 				e.getBlock().setType(Utils.getCropsMaterial());
 			} else if (Utils.getCropsMaterial() == Material.MELON_SEEDS) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("MeloenNietVolgroeid")); // need to make a message
+					e.getPlayer().sendMessage(Main.getMessage("MeloenNietVolgroeid")); 
 					e.setCancelled(true);
 					return;
 				}
@@ -89,7 +88,7 @@ public class FarmListener implements Listener {
 				e.getBlock().setType(Utils.getCropsMaterial());
 			} else if (Utils.getCropsMaterial() == Material.CARROT) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("WortelNietVolgroeid")); // need to make a message
+					e.getPlayer().sendMessage(Main.getMessage("WortelNietVolgroeid")); 
 					e.setCancelled(true);
 					return;
 				}
@@ -100,7 +99,7 @@ public class FarmListener implements Listener {
 				e.getBlock().setType(Utils.getCropsMaterial());
 			} else if (Utils.getCropsMaterial() == Material.POTATO) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("AardappelNietVolgroeid")); // need to make a message
+					e.getPlayer().sendMessage(Main.getMessage("AardappelNietVolgroeid")); 
 					e.setCancelled(true);
 					return;
 				}
