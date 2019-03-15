@@ -9,8 +9,7 @@ import org.bukkit.inventory.ItemStack;
  * PLAYER_HEAD REMOVED BECAUSE OF {@link LegacyVersionManager#getSkullMaterial()}
  *
  */
-public enum XMaterial {
-	
+public enum XMaterial {	
 	ACACIA_BOAT("BOAT_ACACIA", 0),
 	ACACIA_BUTTON("WOOD_BUTTON", 0),
 	ACACIA_DOOR("ACACIA_DOOR", 0),
@@ -868,7 +867,6 @@ public enum XMaterial {
 		this.data = data;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public ItemStack parseItem(){
 		Material mat = parseMaterial();
 		if(isNewVersion()){
@@ -995,5 +993,4 @@ public enum XMaterial {
         }
         return Material.matchMaterial(m);
     }
-	
 }
