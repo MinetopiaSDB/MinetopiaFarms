@@ -16,7 +16,6 @@ import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
 
 public class FarmListener implements Listener {
-
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
@@ -36,23 +35,80 @@ public class FarmListener implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			
+
 			if (!CustomFlags.isAllowed(p, e.getBlock().getLocation(), "farm")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "farm"));
 				return;
 			}
-			
-			Crops crops = (Crops) e.getBlock().getState().getData();
-			if (crops.getState() != CropState.RIPE) {
-				e.getPlayer().sendMessage(Main.getMessage("TarweNietVolgroeid"));
-				e.setCancelled(true);
-				return;
-			}
 
-			e.setCancelled(true);
-			p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
-			Utils.wheatPlaces.add(e.getBlock().getLocation());
-			e.getBlock().setType(Utils.getCropsMaterial());
+			Crops crops = (Crops) e.getBlock().getState().getData();
+			if (Utils.getCropsMaterial() == Material.WHEAT_SEEDS) {
+				if (crops.getState() != CropState.RIPE) {
+					e.getPlayer().sendMessage(Main.getMessage("TarweNietVolgroeid"));
+					e.setCancelled(true);
+					return;
+				}
+
+				e.setCancelled(true);
+				p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
+				Utils.wheatPlaces.add(e.getBlock().getLocation());
+				e.getBlock().setType(Utils.getCropsMaterial());
+			} else if (Utils.getCropsMaterial() == Material.PUMPKIN_SEEDS) {
+				if (crops.getState() != CropState.RIPE) {
+					e.getPlayer().sendMessage(Main.getMessage("PompoenNietVolgroeid")); 
+					e.setCancelled(true);
+					return;
+				}
+
+				e.setCancelled(true);
+				p.getInventory().addItem(new ItemStack(Material.PUMPKIN, 1));
+				Utils.pumpkinPlaces.add(e.getBlock().getLocation());
+				e.getBlock().setType(Utils.getCropsMaterial());
+			} else if (Utils.getCropsMaterial() == Material.BEETROOT_SEEDS) {
+				if (crops.getState() != CropState.RIPE) {
+					e.getPlayer().sendMessage(Main.getMessage("BietenNietVolgroeid")); 
+					e.setCancelled(true);
+					return;
+				}
+
+				e.setCancelled(true);
+				p.getInventory().addItem(new ItemStack(Material.BEETROOT, 1));
+				Utils.beetrootPlaces.add(e.getBlock().getLocation());
+				e.getBlock().setType(Utils.getCropsMaterial());
+			} else if (Utils.getCropsMaterial() == Material.MELON_SEEDS) {
+				if (crops.getState() != CropState.RIPE) {
+					e.getPlayer().sendMessage(Main.getMessage("MeloenNietVolgroeid")); 
+					e.setCancelled(true);
+					return;
+				}
+
+				e.setCancelled(true);
+				p.getInventory().addItem(new ItemStack(Material.MELON, 1));
+				Utils.melonPlaces.add(e.getBlock().getLocation());
+				e.getBlock().setType(Utils.getCropsMaterial());
+			} else if (Utils.getCropsMaterial() == Material.CARROT) {
+				if (crops.getState() != CropState.RIPE) {
+					e.getPlayer().sendMessage(Main.getMessage("WortelNietVolgroeid")); 
+					e.setCancelled(true);
+					return;
+				}
+
+				e.setCancelled(true);
+				p.getInventory().addItem(new ItemStack(Material.CARROT, 1));
+				Utils.carrotPlaces.add(e.getBlock().getLocation());
+				e.getBlock().setType(Utils.getCropsMaterial());
+			} else if (Utils.getCropsMaterial() == Material.POTATO) {
+				if (crops.getState() != CropState.RIPE) {
+					e.getPlayer().sendMessage(Main.getMessage("AardappelNietVolgroeid")); 
+					e.setCancelled(true);
+					return;
+				}
+
+				e.setCancelled(true);
+				p.getInventory().addItem(new ItemStack(Material.POTATO, 1));
+				Utils.potatoPlaces.add(e.getBlock().getLocation());
+				e.getBlock().setType(Utils.getCropsMaterial());
+			}
 		}
 	}
 }
