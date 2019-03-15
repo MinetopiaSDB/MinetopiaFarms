@@ -14,12 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 	public static ArrayList<Location> ironOres = new ArrayList<>();
-	public static ArrayList<Location> wheatPlaces = new ArrayList<>();
-	public static ArrayList<Location> pumpkinPlaces = new ArrayList<>();
-	public static ArrayList<Location> beetrootPlaces = new ArrayList<>();
-	public static ArrayList<Location> melonPlaces = new ArrayList<>();
-	public static ArrayList<Location> carrotPlaces = new ArrayList<>();
-	public static ArrayList<Location> potatoPlaces = new ArrayList<>();
+	public static ArrayList<Location> cropPlaces = new ArrayList<>();
 	public static HashMap<Location, TreeObj> treePlaces = new HashMap<>();
 
 	public static String color(String input) {
@@ -55,13 +50,13 @@ public class Utils {
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_");
 	}
-
+	
 	public static Material getCropsMaterial() {
 		if (is113orUp()) {
 			return Material.valueOf("WHEAT");
 		}
 		return Material.valueOf("CROPS");
-	}
+}
 
 	public static class TreeObj {
 

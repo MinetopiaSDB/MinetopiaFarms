@@ -77,9 +77,10 @@ public class Main extends JavaPlugin {
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
-				for (Location l : new ArrayList<Location>(Utils.wheatPlaces)) {
-					if (Utils.getCropsMaterial() == l.getBlock().getType()) {
-						BlockState state = l.getBlock().getState();
+				for (Location l : new ArrayList<Location>(Utils.cropPlaces)) {
+					BlockState state = l.getBlock().getState();
+
+					if (state.getData() instanceof Crops) {
 						Crops crop = (Crops) state.getData();
 						if (crop.getState() == CropState.SEEDED) {
 							crop.setState(CropState.GERMINATED);
@@ -95,11 +96,11 @@ public class Main extends JavaPlugin {
 							crop.setState(CropState.VERY_TALL);
 						} else if (crop.getState() == CropState.VERY_TALL) {
 							crop.setState(CropState.RIPE);
-							Utils.wheatPlaces.remove(l);
+							Utils.cropPlaces.remove(l);
 						}
 						state.update();
 					} else {
-						Utils.wheatPlaces.remove(l);
+						Utils.cropPlaces.remove(l);
 					}
 				}
 			}
@@ -118,8 +119,12 @@ public class Main extends JavaPlugin {
 		for (Location l : Utils.ironOres) {
 			l.getBlock().setType(Material.IRON_ORE);
 		}
-		for (Location l : Utils.wheatPlaces) {
-			l.getBlock().setType(Utils.getCropsMaterial());
+		for (Location l : Utils.cropPlaces) {
+			BlockState state = l.getBlock().getState();
+			if (state.getData() instanceof Crops) {
+				Crops crop = (Crops) state.getData();
+				crop.setState(CropState.RIPE);
+			}
 		}
 		for (Location l : Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);

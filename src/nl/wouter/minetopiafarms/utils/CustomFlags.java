@@ -15,8 +15,6 @@ public class CustomFlags {
 	public static final StringFlag farmFlag = new StringFlag("minetopiafarms");
 
 	public static void loadCustomFlag() {
-		// ... do your own plugin things, get the WorldGuard object, etc
-
 		FlagRegistry registry = WorldGuardLegacyManager.getInstance().getFlagRegistry();
 
 		try {
@@ -32,7 +30,7 @@ public class CustomFlags {
 	
 	public static boolean isAllowed(Player p, Location loc, String name) {
 		ApplicableRegionSet set = WorldGuardLegacyManager.getInstance().getApplicableRegionSet(loc);
-		LocalPlayer localPlayer = WorldGuardLegacyManager.getWorldGuard().wrapPlayer(p);
+		LocalPlayer localPlayer = WorldGuardLegacyManager.getInstance().getWorldGuard().wrapPlayer(p);
 		String type = set.queryValue(localPlayer, CustomFlags.farmFlag);
 		
 		return type != null && name.equalsIgnoreCase(type);
@@ -40,7 +38,7 @@ public class CustomFlags {
 
 	public static boolean hasFlag(Player p, Location loc) {
 		ApplicableRegionSet set = WorldGuardLegacyManager.getInstance().getApplicableRegionSet(loc);
-		LocalPlayer localPlayer = WorldGuardLegacyManager.getWorldGuard().wrapPlayer(p);
+		LocalPlayer localPlayer = WorldGuardLegacyManager.getInstance().getWorldGuard().wrapPlayer(p);
 		String type = set.queryValue(localPlayer, CustomFlags.farmFlag);
 		
 		return type != null;
