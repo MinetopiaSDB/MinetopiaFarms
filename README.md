@@ -5,7 +5,7 @@ Een plugin met houthakkers, mijnen en farmen.
 
 Hoewel de plugin nu prima ondersteuning bevat voor 1.13 update ik hem niet (of zeer zelden) meer. Leuke kans om wat ervaring op te doen en er aan door te werken iemand? Geen idee hoe stabiel het is, beoordeel zelf.
 
-#Contributen aan MTFarms? Zeker doen!
+Contributen aan MTFarms? Zeker doen!
 ======
 Als je een **goede** pullrequest maakt die of functies toevoegd of een/meerdere bugs fixed sturen wij je een MinetopiaSDB badge (max. 1 p.p.)! 
 ![SDB Buttons](https://cdn.discordapp.com/attachments/389835875082698752/547393942329753600/IMG_20190219_132501.png)
