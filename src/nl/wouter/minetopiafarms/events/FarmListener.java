@@ -20,7 +20,9 @@ public class FarmListener implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if (e.getBlock().getType() == Utils.getCropsMaterial()) {
+		if (e.getBlock().getType() == Utils.getBeetrootMaterial() || e.getBlock().getType() == Utils.getCropsMaterial()
+				|| e.getBlock().getType() == Utils.getMelonMaterial() || e.getBlock().getType() == Material.PUMPKIN
+				|| e.getBlock().getType() == Utils.getCarrotBlock()|| e.getBlock().getType() == Utils.getPotatoBlock()) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
@@ -42,6 +44,14 @@ public class FarmListener implements Listener {
 			}
 
 			if (!(e.getBlock().getState().getData() instanceof Crops)) {
+				if (e.getBlock().getType() == Material.PUMPKIN) {
+					p.getInventory().addItem(new ItemStack(Material.PUMPKIN, 1));
+				} else if (e.getBlock().getType() == Utils.getMelonMaterial()) {
+					p.getInventory().addItem(new ItemStack(e.getBlock().getType(), 1));
+				}
+				e.setCancelled(true);
+				Utils.blockReplaces.put(e.getBlock().getLocation(), e.getBlock().getType());
+				e.getBlock().setType(Material.AIR);
 				return;
 			}
 			Crops crops = (Crops) e.getBlock().getState().getData();
@@ -55,21 +65,10 @@ public class FarmListener implements Listener {
 				e.setCancelled(true);
 				p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
-				e.getBlock().setType(Utils.getCropsMaterial());
-			} else if (e.getBlock().getType() == Material.PUMPKIN_SEEDS) {
+				e.getBlock().setType(e.getBlock().getType());
+			} else if (e.getBlock().getType() == Utils.getBeetrootMaterial()) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("PompoenNietVolgroeid")); 
-					e.setCancelled(true);
-					return;
-				}
-
-				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.PUMPKIN, 1));
-				Utils.cropPlaces.add(e.getBlock().getLocation());
-				e.getBlock().setType(Utils.getCropsMaterial());
-			} else if (e.getBlock().getType() == Material.BEETROOT_SEEDS) {
-				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("BietenNietVolgroeid")); 
+					e.getPlayer().sendMessage(Main.getMessage("BietenNietVolgroeid"));
 					e.setCancelled(true);
 					return;
 				}
@@ -77,40 +76,29 @@ public class FarmListener implements Listener {
 				e.setCancelled(true);
 				p.getInventory().addItem(new ItemStack(Material.BEETROOT, 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
-				e.getBlock().setType(Utils.getCropsMaterial());
-			} else if (e.getBlock().getType() == Material.MELON_SEEDS) {
+				e.getBlock().setType(e.getBlock().getType());
+			} else if (e.getBlock().getType() == Utils.getCarrotBlock()) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("MeloenNietVolgroeid")); 
+					e.getPlayer().sendMessage(Main.getMessage("WortelNietVolgroeid"));
 					e.setCancelled(true);
 					return;
 				}
 
 				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.MELON, 1));
+				p.getInventory().addItem(new ItemStack(Utils.getCarrotItem(), 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
-				e.getBlock().setType(Utils.getCropsMaterial());
-			} else if (e.getBlock().getType() == Material.CARROT) {
+				e.getBlock().setType(e.getBlock().getType());
+			} else if (e.getBlock().getType() == Utils.getPotatoBlock()) {
 				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("WortelNietVolgroeid")); 
+					e.getPlayer().sendMessage(Main.getMessage("AardappelNietVolgroeid"));
 					e.setCancelled(true);
 					return;
 				}
 
 				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.CARROT, 1));
+				p.getInventory().addItem(new ItemStack(Utils.getPotatoItem(), 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
-				e.getBlock().setType(Utils.getCropsMaterial());
-			} else if (e.getBlock().getType() == Material.POTATO) {
-				if (crops.getState() != CropState.RIPE) {
-					e.getPlayer().sendMessage(Main.getMessage("AardappelNietVolgroeid")); 
-					e.setCancelled(true);
-					return;
-				}
-
-				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.POTATO, 1));
-				Utils.cropPlaces.add(e.getBlock().getLocation());
-				e.getBlock().setType(Utils.getCropsMaterial());
+				e.getBlock().setType(e.getBlock().getType());
 			}
 		}
 	}

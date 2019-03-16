@@ -13,8 +13,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
-	public static ArrayList<Location> ironOres = new ArrayList<>();
+	public static HashMap<Location, Material> ores = new HashMap<>();
 	public static ArrayList<Location> cropPlaces = new ArrayList<>();
+	public static HashMap<Location, Material> blockReplaces = new HashMap<>();
+	
 	public static HashMap<Location, TreeObj> treePlaces = new HashMap<>();
 
 	public static String color(String input) {
@@ -50,13 +52,56 @@ public class Utils {
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_");
 	}
-	
+
 	public static Material getCropsMaterial() {
 		if (is113orUp()) {
 			return Material.valueOf("WHEAT");
 		}
 		return Material.valueOf("CROPS");
-}
+	}
+
+	public static Material getBeetrootMaterial() {
+		if (is113orUp()) {
+			return Material.valueOf("BEETROOTS");
+		}
+		return Material.valueOf("BEETROOT_BLOCK");
+	}
+	
+
+	public static Material getMelonMaterial() {
+		if (is113orUp()) {
+			return Material.MELON;
+		}
+		return Material.valueOf("MELON_BLOCK");
+	}
+	
+	public static Material getCarrotItem() {
+		if (is113orUp()) {
+			return Material.CARROTS;
+		}
+		return Material.valueOf("CARROT_ITEM");
+	}
+
+	public static Material getPotatoItem() {
+		if (is113orUp()) {
+			return Material.POTATOES;
+		}
+		return Material.valueOf("POTATO_ITEM");
+	}
+	
+	public static Material getCarrotBlock() {
+		if (is113orUp()) {
+			return Material.CARROTS;
+		}
+		return Material.valueOf("CARROT");
+	}
+
+	public static Material getPotatoBlock() {
+		if (is113orUp()) {
+			return Material.POTATOES;
+		}
+		return Material.valueOf("POTATO");
+	}
 
 	public static class TreeObj {
 

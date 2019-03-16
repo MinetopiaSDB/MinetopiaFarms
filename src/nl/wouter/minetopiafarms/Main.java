@@ -6,7 +6,6 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -53,9 +52,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.BeroepNodig", "&4ERROR: &cHiervoor heb je het beroep &4<Beroep> &cnodig!");
 		getConfig().addDefault("Messages.ToolNodig", "&4ERROR: &cHiervoor heb je een &4<Tool> &cnodig!");
 		getConfig().addDefault("Messages.TarweNietVolgroeid", "&4ERROR: &cDeze tarwe is niet volgroeid!");
-		getConfig().addDefault("Messages.PompoenNietVolgroeid", "&4ERROR: &cDeze pompoen is niet volgroeid!");
 		getConfig().addDefault("Messages.BietenNietVolgroeid", "&4ERROR: &cDeze bieten zijn niet volgroeid!");
-		getConfig().addDefault("Messages.MeloenNietVolgroeid", "&4ERROR: &cDeze meloen is niet volgroeid!");
 		getConfig().addDefault("Messages.WortelNietVolgroeid", "&4ERROR: &cDeze wortel is niet volgroeid!");
 		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
@@ -105,6 +102,13 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}, 6 * 20l, 6 * 20l);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				for (Location l : Utils.blockReplaces.keySet()) {
+					l.getBlock().setType(Utils.blockReplaces.get(l));
+				}
+			}
+		}, 40 * 20l, 40 * 20l);
 
 		UpdateChecker.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {
@@ -113,11 +117,11 @@ public class Main extends JavaPlugin {
 				UpdateChecker.getInstance().sendUpdateMessageLater(e.getPlayer());
 			}
 		}, this);
-	}
+	} 
 
 	public void onDisable() {
-		for (Location l : Utils.ironOres) {
-			l.getBlock().setType(Material.IRON_ORE);
+		for (Location l : Utils.ores.keySet()) {
+			l.getBlock().setType(Utils.ores.get(l));
 		}
 		for (Location l : Utils.cropPlaces) {
 			BlockState state = l.getBlock().getState();
@@ -125,6 +129,9 @@ public class Main extends JavaPlugin {
 				Crops crop = (Crops) state.getData();
 				crop.setState(CropState.RIPE);
 			}
+		}
+		for (Location l : Utils.blockReplaces.keySet()) {
+			l.getBlock().setType(Utils.blockReplaces.get(l));
 		}
 		for (Location l : Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);
