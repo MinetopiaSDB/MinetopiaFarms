@@ -7,6 +7,7 @@ Hoewel de plugin nu prima ondersteuning bevat voor 1.13 update ik hem niet (of z
 
 Contributen aan MTFarms? Zeker doen!
 ======
-Als je een **goede** pullrequest maakt die of functies toevoegd of een/meerdere bugs fixed sturen wij je een MinetopiaSDB badge (max. 1 p.p.)! 
+Als je een **goede** pullrequest maakt die of functies toevoegd of een/meerdere bugs fixed sturen wij je een MinetopiaSDB badge (max. 1 p.p.)
+
 ![SDB Buttons](https://cdn.discordapp.com/attachments/389835875082698752/547393942329753600/IMG_20190219_132501.png | width=48)
 *We sturen deze badges alleen op naar adressen in Nederland of België.*
