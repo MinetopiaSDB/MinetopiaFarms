@@ -14,6 +14,7 @@ import org.bukkit.material.Crops;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.wouter.minetopia.utils.plugin.web.UpdateChecker;
 import nl.wouter.minetopiafarms.commands.KiesCMD;
 import nl.wouter.minetopiafarms.commands.MTFarmsCMD;
 import nl.wouter.minetopiafarms.events.BlockBreaker;
@@ -21,7 +22,6 @@ import nl.wouter.minetopiafarms.events.FarmListener;
 import nl.wouter.minetopiafarms.events.InventoryClickListener;
 import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
-import nl.wouter.minetopiafarms.utils.UpdateChecker;
 import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 

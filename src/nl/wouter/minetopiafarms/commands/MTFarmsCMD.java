@@ -1,11 +1,12 @@
 package nl.wouter.minetopiafarms.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.UpdateChecker;
+import nl.wouter.minetopiafarms.utils.Updat3r;
 import nl.wouter.minetopiafarms.utils.Utils;
 
 public class MTFarmsCMD implements CommandExecutor {
@@ -26,9 +27,18 @@ public class MTFarmsCMD implements CommandExecutor {
 		
 		//More or less just for debug reasons.
 		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
-			sender.sendMessage(Utils.color("&3Cached 'latest': &b" + UpdateChecker.getInstance().getVersion()));
-			sender.sendMessage(Utils.color("&3Latest: &b" + UpdateChecker.getInstance().getLatestVersion()));
+			sender.sendMessage(Utils.color("&3Cached 'latest': &b" + Updat3r.getInstance().getLatestCached().getVersion()));
+			sender.sendMessage(Utils.color("&3Latest: &b" + Updat3r.getInstance().getLatestUpdate(Updat3r.PROJECT_NAME, Updat3r.API_KEY).getVersion()));
 			sender.sendMessage(Utils.color("&3Actual version: &b" + Main.pl.getDescription().getVersion()));
+		}
+		if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
+			if (!Updat3r.getInstance().getLatestCached().isNewer()) {
+				sender.sendMessage(Utils.color("&cEr is geen update beschikbaar!"));
+				return true;
+			}
+			sender.sendMessage(Utils.color("&3We gaan de update nu installeren!"));
+			Updat3r.getInstance().downloadLatest(Updat3r.getInstance().getLatestCached().getDownloadLink(), "MinetopiaFarms", Main.pl);
+			Bukkit.reload();
 		}
 		return true;
 	}
