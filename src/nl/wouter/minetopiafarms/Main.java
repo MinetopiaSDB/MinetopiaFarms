@@ -14,7 +14,6 @@ import org.bukkit.material.Crops;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.wouter.minetopia.utils.plugin.web.UpdateChecker;
 import nl.wouter.minetopiafarms.commands.KiesCMD;
 import nl.wouter.minetopiafarms.commands.MTFarmsCMD;
 import nl.wouter.minetopiafarms.events.BlockBreaker;
@@ -22,6 +21,7 @@ import nl.wouter.minetopiafarms.events.FarmListener;
 import nl.wouter.minetopiafarms.events.InventoryClickListener;
 import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
+import nl.wouter.minetopiafarms.utils.Updat3r;
 import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4ï¿½ <Bedrag>,- &cnodig!");
+				"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag>,- &cnodig!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
@@ -110,11 +110,11 @@ public class Main extends JavaPlugin {
 			}
 		}, 40 * 20l, 40 * 20l);
 
-		UpdateChecker.getInstance().startTask();
+		Updat3r.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
 			public void onJoin(PlayerJoinEvent e) {
-				UpdateChecker.getInstance().sendUpdateMessageLater(e.getPlayer());
+				Updat3r.getInstance().sendUpdateMessageLater(e.getPlayer());
 			}
 		}, this);
 	} 
