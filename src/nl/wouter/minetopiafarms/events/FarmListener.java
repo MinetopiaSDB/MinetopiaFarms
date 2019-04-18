@@ -16,7 +16,6 @@ import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
 
 public class FarmListener implements Listener {
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
@@ -32,7 +31,7 @@ public class FarmListener implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			if (!p.getItemInHand().getType().toString().contains("HOE")) {
+			if (!p.getInventory().getItemInMainHand().getType().toString().contains("HOE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "hoe"));
 				e.setCancelled(true);
 				return;
