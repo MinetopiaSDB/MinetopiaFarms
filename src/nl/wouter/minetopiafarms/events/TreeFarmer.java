@@ -2,7 +2,6 @@ package nl.wouter.minetopiafarms.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,7 +38,8 @@ public class TreeFarmer implements Listener {
 			}
 
 			Material blockType = e.getBlock().getType();
-			BlockData blockData = e.getBlock().getBlockData();
+			@SuppressWarnings("deprecation")
+			byte blockData = e.getBlock().getData();
 
 			e.setCancelled(true);
 			for (ItemStack drop : e.getBlock().getDrops()) {

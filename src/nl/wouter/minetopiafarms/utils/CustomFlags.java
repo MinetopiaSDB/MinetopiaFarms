@@ -18,7 +18,6 @@ public class CustomFlags {
 	public static final StringFlag farmFlag = new StringFlag("minetopiafarms");
 
 	public static void loadCustomFlag() {
-
 		FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
 
 		try {

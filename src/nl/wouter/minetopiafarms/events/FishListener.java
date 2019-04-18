@@ -52,7 +52,7 @@ public class FishListener implements Listener {
 						.setLore(Main.getPlugin().getConfig().getStringList("VangstItemLore")).toItemStack();
 				p.getInventory().addItem(stack);
 			} else {
-				Bukkit.getLogger().severe("Can't give the player the material" + str + " because it doesn't exists!");
+				Bukkit.getLogger().severe("Het item " + str + " kan niet worden gegeven, omdat het niet bestaat!");
 				return;
 			}
 		}

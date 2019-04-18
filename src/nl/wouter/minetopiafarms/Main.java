@@ -74,7 +74,7 @@ public class Main extends JavaPlugin {
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
-				for (Location l : new ArrayList<Location>(Utils.wheatPlaces)) {
+				for (Location l : new ArrayList<Location>(Utils.cropPlaces)) {
 					if (Material.WHEAT == l.getBlock().getType()) {
 						BlockState state = l.getBlock().getState();
 						Crops crop = (Crops) state.getData();
@@ -92,15 +92,23 @@ public class Main extends JavaPlugin {
 							crop.setState(CropState.VERY_TALL);
 						} else if (crop.getState() == CropState.VERY_TALL) {
 							crop.setState(CropState.RIPE);
-							Utils.wheatPlaces.remove(l);
+							Utils.cropPlaces.remove(l);
 						}
 						state.update();
 					} else {
-						Utils.wheatPlaces.remove(l);
+						Utils.cropPlaces.remove(l);
 					}
 				}
 			}
 		}, 6 * 20l, 6 * 20l);
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				for (Location l : Utils.blockReplaces.keySet()) {
+					l.getBlock().setType(Utils.blockReplaces.get(l));
+				}
+			}
+		}, 40 * 20l, 40 * 20l);
 	}
 	
 	private boolean setupPlugins() {
@@ -115,13 +123,20 @@ public class Main extends JavaPlugin {
     }
 
 	public void onDisable() {
-		for (Location l : Utils.ironOres) {
-			l.getBlock().setType(Material.IRON_ORE);
+		for (Location l : Utils.ores.keySet()) {
+			l.getBlock().setType(Utils.ores.get(l));
 		}
-		for (Location l : Utils.wheatPlaces) {
-			l.getBlock().setType(Material.WHEAT);
+		for (Location l : Utils.cropPlaces) {
+			BlockState state = l.getBlock().getState();
+			if (state.getData() instanceof Crops) {
+				Crops crop = (Crops) state.getData();
+				crop.setState(CropState.RIPE);
+			}
 		}
-		for (Location l: Utils.treePlaces.keySet()) {
+		for (Location l : Utils.blockReplaces.keySet()) {
+			l.getBlock().setType(Utils.blockReplaces.get(l));
+		}
+		for (Location l : Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);
 			l.getBlock().setType(obj.getMaterial());
 		}

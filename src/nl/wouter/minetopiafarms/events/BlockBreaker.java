@@ -74,17 +74,16 @@ public class BlockBreaker implements Listener {
 					//Not important & should be unreachable
 					return;
 			}
-
-			e.getBlock().getLocation().getBlock().setType(Material.COBBLESTONE);
 			
 			e.getBlock().getDrops().clear();
-			Utils.ironOres.add(e.getBlock().getLocation());
+			Utils.ores.put(e.getBlock().getLocation(), e.getBlock().getType());
+			e.getBlock().getLocation().getBlock().setType(Material.COBBLESTONE);
 			Utils.handleToolDurability(e.getPlayer());
 			Bukkit.getScheduler().runTaskLater(Main.getPlugin(), new Runnable() {
 				@Override
 				public void run() {
 					e.getBlock().setType(blockType);
-					Utils.ironOres.remove(e.getBlock().getLocation());
+					Utils.ores.remove(e.getBlock().getLocation());
 				}
 			}, /* seconds multiplied by 20 */ 120 * 20);
 		}
