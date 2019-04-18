@@ -73,7 +73,7 @@ public class FarmListener implements Listener {
 				}
 
 				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.BEETROOT, 1));
+				p.getInventory().addItem(new ItemStack(Material.BEETROOTS, 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
 				e.getBlock().setType(e.getBlock().getType());
 			} else if (e.getBlock().getType() == Material.CARROTS) {
