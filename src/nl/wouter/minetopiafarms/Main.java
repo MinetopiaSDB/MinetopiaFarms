@@ -40,6 +40,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new FishListener(), this);
 		
+		
 		if (Bukkit.getPluginManager().getPlugin("Citizens") != null) {
 			Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
 		}
