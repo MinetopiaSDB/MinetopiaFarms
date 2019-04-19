@@ -39,7 +39,10 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new TreeFarmer(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new FishListener(), this);
-		Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
+		
+		if (Bukkit.getPluginManager().getPlugin("Citizens") != null) {
+			Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
+		}
 
 		getCommand("kies").setExecutor(new KiesCMD());
 		getCommand("minetopiafarms").setExecutor(new MTFarmsCMD());

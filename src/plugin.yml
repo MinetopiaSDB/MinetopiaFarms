@@ -5,7 +5,8 @@ author: MrWouter
 description: Farms en Mines
 main: nl.wouter.minetopiafarms.Main
 loadbefore: [WorldGuard]
-depend: [Citizens, WorldGuard, WorldEdit, Vault, MinetopiaSDB]
+depend: [WorldGuard, WorldEdit, Vault, MinetopiaSDB]
+soft-depend: [Citizens]
 commands:
      kies:
      minetopiafarms:

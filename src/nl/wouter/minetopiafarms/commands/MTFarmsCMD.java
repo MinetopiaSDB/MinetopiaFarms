@@ -46,6 +46,12 @@ public class MTFarmsCMD implements CommandExecutor {
 			Bukkit.reload();
 		}
 		if (args.length == 1 && args[0].equalsIgnoreCase("spawnnpc")) {
+			
+			if (Bukkit.getPluginManager().getPlugin("Citizens") == null) {
+				sender.sendMessage(Utils.color("&4ERROR: &cCitizens is hiervoor benodigd!"));
+				return true;
+			}
+			
 			if (!(sender instanceof Player)) {
 				sender.sendMessage(Utils.color("&4ERROR: &cJe moet een speler zijn om dit te doen!"));
 				return true;
