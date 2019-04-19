@@ -66,7 +66,7 @@ public class BlockBreaker implements Listener {
 					e.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT));
 					break;
 				case LAPIS_ORE:
-					e.getPlayer().getInventory().addItem(XMaterial.LAPIS_LAZULI.parseItem());
+					e.getPlayer().getInventory().addItem(new ItemStack(XMaterial.LAPIS_LAZULI.parseMaterial()));
 					break;
 				case REDSTONE_ORE:
 					e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
@@ -80,7 +80,7 @@ public class BlockBreaker implements Listener {
 			Utils.ores.put(e.getBlock().getLocation(), e.getBlock().getType());
 			e.getBlock().getLocation().getBlock().setType(Material.COBBLESTONE);
 			Utils.handleToolDurability(e.getPlayer());
-			Bukkit.getScheduler().runTaskLater(Main.pl, new Runnable() {
+			Bukkit.getScheduler().runTaskLater(Main.getPlugin(), new Runnable() {
 				@Override
 				public void run() {
 					e.getBlock().setType(blockType);

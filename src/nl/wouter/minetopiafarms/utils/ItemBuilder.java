@@ -21,7 +21,6 @@ import org.bukkit.inventory.meta.SkullMeta;
  * @author NonameSL
  */
 
-@SuppressWarnings("deprecation")
 public class ItemBuilder {
 	private ItemStack is;
 

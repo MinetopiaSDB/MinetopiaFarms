@@ -867,7 +867,6 @@ public enum XMaterial {
 		this.data = data;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public ItemStack parseItem(){
 		Material mat = parseMaterial();
 		if(isNewVersion()){

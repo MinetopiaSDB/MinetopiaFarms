@@ -16,7 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import me.wouter.minetopia.Main;
+import nl.wouter.minetopiafarms.Main;
 
 public class Updat3r {
 
@@ -34,13 +34,12 @@ public class Updat3r {
 		return instance;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void startTask() {
 		if (taskRunning) {
 			return;
 		}
 		taskRunning = true;
-		Bukkit.getScheduler().scheduleAsyncRepeatingTask(Main.pl, new Runnable() {
+		Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), new Runnable() {
 			public void run() {
 				update = getLatestUpdate(PROJECT_NAME, API_KEY);
 			}
@@ -130,19 +129,19 @@ public class Updat3r {
 	}
 
 	public void sendUpdateMessage(Player p) {
-		p.sendMessage("   §3-=-=-=[§bMinetopiaFarms§3]=-=-=-   ");
-		p.sendMessage("§3Er is een update beschikbaar voor §bMinetopiaFarms§3!");
-		p.sendMessage("§3Je maakt nu gebruik van versie §b" + Main.pl.getDescription().getVersion() + "§3.");
-		p.sendMessage("§3De nieuwste versie is §b" + update.getVersion());
+		p.sendMessage("   Â§3-=-=-=[Â§bMinetopiaFarmsÂ§3]=-=-=-   ");
+		p.sendMessage("Â§3Er is een update beschikbaar voor Â§bMinetopiaFarmsÂ§3!");
+		p.sendMessage("Â§3Je maakt nu gebruik van versie Â§b" + Main.getPlugin().getDescription().getVersion() + "Â§3.");
+		p.sendMessage("Â§3De nieuwste versie is Â§b" + update.getVersion());
 		if (update.isCritical()) {
-			p.sendMessage("§3§lLet op, deze build is gemarkeert als belangrijk. Installeer hem zo snel mogelijk!");
+			p.sendMessage("Â§3Â§lLet op, deze build is gemarkeert als belangrijk. Installeer hem zo snel mogelijk!");
 		}
-		p.sendMessage("§3Om deze update te installeren, type §b/mtfarms update.");
-		p.sendMessage("   §3-=-=-=[§bMinetopiaFarms§3]=-=-=-   ");
+		p.sendMessage("Â§3Om deze update te installeren, type Â§b/mtfarms update.");
+		p.sendMessage("   Â§3-=-=-=[Â§bMinetopiaFarmsÂ§3]=-=-=-   ");
 	}
 
 	public void sendUpdateMessageLater(Player p) {
-		Bukkit.getScheduler().runTaskLaterAsynchronously(Main.pl, new Runnable() {
+		Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), new Runnable() {
 			public void run() {
 				if (p.isOp()) {
 					if (update.isNewer()) {
@@ -183,7 +182,7 @@ public class Updat3r {
 
 		public boolean isNewer() {
 			String[] ver = version.split("\\.");
-			String[] sdbver = Main.pl.getDescription().getVersion().split("\\.");
+			String[] sdbver = Main.getPlugin().getDescription().getVersion().split("\\.");
 
 			if (ver.length == 1 || ver[0].equals("?")) {
 				return false;

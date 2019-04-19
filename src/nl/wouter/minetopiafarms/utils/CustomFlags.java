@@ -22,7 +22,7 @@ public class CustomFlags {
 			registry.register(farmFlag);
 			
 		} catch (Exception e) {
-			Main.pl.getLogger().severe("Something went wrong whilst loading flag 'MinetopiaFarms'");
+			Main.getPlugin().getLogger().severe("Something went wrong whilst loading flag 'MinetopiaFarms'");
 			e.printStackTrace();
 		}
 

@@ -34,7 +34,6 @@ public class Utils {
 		return is;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void handleToolDurability(Player p) {
 		if ((short) (p.getInventory().getItemInMainHand().getDurability() + 2) >= p.getInventory().getItemInMainHand()
 				.getType().getMaxDurability()) {
@@ -51,56 +50,6 @@ public class Utils {
 		nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_") && !nmsver.startsWith("v1_12_");
-	}
-
-	public static Material getCropsMaterial() {
-		if (is113orUp()) {
-			return Material.valueOf("WHEAT");
-		}
-		return Material.valueOf("CROPS");
-	}
-
-	public static Material getBeetrootMaterial() {
-		if (is113orUp()) {
-			return Material.valueOf("BEETROOTS");
-		}
-		return Material.valueOf("BEETROOT_BLOCK");
-	}
-	
-
-	public static Material getMelonMaterial() {
-		if (is113orUp()) {
-			return Material.MELON;
-		}
-		return Material.valueOf("MELON_BLOCK");
-	}
-	
-	public static Material getCarrotItem() {
-		if (is113orUp()) {
-			return Material.CARROTS;
-		}
-		return Material.valueOf("CARROT_ITEM");
-	}
-
-	public static Material getPotatoItem() {
-		if (is113orUp()) {
-			return Material.POTATOES;
-		}
-		return Material.valueOf("POTATO_ITEM");
-	}
-	
-	public static Material getCarrotBlock() {
-		if (is113orUp()) {
-			return Material.CARROTS;
-		}
-		return Material.valueOf("CARROT");
-	}
-
-	public static Material getPotatoBlock() {
-		if (is113orUp()) {
-			return Material.POTATOES;
-		}
-		return Material.valueOf("POTATO");
 	}
 
 	public static class TreeObj {
