@@ -40,7 +40,23 @@ public class Main extends JavaPlugin {
 
 		getConfig().addDefault("KostenVoorEenBaan", 2500);
 		getConfig().addDefault("KrijgItemsBijBaanSelect", true);
-
+		
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.COAL_ORE", 10);
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.IRON_ORE", 25);
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.EMERALD_ORE", 30);
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.GOLD_ORE", 25);
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.LAPIS_ORE", 35);
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.REDSTONE_ORE", 25);
+		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.DIAMOND_ORE", 80);
+		getConfig().addDefault("TerugverkoopPrijs.Boer.BEETROOTS", 35);
+		getConfig().addDefault("TerugverkoopPrijs.Boer.WHEAT", 10);
+		getConfig().addDefault("TerugverkoopPrijs.Boer.MELON", 30);
+		getConfig().addDefault("TerugverkoopPrijs.Boer.PUMPKIN", 30);
+		getConfig().addDefault("TerugverkoopPrijs.Boer.CARROTS", 20);
+		getConfig().addDefault("TerugverkoopPrijs.Boer.POTATOES", 20);
+		getConfig().addDefault("TerugverkoopPrijs.Houthakker", 25);
+		getConfig().addDefault("TerugverkoopPrijs.Visser", 35);
+		
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
@@ -60,6 +76,8 @@ public class Main extends JavaPlugin {
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
 				"&4ERROR: &cOm van baan te veranderen heb je &4€<Bedrag>,- &cnodig!");
+		
+		getConfig().addDefault("Messages.GeldBetaald","&3Gelukt! Wij hebben jou &4€<Bedrag>,- &3betaald voor jouw opgehaalde spullen!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 

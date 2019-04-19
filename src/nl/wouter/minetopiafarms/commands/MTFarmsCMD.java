@@ -1,10 +1,16 @@
 package nl.wouter.minetopiafarms.commands;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.Updat3r;
 import nl.wouter.minetopiafarms.utils.Utils;
@@ -39,6 +45,19 @@ public class MTFarmsCMD implements CommandExecutor {
 			sender.sendMessage(Utils.color("&3We gaan de update nu installeren!"));
 			Updat3r.getInstance().downloadLatest(Updat3r.getInstance().getLatestCached().getDownloadLink(), "MinetopiaFarms", Main.getPlugin());
 			Bukkit.reload();
+		}
+		if (args.length == 1 && args[0].equalsIgnoreCase("spawnnpc")) {
+			if (!(sender instanceof Player)) {
+				sender.sendMessage(Utils.color("&4ERROR: &cJe moet een speler zijn om dit te doen!"));
+				return true;
+			}
+			Player p = (Player) sender;
+			
+			NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Farm Verkooppunt");
+			npc.setProtected(true);
+			npc.spawn(p.getLocation());
+			
+			sender.sendMessage(Utils.color("&3NPC gespanwed op jouw huidige locatie! Skin aanpassen toegestaan, de naam niet!"));
 		}
 		return true;
 	}
