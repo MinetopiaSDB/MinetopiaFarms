@@ -74,7 +74,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("VangstItemNaam", "&6Vangst");
 		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4€<Bedrag>,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4â‚¬<Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -82,18 +82,20 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.BeroepNodig", "&4ERROR: &cHiervoor heb je het beroep &4<Beroep> &cnodig!");
 		getConfig().addDefault("Messages.ToolNodig", "&4ERROR: &cHiervoor heb je een &4<Tool> &cnodig!");
 		getConfig().addDefault("Messages.TarweNietVolgroeid", "&4ERROR: &cDeze tarwe is niet volgroeid!");
+		getConfig().addDefault("Messages.BietenNietVolgroeid", "&4ERROR: &cDeze bieten zijn niet volgroeid!");
+		getConfig().addDefault("Messages.WortelNietVolgroeid", "&4ERROR: &cDeze wortel is niet volgroeid!");
+		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
-		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4€<Bedrag>,- &cnodig!");
+		getConfig().addDefault("Messages.TeWeinigGeld",	"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag>,- &cnodig!");
 		
-		getConfig().addDefault("Messages.GeldBetaald","&3Gelukt! Wij hebben jou &4€<Bedrag>,- &3betaald voor jouw opgehaalde spullen!");
+		getConfig().addDefault("Messages.GeldBetaald","&3Gelukt! Wij hebben jou &4â‚¬<Bedrag>,- &3betaald voor jouw opgehaalde spullen!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
 		getConfig().addDefault("Messages.GeenRegion", "&4ERROR: &cDeze region moet de tag &4'<Tag>' &chebben.");
-		getConfig().addDefault("Messages.Creative", "&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass..");
+		getConfig().addDefault("Messages.Creative",
+				"&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass..");
 
-		
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
