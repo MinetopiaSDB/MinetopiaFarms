@@ -20,7 +20,7 @@ public class NPCClickListener implements Listener {
 	public void onNPCRightClick(NPCRightClickEvent e) {
 		Player clicker = e.getClicker();
 		NPC clicked = e.getNPC();
-		if (clicked.getName() != "Farm Verkooppunt") {
+		if (!clicked.getName().equalsIgnoreCase("Farm Verkooppunt")) {
 			e.setCancelled(true);
 			return;
 		}
@@ -35,60 +35,72 @@ public class NPCClickListener implements Listener {
 			
 			if (e.getClicker().getInventory().contains(XMaterial.BEETROOTS.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.BEETROOTS.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						beetcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.BEETROOTS.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							beetcount = beetcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.WHEAT.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.WHEAT.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						wheatcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.WHEAT.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							wheatcount = wheatcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.MELON.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.MELON.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						meloncount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.MELON.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							meloncount = meloncount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.PUMPKIN.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.PUMPKIN.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						pumpkincount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.PUMPKIN.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							pumpkincount = pumpkincount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.CARROTS.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.CARROTS.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						carrotcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.CARROTS.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							carrotcount = carrotcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.POTATOES.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.POTATOES.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						potatocount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.POTATOES.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							potatocount = potatocount + item.getAmount();
+						}
 					}
 				}
 			}
@@ -116,70 +128,84 @@ public class NPCClickListener implements Listener {
 			
 			if (e.getClicker().getInventory().contains(XMaterial.COAL.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.COAL.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						coalcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.COAL.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							coalcount = coalcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.DIAMOND.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.DIAMOND.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						diamondcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.DIAMOND.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							diamondcount = diamondcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.EMERALD.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.EMERALD.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						emeraldcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.EMERALD.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							emeraldcount = emeraldcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.GOLD_INGOT.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.GOLD_INGOT.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						goldcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.GOLD_INGOT.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							goldcount = goldcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.IRON_INGOT.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.IRON_INGOT.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						ironcount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.IRON_INGOT.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							ironcount = ironcount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.LAPIS_LAZULI.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.LAPIS_LAZULI.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						lapiscount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.LAPIS_LAZULI.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							lapiscount = lapiscount + item.getAmount();
+						}
 					}
 				}
 			}
 			
 			if (e.getClicker().getInventory().contains(XMaterial.REDSTONE.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.REDSTONE.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						redstonecount++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.REDSTONE.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							redstonecount = redstonecount + item.getAmount();
+						}
 					}
 				}
 			}
@@ -201,13 +227,15 @@ public class NPCClickListener implements Listener {
 			int counter = 0;
 			if (e.getClicker().getInventory().contains(XMaterial.PUFFERFISH.parseMaterial()) || e.getClicker().getInventory().contains(XMaterial.TROPICAL_FISH.parseMaterial())) {
 				for (ItemStack item : clicker.getInventory().getContents()) {
-					Material itemmat = item.getType();
-					if (itemmat == XMaterial.PUFFERFISH.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						counter++;
-					} else if (itemmat == XMaterial.TROPICAL_FISH.parseMaterial()) {
-						clicker.getInventory().removeItem(item);
-						counter++;
+					if (item != null && item.getType() != null) {
+						Material itemmat = item.getType();
+						if (itemmat == XMaterial.PUFFERFISH.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							counter = counter + item.getAmount();
+						} else if (itemmat == XMaterial.TROPICAL_FISH.parseMaterial()) {
+							clicker.getInventory().removeItem(item);
+							counter = counter + item.getAmount();
+						}
 					}
 				}
 			}
@@ -222,10 +250,12 @@ public class NPCClickListener implements Listener {
 			int counter = 0;
 			
 			for (ItemStack item : clicker.getInventory().getContents()) {
-				Material itemmat = item.getType();
-				if (itemmat.toString().contains("_LOG")) {
-					clicker.getInventory().removeItem(item);
-					counter++;
+				if (item != null && item.getType() != null) {
+					Material itemmat = item.getType();
+					if (itemmat.toString().contains("LOG")) {
+						clicker.getInventory().removeItem(item);
+						counter = counter + item.getAmount();
+					}
 				}
 			}
 			

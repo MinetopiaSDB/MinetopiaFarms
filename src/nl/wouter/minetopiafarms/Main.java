@@ -19,6 +19,7 @@ import nl.wouter.minetopiafarms.events.BlockBreaker;
 import nl.wouter.minetopiafarms.events.FarmListener;
 import nl.wouter.minetopiafarms.events.FishListener;
 import nl.wouter.minetopiafarms.events.InventoryClickListener;
+import nl.wouter.minetopiafarms.events.NPCClickListener;
 import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Updat3r;
@@ -27,6 +28,10 @@ import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class Main extends JavaPlugin {
 	private static Main pl;
+	
+	public void onLoad() {
+		CustomFlags.loadCustomFlag();
+	}
 
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new BlockBreaker(), this);
@@ -34,6 +39,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new TreeFarmer(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new FishListener(), this);
+		Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
 
 		getCommand("kies").setExecutor(new KiesCMD());
 		getCommand("minetopiafarms").setExecutor(new MTFarmsCMD());
@@ -89,8 +95,6 @@ public class Main extends JavaPlugin {
 		saveConfig();
 
 		pl = this;
-
-		CustomFlags.loadCustomFlag();
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
