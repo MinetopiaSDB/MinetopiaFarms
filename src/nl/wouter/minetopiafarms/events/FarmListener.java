@@ -14,14 +14,15 @@ import nl.minetopiasdb.api.SDBPlayer;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
+import nl.wouter.minetopiafarms.utils.XMaterial;
 
 public class FarmListener implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if (e.getBlock().getType() == Material.BEETROOTS || e.getBlock().getType() == Material.WHEAT
-				|| e.getBlock().getType() == Material.MELON || e.getBlock().getType() == Material.PUMPKIN
-				|| e.getBlock().getType() == Material.CARROTS || e.getBlock().getType() == Material.POTATOES) {
+		if (e.getBlock().getType() == XMaterial.BEETROOTS.parseMaterial() || e.getBlock().getType() == XMaterial.WHEAT.parseMaterial()
+				|| e.getBlock().getType() == XMaterial.MELON.parseMaterial() || e.getBlock().getType() == XMaterial.PUMPKIN.parseMaterial()
+				|| e.getBlock().getType() == XMaterial.CARROTS.parseMaterial() || e.getBlock().getType() == XMaterial.POTATOES.parseMaterial()) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
@@ -43,9 +44,9 @@ public class FarmListener implements Listener {
 			}
 
 			if (!(e.getBlock().getState().getData() instanceof Crops)) {
-				if (e.getBlock().getType() == Material.PUMPKIN) {
-					p.getInventory().addItem(new ItemStack(Material.PUMPKIN, 1));
-				} else if (e.getBlock().getType() == Material.MELON) {
+				if (e.getBlock().getType() == XMaterial.PUMPKIN.parseMaterial()) {
+					p.getInventory().addItem(new ItemStack(XMaterial.PUMPKIN.parseMaterial(), 1));
+				} else if (e.getBlock().getType() == XMaterial.MELON.parseMaterial()) {
 					p.getInventory().addItem(new ItemStack(e.getBlock().getType(), 1));
 				}
 				e.setCancelled(true);
@@ -54,7 +55,7 @@ public class FarmListener implements Listener {
 				return;
 			}
 			Crops crops = (Crops) e.getBlock().getState().getData();
-			if (e.getBlock().getType() == Material.WHEAT) {
+			if (e.getBlock().getType() == XMaterial.WHEAT.parseMaterial()) {
 				if (crops.getState() != CropState.RIPE) {
 					e.getPlayer().sendMessage(Main.getMessage("TarweNietVolgroeid"));
 					e.setCancelled(true);
@@ -65,7 +66,7 @@ public class FarmListener implements Listener {
 				p.getInventory().addItem(new ItemStack(Material.WHEAT, 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
 				e.getBlock().setType(e.getBlock().getType());
-			} else if (e.getBlock().getType() == Material.BEETROOTS) {
+			} else if (e.getBlock().getType() == XMaterial.BEETROOTS.parseMaterial()) {
 				if (crops.getState() != CropState.RIPE) {
 					e.getPlayer().sendMessage(Main.getMessage("BietenNietVolgroeid"));
 					e.setCancelled(true);
@@ -73,10 +74,10 @@ public class FarmListener implements Listener {
 				}
 
 				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.BEETROOTS, 1));
+				p.getInventory().addItem(new ItemStack(XMaterial.BEETROOTS.parseMaterial(), 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
 				e.getBlock().setType(e.getBlock().getType());
-			} else if (e.getBlock().getType() == Material.CARROTS) {
+			} else if (e.getBlock().getType() == XMaterial.CARROTS.parseMaterial()) {
 				if (crops.getState() != CropState.RIPE) {
 					e.getPlayer().sendMessage(Main.getMessage("WortelNietVolgroeid"));
 					e.setCancelled(true);
@@ -84,10 +85,10 @@ public class FarmListener implements Listener {
 				}
 
 				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.CARROTS, 1));
+				p.getInventory().addItem(new ItemStack(XMaterial.CARROTS.parseMaterial(), 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
 				e.getBlock().setType(e.getBlock().getType());
-			} else if (e.getBlock().getType() == Material.POTATOES) {
+			} else if (e.getBlock().getType() == XMaterial.POTATOES.parseMaterial()) {
 				if (crops.getState() != CropState.RIPE) {
 					e.getPlayer().sendMessage(Main.getMessage("AardappelNietVolgroeid"));
 					e.setCancelled(true);
@@ -95,7 +96,7 @@ public class FarmListener implements Listener {
 				}
 
 				e.setCancelled(true);
-				p.getInventory().addItem(new ItemStack(Material.POTATOES, 1));
+				p.getInventory().addItem(new ItemStack(XMaterial.POTATOES.parseMaterial(), 1));
 				Utils.cropPlaces.add(e.getBlock().getLocation());
 				e.getBlock().setType(e.getBlock().getType());
 			}

@@ -2,12 +2,14 @@ package nl.wouter.minetopiafarms.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
@@ -21,19 +23,33 @@ public class Utils {
 		return ChatColor.translateAlternateColorCodes('&', input);
 	}
 
-	public static void handleToolDurability(Player p) {
-		ItemStack item = p.getInventory().getItemInMainHand();
-		ItemMeta meta = item.getItemMeta();
-		if (meta instanceof Damageable) {
-			Damageable dam = (Damageable) meta;
-			if (dam.getDamage() + 2 >= item.getType().getMaxDurability()) {
-				p.getInventory().remove(p.getInventory().getItemInMainHand());
-			} else {
-				dam.setDamage(dam.getDamage() + 2);
-			}
-			item.setItemMeta(meta);
-			p.updateInventory();
+	public static ItemStack createItemStack(Material mat, String name, List<String> lore) {
+		ItemStack is = new ItemStack(mat);
+		ItemMeta ism = is.getItemMeta();
+		if (name != null) {
+			ism.setDisplayName(color(name));
 		}
+		ism.setLore(lore);
+		is.setItemMeta(ism);
+		return is;
+	}
+
+	public static void handleToolDurability(Player p) {
+		if ((short) (p.getInventory().getItemInMainHand().getDurability() + 2) >= p.getInventory().getItemInMainHand()
+				.getType().getMaxDurability()) {
+			p.getInventory().remove(p.getInventory().getItemInMainHand());
+		} else {
+			p.getInventory().getItemInMainHand()
+					.setDurability((short) (p.getInventory().getItemInMainHand().getDurability() + 2));
+		}
+		p.updateInventory();
+	}
+
+	public static boolean is113orUp() {
+		String nmsver = Bukkit.getServer().getClass().getPackage().getName();
+		nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
+		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
+				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_") && !nmsver.startsWith("v1_12_");
 	}
 
 	public static class TreeObj {

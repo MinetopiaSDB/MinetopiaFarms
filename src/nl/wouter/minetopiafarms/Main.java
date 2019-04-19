@@ -6,8 +6,10 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.BlockState;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,21 +17,23 @@ import nl.wouter.minetopiafarms.commands.KiesCMD;
 import nl.wouter.minetopiafarms.commands.MTFarmsCMD;
 import nl.wouter.minetopiafarms.events.BlockBreaker;
 import nl.wouter.minetopiafarms.events.FarmListener;
+import nl.wouter.minetopiafarms.events.FishListener;
 import nl.wouter.minetopiafarms.events.InventoryClickListener;
 import nl.wouter.minetopiafarms.events.TreeFarmer;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
+import nl.wouter.minetopiafarms.utils.Updat3r;
 import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
-import nl.wouter.minetopiafarms.utils.WG;
 
 public class Main extends JavaPlugin {
-	private static Main plugin;
+	private static Main pl;
 
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new BlockBreaker(), this);
 		Bukkit.getPluginManager().registerEvents(new FarmListener(), this);
 		Bukkit.getPluginManager().registerEvents(new TreeFarmer(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
+		Bukkit.getPluginManager().registerEvents(new FishListener(), this);
 
 		getCommand("kies").setExecutor(new KiesCMD());
 		getCommand("minetopiafarms").setExecutor(new MTFarmsCMD());
@@ -45,7 +49,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("VangstItemNaam", "&6Vangst");
 		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4€<Bedrag>,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4â‚¬<Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -55,7 +59,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.TarweNietVolgroeid", "&4ERROR: &cDeze tarwe is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4€<Bedrag>,- &cnodig!");
+				"&4ERROR: &cOm van baan te veranderen heb je &4â‚¬<Bedrag>,- &cnodig!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
@@ -66,17 +70,16 @@ public class Main extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
-		plugin = this;
-		
-		setupPlugins();
+		pl = this;
 
 		CustomFlags.loadCustomFlag();
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
 				for (Location l : new ArrayList<Location>(Utils.cropPlaces)) {
-					if (Material.WHEAT == l.getBlock().getType()) {
-						BlockState state = l.getBlock().getState();
+					BlockState state = l.getBlock().getState();
+
+					if (state.getData() instanceof Crops) {
 						Crops crop = (Crops) state.getData();
 						if (crop.getState() == CropState.SEEDED) {
 							crop.setState(CropState.GERMINATED);
@@ -101,7 +104,6 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}, 6 * 20l, 6 * 20l);
-		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
 				for (Location l : Utils.blockReplaces.keySet()) {
@@ -109,18 +111,15 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}, 40 * 20l, 40 * 20l);
-	}
-	
-	private boolean setupPlugins() {
-        if (hasWorldGuardOnServer()) {
-            WG.setWorldGuard(getServer().getPluginManager().getPlugin("WorldGuard"));
-            return true;
-        }
-        return false;
-    }
-    private static boolean hasWorldGuardOnServer() {
-        return Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
-    }
+
+		Updat3r.getInstance().startTask();
+		Bukkit.getPluginManager().registerEvents(new Listener() {
+			@EventHandler
+			public void onJoin(PlayerJoinEvent e) {
+				Updat3r.getInstance().sendUpdateMessageLater(e.getPlayer());
+			}
+		}, this);
+	} 
 
 	public void onDisable() {
 		for (Location l : Utils.ores.keySet()) {
@@ -139,14 +138,21 @@ public class Main extends JavaPlugin {
 		for (Location l : Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);
 			l.getBlock().setType(obj.getMaterial());
+			if (!Utils.is113orUp()) {
+				try {
+					l.getBlock().getClass().getMethod("setData", byte.class).invoke(l.getBlock(), obj.getData());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
 		}
 	}
 	
 	public static Main getPlugin() {
-		return plugin;
+		return pl;
 	}
 
 	public static String getMessage(String path) {
-		return Utils.color(getPlugin().getConfig().getString("Messages." + path));
+		return Utils.color(pl.getConfig().getString("Messages." + path));
 	}
 }

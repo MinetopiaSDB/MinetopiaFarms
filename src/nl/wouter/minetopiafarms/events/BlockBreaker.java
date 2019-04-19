@@ -13,6 +13,7 @@ import nl.minetopiasdb.api.SDBPlayer;
 import nl.wouter.minetopiafarms.Main;
 import nl.wouter.minetopiafarms.utils.CustomFlags;
 import nl.wouter.minetopiafarms.utils.Utils;
+import nl.wouter.minetopiafarms.utils.XMaterial;
 
 public class BlockBreaker implements Listener {
 
@@ -65,7 +66,7 @@ public class BlockBreaker implements Listener {
 					e.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT));
 					break;
 				case LAPIS_ORE:
-					e.getPlayer().getInventory().addItem(new ItemStack(Material.LAPIS_LAZULI));
+					e.getPlayer().getInventory().addItem(new ItemStack(XMaterial.LAPIS_LAZULI.parseMaterial()));
 					break;
 				case REDSTONE_ORE:
 					e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
