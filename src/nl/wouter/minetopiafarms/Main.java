@@ -27,11 +27,9 @@ import nl.wouter.minetopiafarms.utils.Utils;
 import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class Main extends JavaPlugin {
-	private static Main pl;
 	
-	public void onLoad() {
-		CustomFlags.loadCustomFlag();
-	}
+	private static Main pl;
+
 
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new BlockBreaker(), this);
@@ -71,11 +69,12 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
 		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Arrays.asList("Typ hier jouw commands"));
+		
 		getConfig().addDefault("MogelijkeItemsBijVangst", Arrays.asList("Typ hier welke materials de persoon krijgt."));
 		getConfig().addDefault("VangstItemNaam", "&6Vangst");
 		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4â‚¬<Bedrag>,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -87,9 +86,9 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.WortelNietVolgroeid", "&4ERROR: &cDeze wortel is niet volgroeid!");
 		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
-		getConfig().addDefault("Messages.TeWeinigGeld",	"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag>,- &cnodig!");
+		getConfig().addDefault("Messages.TeWeinigGeld",	"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag> &cnodig!");
 		
-		getConfig().addDefault("Messages.GeldBetaald","&3Gelukt! Wij hebben jou &4â‚¬<Bedrag>,- &3betaald voor jouw opgehaalde spullen!");
+		getConfig().addDefault("Messages.GeldBetaald","&3Gelukt! Wij hebben jou &b€ <Bedrag> &3betaald voor jouw opgehaalde spullen!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
@@ -97,10 +96,16 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.Creative",
 				"&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass..");
 
+		getConfig().addDefault("Messages.NPC.Name", "&6Verkooppunt");
+		getConfig().addDefault("Messages.NPC.Skin.Name", "MrWouter");
+		getConfig().addDefault("Messages.NPC.Skin.UUID", "836ce767-0e25-45a0-8012-fa1864d2b6aa");
+		
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
 		pl = this;
+		
+		CustomFlags.loadCustomFlag();
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {

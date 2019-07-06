@@ -144,7 +144,7 @@ public class Updat3r {
 		Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), new Runnable() {
 			public void run() {
 				if (p.isOp()) {
-					if (update.isNewer()) {
+					if (update != null && update.isNewer()) {
 						sendUpdateMessage(p);
 					}
 				}

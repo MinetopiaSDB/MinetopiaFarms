@@ -1,5 +1,6 @@
 package nl.wouter.minetopiafarms.utils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,7 @@ public class Utils {
 		return is;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void handleToolDurability(Player p) {
 		if ((short) (p.getInventory().getItemInMainHand().getDurability() + 2) >= p.getInventory().getItemInMainHand()
 				.getType().getMaxDurability()) {
@@ -50,6 +52,11 @@ public class Utils {
 		nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_") && !nmsver.startsWith("v1_12_");
+	}
+	
+	public static String formatMoney(double money) {
+		DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+		return decimalFormat.format(money).replace(",", "tmp").replace(".", ",").replace("tmp", ".");
 	}
 
 	public static class TreeObj {

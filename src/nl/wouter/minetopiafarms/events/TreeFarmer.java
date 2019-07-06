@@ -57,7 +57,7 @@ public class TreeFarmer implements Listener {
 					e.getBlock().setType(blockType);
 					Utils.treePlaces.remove(e.getBlock().getLocation());
 				}
-			}, /* 30 seconds multiplied by 20 */30 * 20);
+			}, 30 * 20);
 		}
 	}
 }
