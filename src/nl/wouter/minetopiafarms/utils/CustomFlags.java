@@ -6,23 +6,19 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.StringFlag;
-import com.sk89q.worldguard.protection.flags.registry.SimpleFlagRegistry;
-
-import nl.wouter.minetopiafarms.Main;
+import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 
 public class CustomFlags {
 
-	public static final StringFlag farmFlag = new StringFlag("minetopiafarms");
+	public static StringFlag farmFlag = new StringFlag("minetopiafarms");
 
 	public static void loadCustomFlag() {
-		SimpleFlagRegistry registry = (SimpleFlagRegistry) WorldGuardLegacyManager.getInstance().getFlagRegistry();
+		FlagRegistry registry = WorldGuardLegacyManager.getInstance().getFlagRegistry();
 		try {	
-			registry.setInitialized(false);
 			registry.register(farmFlag);
-			registry.setInitialized(true);
-		} catch (Exception e) {	
-			Main.getPlugin().getLogger().warning("An error occured whilst loading MinetopiaFarms flag!");
-			e.printStackTrace();
+		} catch (FlagConflictException e) {
+			farmFlag = (StringFlag) registry.get("sdb-minetopiafarms");
 		}
 
 
