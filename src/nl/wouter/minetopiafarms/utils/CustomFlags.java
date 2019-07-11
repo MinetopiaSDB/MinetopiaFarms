@@ -18,7 +18,7 @@ public class CustomFlags {
 		try {	
 			registry.register(farmFlag);
 		} catch (FlagConflictException e) {
-			farmFlag = (StringFlag) registry.get("sdb-minetopiafarms");
+			farmFlag = (StringFlag) registry.get("minetopiafarms");
 		}
 
 

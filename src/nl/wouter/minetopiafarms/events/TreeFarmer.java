@@ -32,8 +32,9 @@ public class TreeFarmer implements Listener {
 				return;
 			}
 
-			if (CustomFlags.isAllowed(p, e.getBlock().getLocation(), "houthakker")) {
+			if (!CustomFlags.isAllowed(p, e.getBlock().getLocation(), "houthakker")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "houthakker"));
+				e.setCancelled(true);
 				return;
 			}
 

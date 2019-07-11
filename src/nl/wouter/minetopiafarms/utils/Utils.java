@@ -17,7 +17,7 @@ public class Utils {
 	public static HashMap<Location, Material> ores = new HashMap<>();
 	public static ArrayList<Location> cropPlaces = new ArrayList<>();
 	public static HashMap<Location, Material> blockReplaces = new HashMap<>();
-	
+
 	public static HashMap<Location, TreeObj> treePlaces = new HashMap<>();
 
 	public static String color(String input) {
@@ -53,10 +53,31 @@ public class Utils {
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_") && !nmsver.startsWith("v1_12_");
 	}
-	
+
 	public static String formatMoney(double money) {
 		DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
 		return decimalFormat.format(money).replace(",", "tmp").replace(".", ",").replace("tmp", ".");
+	}
+
+	public static Material getCropsMaterial() {
+		if (is113orUp()) {
+			return Material.valueOf("WHEAT");
+		}
+		return Material.valueOf("CROPS");
+	}
+	
+	public static Material getBeetrootMaterial() {
+		if (is113orUp()) {
+			return Material.valueOf("BEETROOTS");
+		}
+		return Material.valueOf("BEETROOT_BLOCK");
+	}
+	
+	public static Material getMelonMaterial() {
+		if (is113orUp()) {
+			return Material.valueOf("MELON");
+		}
+		return Material.valueOf("MELON_BLOCK");
 	}
 
 	public static class TreeObj {
@@ -77,4 +98,5 @@ public class Utils {
 			return mat;
 		}
 	}
+
 }
