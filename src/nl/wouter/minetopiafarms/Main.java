@@ -70,6 +70,11 @@ public class Main extends JavaPlugin {
         getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
         getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Arrays.asList("Typ hier jouw commands"));
 
+        getConfig().addDefault("ItemsBijBaanSelect.Boer",Arrays.asList("DIAMOND_HOE"));
+        getConfig().addDefault("ItemsBijBaanSelect.Mijnwerker",Arrays.asList("DIAMOND_PICKAXE"));
+        getConfig().addDefault("ItemsBijBaanSelect.Houthakker",Arrays.asList("DIAMOND_AXE"));
+        getConfig().addDefault("ItemsBijBaanSelect.Visser",Arrays.asList("FISHING_ROD"));
+
         getConfig().addDefault("MogelijkeItemsBijVangst", Arrays.asList("Typ hier welke materials de persoon krijgt."));
         getConfig().addDefault("VangstItemNaam", "&6Vangst");
         getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
@@ -102,6 +107,13 @@ public class Main extends JavaPlugin {
 
         getConfig().addDefault("scheduler.cropgrow",120);
         getConfig().addDefault("scheduler.perstatetime",120);
+        getConfig().addDefault("scheduler.miner.COAL_ORE",2400);
+        getConfig().addDefault("scheduler.miner.DIAMOND_ORE",2400);
+        getConfig().addDefault("scheduler.miner.EMERALD_ORE",2400);
+        getConfig().addDefault("scheduler.miner.GOLD_ORE",2400);
+        getConfig().addDefault("scheduler.miner.IRON_ORE",2400);
+        getConfig().addDefault("scheduler.miner.LAPIS_ORE",2400);
+        getConfig().addDefault("scheduler.miner.REDSTONE_ORE",2400);
 
         getConfig().options().copyDefaults(true);
         saveConfig();
