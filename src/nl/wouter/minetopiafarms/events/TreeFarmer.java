@@ -52,12 +52,9 @@ public class TreeFarmer implements Listener {
 			Utils.treePlaces.put(e.getBlock().getLocation(), new TreeObj(blockType, blockData));
 			
 			
-			Bukkit.getScheduler().runTaskLater(Main.getPlugin(), new Runnable() {
-				@Override
-				public void run() {
-					e.getBlock().setType(blockType);
-					Utils.treePlaces.remove(e.getBlock().getLocation());
-				}
+			Bukkit.getScheduler().runTaskLater(Main.getPlugin(), () -> {
+				e.getBlock().setType(blockType);
+				Utils.treePlaces.remove(e.getBlock().getLocation());
 			}, 30 * 20);
 		}
 	}
