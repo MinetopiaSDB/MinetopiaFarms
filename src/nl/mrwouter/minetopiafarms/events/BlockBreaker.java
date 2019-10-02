@@ -1,4 +1,4 @@
-package nl.wouter.minetopiafarms.events;
+package nl.mrwouter.minetopiafarms.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -10,10 +10,10 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import nl.minetopiasdb.api.SDBPlayer;
-import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.CustomFlags;
-import nl.wouter.minetopiafarms.utils.Utils;
-import nl.wouter.minetopiafarms.utils.XMaterial;
+import nl.mrwouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.utils.CustomFlags;
+import nl.mrwouter.minetopiafarms.utils.Utils;
+import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 public class BlockBreaker implements Listener {
 
@@ -46,7 +46,7 @@ public class BlockBreaker implements Listener {
                 return;
             }
 
-            final Material blockType = e.getBlock().getType() == Material.GLOWING_REDSTONE_ORE ? Material.REDSTONE_ORE : e.getBlock().getType();
+            Material blockType = e.getBlock().getType().toString().contains("REDSTONE_ORE") ? Material.REDSTONE_ORE : e.getBlock().getType();
             e.setCancelled(true);
 
             switch (blockType) {

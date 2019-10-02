@@ -1,18 +1,16 @@
-package nl.wouter.minetopiafarms.events;
+package nl.mrwouter.minetopiafarms.events;
 
-import nl.wouter.minetopiafarms.utils.XMaterial;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.SDBPlayer;
-import nl.wouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 public class InventoryClickListener implements Listener {
 

@@ -1,4 +1,4 @@
-package nl.wouter.minetopiafarms.events;
+package nl.mrwouter.minetopiafarms.events;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,9 +11,9 @@ import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.SDBPlayer;
-import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.Utils;
-import nl.wouter.minetopiafarms.utils.XMaterial;
+import nl.mrwouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.utils.Utils;
+import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 public class NPCClickListener implements Listener {
 

@@ -30,20 +30,78 @@
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+			<url>
+https://hub.spigotmc.org/nexus/content/repositories/snapshots/
+</url>
 		</repository>
 		<repository>
 			<id>bungeecord-repo</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<url>
+https://oss.sonatype.org/content/repositories/snapshots
+</url>
+		</repository>
+		<repository>
+			<id>vault-repo</id>
+			<url>
+http://nexus.hc.to/content/repositories/pub_releases
+</url>
+		</repository>
+		<repository>
+			<id>sk89q-repo</id>
+			<url>http://maven.sk89q.com/repo/</url>
+		</repository>
+		<repository>
+			<id>everything</id>
+			<url>http://repo.citizensnpcs.co/</url>
+		</repository>
+		<repository>
+			<id>mrwouter-repo</id>
+			<url>https://repo.mrwouter.nl/</url>
 		</repository>
 	</repositories>
 	<dependencies>
-		<!--Spigot API -->
-		<!--You only need one of the two, don't put both. Spigot is recommended. -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
 			<version>1.14.4-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sk89q.worldguard</groupId>
+			<artifactId>worldguard-legacy</artifactId>
+			<version>6.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sk89q.worldedit</groupId>
+			<artifactId>worldedit-bukkit</artifactId>
+			<version>6.1.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sk89q.worldedit</groupId>
+			<artifactId>worldedit-core</artifactId>
+			<version>6.1.4-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.citizensnpcs</groupId>
+			<artifactId>citizens</artifactId>
+			<version>2.0.18-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.mrwouter</groupId>
+			<artifactId>minetopiasdb</artifactId>
+			<version>1.28.1</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.milkbowl.vault</groupId>
+			<artifactId>VaultAPI</artifactId>
+			<version>1.7</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

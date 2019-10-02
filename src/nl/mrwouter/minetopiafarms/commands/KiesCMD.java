@@ -1,4 +1,4 @@
-package nl.wouter.minetopiafarms.commands;
+package nl.mrwouter.minetopiafarms.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -8,8 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.ItemBuilder;
+import nl.mrwouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.utils.ItemBuilder;
 
 public class KiesCMD implements CommandExecutor {
 

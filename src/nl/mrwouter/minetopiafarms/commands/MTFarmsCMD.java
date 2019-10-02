@@ -1,4 +1,4 @@
-package nl.wouter.minetopiafarms.commands;
+package nl.mrwouter.minetopiafarms.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,9 +12,9 @@ import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.util.Colorizer;
 import net.citizensnpcs.npc.skin.SkinnableEntity;
-import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.Updat3r;
-import nl.wouter.minetopiafarms.utils.Utils;
+import nl.mrwouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.utils.Updat3r;
+import nl.mrwouter.minetopiafarms.utils.Utils;
 
 public class MTFarmsCMD implements CommandExecutor {
 

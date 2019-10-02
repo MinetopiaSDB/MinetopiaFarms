@@ -1,4 +1,4 @@
-package nl.wouter.minetopiafarms.events;
+package nl.mrwouter.minetopiafarms.events;
 
 import java.util.List;
 import java.util.Random;
@@ -14,9 +14,9 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 
 import nl.minetopiasdb.api.SDBPlayer;
-import nl.wouter.minetopiafarms.Main;
-import nl.wouter.minetopiafarms.utils.CustomFlags;
-import nl.wouter.minetopiafarms.utils.ItemBuilder;
+import nl.mrwouter.minetopiafarms.Main;
+import nl.mrwouter.minetopiafarms.utils.CustomFlags;
+import nl.mrwouter.minetopiafarms.utils.ItemBuilder;
 
 public class FishListener implements Listener {
 	

@@ -1,4 +1,4 @@
-package nl.wouter.minetopiafarms;
+package nl.mrwouter.minetopiafarms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,18 +13,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import nl.wouter.minetopiafarms.commands.KiesCMD;
-import nl.wouter.minetopiafarms.commands.MTFarmsCMD;
-import nl.wouter.minetopiafarms.events.BlockBreaker;
-import nl.wouter.minetopiafarms.events.FarmListener;
-import nl.wouter.minetopiafarms.events.FishListener;
-import nl.wouter.minetopiafarms.events.InventoryClickListener;
-import nl.wouter.minetopiafarms.events.NPCClickListener;
-import nl.wouter.minetopiafarms.events.TreeFarmer;
-import nl.wouter.minetopiafarms.utils.CustomFlags;
-import nl.wouter.minetopiafarms.utils.Updat3r;
-import nl.wouter.minetopiafarms.utils.Utils;
-import nl.wouter.minetopiafarms.utils.Utils.TreeObj;
+import nl.mrwouter.minetopiafarms.commands.KiesCMD;
+import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
+import nl.mrwouter.minetopiafarms.events.BlockBreaker;
+import nl.mrwouter.minetopiafarms.events.FarmListener;
+import nl.mrwouter.minetopiafarms.events.FishListener;
+import nl.mrwouter.minetopiafarms.events.InventoryClickListener;
+import nl.mrwouter.minetopiafarms.events.NPCClickListener;
+import nl.mrwouter.minetopiafarms.events.TreeFarmer;
+import nl.mrwouter.minetopiafarms.utils.CustomFlags;
+import nl.mrwouter.minetopiafarms.utils.Updat3r;
+import nl.mrwouter.minetopiafarms.utils.Utils;
+import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
 
 public class Main extends JavaPlugin {
 
