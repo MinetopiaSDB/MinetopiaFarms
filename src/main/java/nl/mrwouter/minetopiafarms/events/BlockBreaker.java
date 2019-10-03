@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.ItemStack;
 
 import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
@@ -25,8 +24,8 @@ public class BlockBreaker implements Listener {
             e.setCancelled(true);
         }
 
-        if (e.getBlock().getType().toString().contains("_ORE")) {
-            if (p.getGameMode() == GameMode.CREATIVE) {
+        if (e.getBlock().getType().toString().contains("_ORE") && CustomFlags.hasFlag(p, e.getBlock().getLocation())) {
+        	if (p.getGameMode() == GameMode.CREATIVE) {
                 p.sendMessage(Main.getMessage("Creative"));
                 return;
             }
@@ -45,31 +44,32 @@ public class BlockBreaker implements Listener {
                 e.setCancelled(true);
                 return;
             }
+            
 
             Material blockType = e.getBlock().getType().toString().contains("REDSTONE_ORE") ? Material.REDSTONE_ORE : e.getBlock().getType();
             e.setCancelled(true);
 
             switch (blockType) {
                 case COAL_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(Material.COAL));
+                    e.getPlayer().getInventory().addItem(XMaterial.COAL.parseItem());
                     break;
                 case DIAMOND_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(Material.DIAMOND));
+                    e.getPlayer().getInventory().addItem(XMaterial.DIAMOND.parseItem());
                     break;
                 case EMERALD_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(Material.EMERALD));
+                    e.getPlayer().getInventory().addItem(XMaterial.EMERALD.parseItem());
                     break;
                 case GOLD_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(Material.GOLD_INGOT));
+                    e.getPlayer().getInventory().addItem(XMaterial.GOLD_INGOT.parseItem());
                     break;
                 case IRON_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(Material.IRON_INGOT));
+                    e.getPlayer().getInventory().addItem(XMaterial.IRON_INGOT.parseItem());
                     break;
                 case LAPIS_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(XMaterial.LAPIS_LAZULI.parseMaterial()));
+                    e.getPlayer().getInventory().addItem(XMaterial.LAPIS_LAZULI.parseItem());
                     break;
                 case REDSTONE_ORE:
-                    e.getPlayer().getInventory().addItem(new ItemStack(Material.REDSTONE));
+                    e.getPlayer().getInventory().addItem(XMaterial.REDSTONE.parseItem());
                     break;
                 default:
                     //Not important & should be unreachable
