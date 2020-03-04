@@ -11,6 +11,10 @@ import org.bukkit.inventory.Inventory;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.ItemBuilder;
 
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 public class KiesCMD implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -24,21 +28,29 @@ public class KiesCMD implements CommandExecutor {
 
 		Inventory inv = Bukkit.createInventory(null, 9 * 3, Main.getMessage("InventoryTitle"));
 
-		inv.setItem(10, new ItemBuilder(Material.DIAMOND_HOE)
-				.setName(Main.getMessage("ItemName").replaceAll("<Beroep>", "Boer"))
-				.addLoreLine(Main.getMessage("ItemLore").replaceAll("<Beroep>", "boer")).toItemStack());
+		HashMap<String, Material> beroepen = new HashMap<>();
+		beroepen.put("Boer", Material.DIAMOND_HOE);
+		beroepen.put("Houthakker", Material.DIAMOND_AXE);
+		beroepen.put("Mijnwerker", Material.DIAMOND_PICKAXE);
+		beroepen.put("Visser", Material.FISHING_ROD);
 
-		inv.setItem(12, new ItemBuilder(Material.DIAMOND_AXE)
-				.setName(Main.getMessage("ItemName").replaceAll("<Beroep>", "Houthakker"))
-				.addLoreLine(Main.getMessage("ItemLore").replaceAll("<Beroep>", "houthakker")).toItemStack());
+//		Verwijder de beroepen die uitgeschakeld zijn
+		beroepen.keySet().stream().filter(beroep -> !Main.getPlugin().getConfig().getBoolean("GebruikBaan." + beroep))
+				.collect(Collectors.toList()).forEach(beroep -> beroepen.remove(beroep));
 
-		inv.setItem(14, new ItemBuilder(Material.DIAMOND_PICKAXE)
-				.setName(Main.getMessage("ItemName").replaceAll("<Beroep>", "Mijnwerker"))
-				.addLoreLine(Main.getMessage("ItemLore").replaceAll("<Beroep>", "mijnwerker")).toItemStack());
-		
-		inv.setItem(16, new ItemBuilder(Material.FISHING_ROD)
-				.setName(Main.getMessage("ItemName").replaceAll("<Beroep>", "Visser"))
-				.addLoreLine(Main.getMessage("ItemLore").replaceAll("<Beroep>", "visser")).toItemStack());
+		if (beroepen.size() == 0) {
+			inv.setItem(13, new ItemBuilder(Material.BARRIER)
+				.setName("§4Er zijn geen beroepen beschikbaar!")
+				.addLoreLine("§3Activeer beroepen in de config.").toItemStack());
+		} else {
+			int startingIndex = 14 - beroepen.size(), index = 0;
+			for (String beroep : beroepen.keySet()) {
+				inv.setItem(startingIndex + index * 2, new ItemBuilder(beroepen.get(beroep))
+					.setName(Main.getMessage("ItemName").replace("<Beroep>", beroep))
+					.addLoreLine(Main.getMessage("ItemLore").replace("<Beroep>", beroep.toLowerCase())).toItemStack());
+				index++;
+			}
+		}
 		
 		p.openInventory(inv);
 

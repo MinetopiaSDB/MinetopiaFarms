@@ -1,6 +1,7 @@
 package nl.mrwouter.minetopiafarms.events;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,13 +20,13 @@ public class InventoryClickListener implements Listener {
         if (e.getView().getTitle().equalsIgnoreCase(Main.getMessage("InventoryTitle"))) {
             e.setCancelled(true);
             String beroep = "none";
-            if (e.getSlot() == 10) {
+            if (e.getCurrentItem().getType().equals(Material.DIAMOND_HOE)) {
                 beroep = "Boer";
-            } else if (e.getSlot() == 12) {
+            } else if (e.getCurrentItem().getType().equals(Material.DIAMOND_AXE)) {
                 beroep = "Houthakker";
-            } else if (e.getSlot() == 14) {
+            } else if (e.getCurrentItem().getType().equals(Material.DIAMOND_PICKAXE)) {
                 beroep = "Mijnwerker";
-            } else if (e.getSlot() == 16) {
+            } else if (e.getCurrentItem().getType().equals(Material.FISHING_ROD)) {
                 beroep = "Visser";
             }
             if (!beroep.equalsIgnoreCase("none")) {
