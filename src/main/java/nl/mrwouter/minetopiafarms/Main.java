@@ -48,6 +48,7 @@ public class Main extends JavaPlugin {
 
 		getConfig().addDefault("KostenVoorEenBaan", 2500);
 		getConfig().addDefault("KrijgItemsBijBaanSelect", true);
+		getConfig().addDefault("PrefixAutomatischUpdaten", true);
 
 		getConfig().addDefault("GebruikBaan.Mijnwerker", true);
 		getConfig().addDefault("GebruikBaan.Boer", true);
@@ -84,7 +85,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("VangstItemNaam", "&6Vangst");
 		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4� <Bedrag>,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
