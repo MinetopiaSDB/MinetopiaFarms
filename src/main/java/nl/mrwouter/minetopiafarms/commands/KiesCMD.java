@@ -35,8 +35,9 @@ public class KiesCMD implements CommandExecutor {
 		beroepen.put("Visser", Material.FISHING_ROD);
 
 //		Verwijder de beroepen die uitgeschakeld zijn
-		beroepen.keySet().stream().filter(beroep -> !Main.getPlugin().getConfig().getBoolean("GebruikBaan." + beroep))
-				.collect(Collectors.toList()).forEach(beroep -> beroepen.remove(beroep));
+		beroepen.keySet().forEach(beroep -> {
+			if (!Main.getPlugin().getConfig().getBoolean("GebruikBaan." + beroep)) beroepen.remove(beroep);
+		});
 
 		if (beroepen.size() == 0) {
 			inv.setItem(13, new ItemBuilder(Material.BARRIER)
