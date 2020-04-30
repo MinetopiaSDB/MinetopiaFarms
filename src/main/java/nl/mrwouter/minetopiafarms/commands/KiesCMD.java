@@ -1,10 +1,12 @@
 package nl.mrwouter.minetopiafarms.commands;
 
+import nl.mrwouter.minetopiafarms.utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -28,16 +30,10 @@ public class KiesCMD implements CommandExecutor {
 
 		Inventory inv = Bukkit.createInventory(null, 9 * 3, Main.getMessage("InventoryTitle"));
 
-		HashMap<String, Material> beroepen = new HashMap<>();
-		beroepen.put("Boer", Material.DIAMOND_HOE);
-		beroepen.put("Houthakker", Material.DIAMOND_AXE);
-		beroepen.put("Mijnwerker", Material.DIAMOND_PICKAXE);
-		beroepen.put("Visser", Material.FISHING_ROD);
-
-//		Verwijder de beroepen die uitgeschakeld zijn
-		beroepen.keySet().forEach(beroep -> {
-			if (!Main.getPlugin().getConfig().getBoolean("GebruikBaan." + beroep)) beroepen.remove(beroep);
-		});
+		HashMap<String, XMaterial> beroepen = new HashMap<>();
+		Main.getPlugin().getConfig().getConfigurationSection("Banen").getKeys(false).stream()
+				.filter(beroep -> Main.getPlugin().getConfig().getBoolean("Banen." + beroep + ".Enabled"))
+				.forEach(beroep -> beroepen.put(beroep, XMaterial.fromString(Main.getPlugin().getConfig().getString("Banen." + beroep + ".Item"))));
 
 		if (beroepen.size() == 0) {
 			inv.setItem(13, new ItemBuilder(Material.BARRIER)
@@ -46,7 +42,7 @@ public class KiesCMD implements CommandExecutor {
 		} else {
 			int startingIndex = 14 - beroepen.size(), index = 0;
 			for (String beroep : beroepen.keySet()) {
-				inv.setItem(startingIndex + index * 2, new ItemBuilder(beroepen.get(beroep))
+				inv.setItem(startingIndex + index * 2, new ItemBuilder(beroepen.get(beroep).parseItem())
 					.setName(Main.getMessage("ItemName").replace("<Beroep>", beroep))
 					.addLoreLine(Main.getMessage("ItemLore").replace("<Beroep>", beroep.toLowerCase())).toItemStack());
 				index++;

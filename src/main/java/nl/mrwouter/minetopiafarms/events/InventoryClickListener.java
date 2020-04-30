@@ -42,10 +42,8 @@ public class InventoryClickListener implements Listener {
                 API.getEcon().withdrawPlayer(((OfflinePlayer) e.getWhoClicked()),
                         Main.getPlugin().getConfig().getInt("KostenVoorEenBaan"));
 
-                if (Main.getPlugin().getConfig().getBoolean("PrefixAutomatischUpdaten")) {
-                    SDBPlayer pl = SDBPlayer.createSDBPlayer(((Player) e.getWhoClicked()));
-                    pl.setPrefix(beroep);
-                }
+                SDBPlayer pl = SDBPlayer.createSDBPlayer(((Player) e.getWhoClicked()));
+                pl.setPrefix(beroep);
                 API.updateScoreboard(((Player) e.getWhoClicked()));
 
                 if (Main.getPlugin().getConfig().getBoolean("KrijgItemsBijBaanSelect")) {

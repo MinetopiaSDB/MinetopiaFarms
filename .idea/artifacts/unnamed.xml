@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="unnamed">
+    <output-path>$PROJECT_DIR$/../../../Testserver 1.12.2/plugins</output-path>
+    <root id="archive" name="MinetopiaFarms.jar">
+      <element id="module-output" name="MinetopiaFarms" />
+    </root>
+  </artifact>
+</component>
