@@ -51,13 +51,13 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("KrijgItemsBijBaanSelect", true);
 
 		getConfig().addDefault("Banen.Mijnwerker.Enabled", true);
-		getConfig().addDefault("Banen.Mijnwerker.Item", XMaterial.DIAMOND_PICKAXE.toString());
+		getConfig().addDefault("Banen.Mijnwerker.Item", XMaterial.DIAMOND_PICKAXE.name());
 		getConfig().addDefault("Banen.Boer.Enabled", true);
-		getConfig().addDefault("Banen.Boer.Item", XMaterial.DIAMOND_HOE.toString());
+		getConfig().addDefault("Banen.Boer.Item", XMaterial.DIAMOND_HOE.name());
 		getConfig().addDefault("Banen.Houthakker.Enabled", true);
-		getConfig().addDefault("Banen.Houthakker.Item", XMaterial.DIAMOND_AXE.toString());
+		getConfig().addDefault("Banen.Houthakker.Item", XMaterial.DIAMOND_AXE.name());
 		getConfig().addDefault("Banen.Visser.Enabled", true);
-		getConfig().addDefault("Banen.Visser.Item", XMaterial.FISHING_ROD.toString());
+		getConfig().addDefault("Banen.Visser.Item", XMaterial.FISHING_ROD.name());
 
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.COAL_ORE", 10);
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.IRON_ORE", 25);
