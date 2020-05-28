@@ -51,25 +51,25 @@ public class BlockBreaker implements Listener {
 
             switch (blockType) {
                 case COAL_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.COAL.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.COAL_ORE.parseItem());
                     break;
                 case DIAMOND_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.DIAMOND.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.DIAMOND_ORE.parseItem());
                     break;
                 case EMERALD_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.EMERALD.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.EMERALD_ORE.parseItem());
                     break;
                 case GOLD_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.GOLD_INGOT.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.GOLD_ORE.parseItem());
                     break;
                 case IRON_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.IRON_INGOT.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.IRON_ORE.parseItem());
                     break;
                 case LAPIS_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.LAPIS_LAZULI.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.LAPIS_ORE.parseItem());
                     break;
                 case REDSTONE_ORE:
-                    e.getPlayer().getInventory().addItem(XMaterial.REDSTONE.parseItem());
+                    e.getPlayer().getInventory().addItem(XMaterial.REDSTONE_ORE.parseItem());
                     break;
                 default:
                     //Not important & should be unreachable
