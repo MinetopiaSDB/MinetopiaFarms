@@ -3,6 +3,7 @@ package nl.mrwouter.minetopiafarms.events;
 import java.util.List;
 import java.util.Random;
 
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 
-import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.ItemBuilder;
@@ -27,7 +27,7 @@ public class FishListener implements Listener {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
 			}*/
-			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Visser")) {
+			if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Visser")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "visser"));
 				e.setCancelled(true);
 				return;

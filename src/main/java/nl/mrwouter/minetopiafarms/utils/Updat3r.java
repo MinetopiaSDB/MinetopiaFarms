@@ -39,11 +39,7 @@ public class Updat3r {
 			return;
 		}
 		taskRunning = true;
-		Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), new Runnable() {
-			public void run() {
-				update = getLatestUpdate(PROJECT_NAME, API_KEY);
-			}
-		}, 30 * 20l, 30 * 60 * 20l);
+		Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), () -> update = getLatestUpdate(PROJECT_NAME, API_KEY), 30 * 20L, 30 * 60 * 20L);
 	}
 
 	public Update getLatestUpdate(String project, String apiKey) {
@@ -105,7 +101,7 @@ public class Updat3r {
 
 				FileOutputStream outputStream = new FileOutputStream(saveFilePath);
 
-				int bytesRead = -1;
+				int bytesRead;
 				byte[] buffer = new byte[4096];
 				while ((bytesRead = inputStream.read(buffer)) != -1) {
 					outputStream.write(buffer, 0, bytesRead);
@@ -124,7 +120,6 @@ public class Updat3r {
 					+ "] An error has occured whilst downloading this resource. Please report the stacktrace below to the developer of "
 					+ project);
 			ex.printStackTrace();
-			return;
 		}
 	}
 
@@ -141,18 +136,16 @@ public class Updat3r {
 	}
 
 	public void sendUpdateMessageLater(Player p) {
-		Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), new Runnable() {
-			public void run() {
-				if (p.isOp()) {
-					if (update != null && update.isNewer()) {
-						sendUpdateMessage(p);
-					}
+		Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), () -> {
+			if (p.isOp()) {
+				if (update != null && update.isNewer()) {
+					sendUpdateMessage(p);
 				}
 			}
-		}, 40l);
+		}, 40L);
 	}
 
-	public class Update {
+	public static class Update {
 
 		private String version, downloadlink, releaseDate;
 		private boolean critical;
@@ -187,23 +180,17 @@ public class Updat3r {
 			if (ver.length == 1 || ver[0].equals("?")) {
 				return false;
 			} else {
-				if (ver.length <= 1) {
-					return false;
-				} else {
-					if (Integer.valueOf(ver[0]) > Integer.valueOf(sdbver[0])) {
-						return true;
-					}
-					if (Integer.valueOf(ver[1]) > Integer.valueOf(sdbver[1])) {
-						return true;
-					}
-					if (ver.length >= 3) {
-						if (Integer.valueOf(ver[1]) >= Integer.valueOf(sdbver[1])) {
-							if (sdbver.length <= 2) {
-								return true;
-							} else if (Integer.valueOf(ver[2]) > Integer.valueOf(sdbver[2])) {
-								return true;
-							}
-						}
+				if (Integer.parseInt(ver[0]) > Integer.parseInt(sdbver[0])) {
+					return true;
+				}
+				if (Integer.parseInt(ver[1]) > Integer.parseInt(sdbver[1])) {
+					return true;
+				}
+				if (ver.length >= 3) {
+					if (Integer.parseInt(ver[1]) >= Integer.parseInt(sdbver[1])) {
+						if (sdbver.length <= 2) {
+							return true;
+						} else return Integer.parseInt(ver[2]) > Integer.parseInt(sdbver[2]);
 					}
 				}
 			}

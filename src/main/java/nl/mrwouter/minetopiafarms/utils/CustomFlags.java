@@ -29,7 +29,7 @@ public class CustomFlags {
 		LocalPlayer localPlayer = WorldGuardLegacyManager.getInstance().getWorldGuard().wrapPlayer(p);
 		String type = set.queryValue(localPlayer, CustomFlags.farmFlag);
 		
-		return type != null && name.equalsIgnoreCase(type);
+		return name.equalsIgnoreCase(type);
 	}
 
 	public static boolean hasFlag(Player p, Location loc) {

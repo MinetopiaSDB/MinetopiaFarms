@@ -1,10 +1,7 @@
 package nl.mrwouter.minetopiafarms.utils;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -35,7 +32,7 @@ public class WorldGuardLegacyManager {
 
 	public WorldGuardPlugin getWorldGuard() {
 		Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
-		if ((plugin == null) || (!(plugin instanceof WorldGuardPlugin))) {
+		if (!(plugin instanceof WorldGuardPlugin)) {
 			return null;
 		}
 		return (WorldGuardPlugin) plugin;
@@ -43,7 +40,7 @@ public class WorldGuardLegacyManager {
 
 	public WorldEditPlugin getWorldEdit() {
 		Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-		if ((plugin == null) || (!(plugin instanceof WorldEditPlugin))) {
+		if (!(plugin instanceof WorldEditPlugin)) {
 			return null;
 		}
 		return (WorldEditPlugin) plugin;
@@ -86,7 +83,7 @@ public class WorldGuardLegacyManager {
 
 	@SuppressWarnings("unchecked")
 	public List<ProtectedRegion> getRegions(Location loc) {
-		ArrayList<ProtectedRegion> regions = new ArrayList<ProtectedRegion>();
+		ArrayList<ProtectedRegion> regions = new ArrayList<>();
 		if (getWgVer().contains("7.")) {
 			try {
 				// List<ProtectedRegion> regions = new ArrayList<ProtectedRegion>();
@@ -103,7 +100,7 @@ public class WorldGuardLegacyManager {
 
 				Method getregions = regionSet.getClass().getMethod("getRegions");
 
-				regions = new ArrayList<ProtectedRegion>(((HashSet<ProtectedRegion>) getregions.invoke(regionSet)));
+				regions = new ArrayList<>(((HashSet<ProtectedRegion>) getregions.invoke(regionSet)));
 
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -112,10 +109,11 @@ public class WorldGuardLegacyManager {
 			// ArrayList<ProtectedRegion>(getRegionManager(loc.getWorld()).getApplicableRegions(BlockVector3.at(loc.getX(),
 			// loc.getY(), loc.getZ())).getRegions());
 		} else {
-			regions = new ArrayList<ProtectedRegion>(getRegionManager(loc.getWorld())
+			regions = new ArrayList<>(getRegionManager(loc.getWorld())
 					.getApplicableRegions(new Vector(loc.getX(), loc.getY(), loc.getZ())).getRegions());
 		}
-		Collections.sort(regions, new RegionCompare());
+
+		regions.sort(Comparator.comparing(ProtectedRegion::getPriority));
 		return regions;
 	}
 

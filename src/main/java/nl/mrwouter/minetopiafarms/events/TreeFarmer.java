@@ -1,5 +1,6 @@
 package nl.mrwouter.minetopiafarms.events;
 
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.Utils;
@@ -21,7 +21,7 @@ public class TreeFarmer implements Listener {
 		Player p = e.getPlayer();
 
 		if (e.getBlock().getType().toString().contains("LOG") && CustomFlags.hasFlag(p, e.getBlock().getLocation())) {
-			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Houthakker")) {
+			if (PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Houthakker")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "houthakker"));
 				e.setCancelled(true);
 				return;

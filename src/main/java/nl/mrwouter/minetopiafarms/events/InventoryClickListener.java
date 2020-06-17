@@ -1,5 +1,7 @@
 package nl.mrwouter.minetopiafarms.events;
 
+import nl.minetopiasdb.api.playerdata.PlayerManager;
+import nl.minetopiasdb.api.playerdata.objects.OnlineSDBPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -8,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import nl.minetopiasdb.api.API;
-import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
@@ -40,8 +41,10 @@ public class InventoryClickListener implements Listener {
 
                 API.getEcon().withdrawPlayer(((OfflinePlayer) e.getWhoClicked()),
                         Main.getPlugin().getConfig().getInt("KostenVoorEenBaan"));
-                SDBPlayer pl = SDBPlayer.createSDBPlayer(((Player) e.getWhoClicked()));
-                pl.setPrefix(beroep);
+
+                OnlineSDBPlayer sdbPlayer = PlayerManager.getOnlinePlayer(e.getWhoClicked().getUniqueId());
+                sdbPlayer.setPrefix(beroep);
+
                 API.updateScoreboard(((Player) e.getWhoClicked()));
 
                 if (Main.getPlugin().getConfig().getBoolean("KrijgItemsBijBaanSelect")) {
