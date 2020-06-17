@@ -21,7 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.Collections;
 
-@SuppressWarnings("Deprecated")
+@SuppressWarnings("deprecation")
 public class Main extends JavaPlugin {
 
 	private static Main pl;
