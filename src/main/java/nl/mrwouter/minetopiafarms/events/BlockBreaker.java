@@ -29,6 +29,7 @@ public class BlockBreaker implements Listener {
                 p.sendMessage(Main.getMessage("Creative"));
                 return;
             }
+
             if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Mijnwerker")) {
                 e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "mijnwerker"));
                 e.setCancelled(true);
