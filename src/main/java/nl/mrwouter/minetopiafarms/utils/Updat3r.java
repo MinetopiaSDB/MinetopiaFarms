@@ -101,7 +101,7 @@ public class Updat3r {
 
 				FileOutputStream outputStream = new FileOutputStream(saveFilePath);
 
-				int bytesRead;
+				int bytesRead = -1;
 				byte[] buffer = new byte[4096];
 				while ((bytesRead = inputStream.read(buffer)) != -1) {
 					outputStream.write(buffer, 0, bytesRead);
