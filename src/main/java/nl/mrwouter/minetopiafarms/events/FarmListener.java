@@ -1,6 +1,5 @@
 package nl.mrwouter.minetopiafarms.events;
 
-import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.CropState;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -11,10 +10,12 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Crops;
 
+import com.cryptomorin.xseries.XMaterial;
+
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.Utils;
-import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 @SuppressWarnings("deprecation")
 public class FarmListener implements Listener {
@@ -84,7 +85,7 @@ public class FarmListener implements Listener {
 				} else if (e.getBlock().getType() == XMaterial.POTATOES.parseMaterial()) {
 					e.getPlayer().getInventory().addItem(new ItemStack(Utils.getPotatoItem(), 1));
 				} else if (e.getBlock().getType() == Utils.getBeetrootMaterial()) {
-					e.getPlayer().getInventory().addItem(XMaterial.BEETROOT.parseItem());
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.BEETROOT));
 				}
 				e.setCancelled(true);
 				crops.setState(CropState.SEEDED);
