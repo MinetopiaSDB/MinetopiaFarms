@@ -128,8 +128,8 @@ public class NPCClickListener implements Listener {
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
 			} else {
-				clicker.sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>",
-						"boer, mijnwerker of houthakker"));
+				clicker.sendMessage(
+						Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer, mijnwerker of houthakker"));
 				e.setCancelled(true);
 			}
 		}

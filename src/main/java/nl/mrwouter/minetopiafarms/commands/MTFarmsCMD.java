@@ -25,7 +25,7 @@ public class MTFarmsCMD implements CommandExecutor {
 			sender.sendMessage(Utils.color("&4ERROR: &cJe mist de permissie minetopiafarms.hulp"));
 			return true;
 		}
-		
+
 		sender.sendMessage(
 				Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
 
