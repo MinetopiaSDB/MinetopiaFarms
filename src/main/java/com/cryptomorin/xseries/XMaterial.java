@@ -59,6 +59,7 @@ import java.util.regex.Pattern;
  * @see Material
  * @see ItemStack
  */
+@SuppressWarnings("all")
 public enum XMaterial {
     ACACIA_BOAT("BOAT_ACACIA"),
     ACACIA_BUTTON("WOOD_BUTTON"),
