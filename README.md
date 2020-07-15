@@ -1,9 +1,7 @@
 # MinetopiaFarms
 Een plugin met houthakkers, mijnen, farmen en vismeren.
 
-~~Deze plugin bevat geen ondersteuning voor 1.13 en wordt 'as-is' geleverd. Ik bied hierdoor geen support aan op deze plugin. Ik ben ontevreden met de code in de huidige staat en ben niet van plan te updaten naar 1.13.~~
-
-Hoewel de plugin nu prima ondersteuning bevat voor 1.13 update ik hem niet (of zeer zelden) meer. Leuke kans om wat ervaring op te doen en er aan door te werken iemand? Geen idee hoe stabiel het is, beoordeel zelf.
+Ja, weer een nieuw berichtje hier over hoe ik 'eigenlijk niet' aan MinetopiaFarms werk, maar ja, soms doen we het dan toch. Zie dit project als een leuke kans om je Java kennis uit te breiden en lekker te prutsen!
 
 Contributen aan MTFarms? Zeker doen!
 ======
