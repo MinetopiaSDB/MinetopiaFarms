@@ -26,15 +26,12 @@ public class MTFarmsCMD implements CommandExecutor {
 			return true;
 		}
 
-		sender.sendMessage(((Player) sender).getInventory().getItemInMainHand().getType().toString());
-		
 		sender.sendMessage(
 				Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
 
 		sender.sendMessage(Utils.color("&3Houthakkers: \n&3&3/rg flag &b<Region> &3minetopiafarms houthakker"));
 		sender.sendMessage(Utils.color("&3Mijnwerker: \n&3&3/rg flag &b<Region> &3minetopiafarms mijn"));
 		sender.sendMessage(Utils.color("&3Boer: \n&3&3/rg flag &b<Region> &3minetopiafarms farm"));
-		sender.sendMessage(Utils.color("&3Visser: \n&3&3/rg flag &b<Region> &3minetopiafarms fisher"));
 		sender.sendMessage(" ");
 		sender.sendMessage(Utils.color("&3Spawn een verkoop NPC: \n&b/mtfarms spawnnpc"));
 		sender.sendMessage(" ");

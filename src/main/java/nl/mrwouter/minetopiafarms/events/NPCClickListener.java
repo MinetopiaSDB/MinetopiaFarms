@@ -7,13 +7,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import com.cryptomorin.xseries.XMaterial;
+
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import nl.minetopiasdb.api.API;
-import nl.minetopiasdb.api.SDBPlayer;
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Utils;
-import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 public class NPCClickListener implements Listener {
 
@@ -23,11 +24,11 @@ public class NPCClickListener implements Listener {
 		NPC clicked = e.getNPC();
 		if (Main.getMessage("NPC.Name").equals(clicked.getName())) {
 
-			if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Boer")) {
+			if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
-						if (item.getType() == XMaterial.BEETROOT.parseMaterial()) {
+						if (item.getType() == Material.BEETROOT) {
 							clicker.getInventory().removeItem(item);
 							paymentAmount = paymentAmount
 									+ (Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Boer.BEETROOTS")
@@ -65,7 +66,8 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
-			} else if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Mijnwerker")) {
+			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix()
+					.equalsIgnoreCase("Mijnwerker")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
@@ -81,9 +83,8 @@ public class NPCClickListener implements Listener {
 											* item.getAmount());
 						} else if (item.getType() == XMaterial.EMERALD_ORE.parseMaterial()) {
 							clicker.getInventory().removeItem(item);
-							paymentAmount = paymentAmount
-									+ (Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Mijnwerker.EMERALD_ORE")
-											* item.getAmount());
+							paymentAmount = paymentAmount + (Main.getPlugin().getConfig()
+									.getDouble("TerugverkoopPrijs.Mijnwerker.EMERALD_ORE") * item.getAmount());
 						} else if (item.getType() == XMaterial.GOLD_ORE.parseMaterial()) {
 							clicker.getInventory().removeItem(item);
 							paymentAmount = paymentAmount
@@ -96,14 +97,12 @@ public class NPCClickListener implements Listener {
 											* item.getAmount());
 						} else if (item.getType() == XMaterial.REDSTONE_ORE.parseMaterial()) {
 							clicker.getInventory().removeItem(item);
-							paymentAmount = paymentAmount
-									+ (Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Mijnwerker.REDSTONE_ORE")
-											* item.getAmount());
+							paymentAmount = paymentAmount + (Main.getPlugin().getConfig()
+									.getDouble("TerugverkoopPrijs.Mijnwerker.REDSTONE_ORE") * item.getAmount());
 						} else if (item.getType() == XMaterial.DIAMOND_ORE.parseMaterial()) {
 							clicker.getInventory().removeItem(item);
-							paymentAmount = paymentAmount
-									+ (Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Mijnwerker.DIAMOND_ORE")
-											* item.getAmount());
+							paymentAmount = paymentAmount + (Main.getPlugin().getConfig()
+									.getDouble("TerugverkoopPrijs.Mijnwerker.DIAMOND_ORE") * item.getAmount());
 						}
 					}
 				}
@@ -112,29 +111,8 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
-			} else if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Visser")) {
-
-				double paymentAmount = 0;
-				if (e.getClicker().getInventory().contains(XMaterial.PUFFERFISH.parseMaterial())
-						|| e.getClicker().getInventory().contains(XMaterial.TROPICAL_FISH.parseMaterial())) {
-					for (ItemStack item : clicker.getInventory().getContents()) {
-						if (item != null && item.getType() != null) {
-							Material itemmat = item.getType();
-							if (itemmat == XMaterial.PUFFERFISH.parseMaterial()
-									|| itemmat == XMaterial.TROPICAL_FISH.parseMaterial()) {
-								clicker.getInventory().removeItem(item);
-								paymentAmount = paymentAmount + (item.getAmount()
-										* Main.getPlugin().getConfig().getInt("TerugverkoopPrijs.Visser"));
-							}
-						}
-					}
-				}
-
-				API.getEcon().depositPlayer(clicker, paymentAmount);
-				clicker.sendMessage(
-						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
-				API.updateScoreboard(clicker);
-			} else if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Houthakker")) {
+			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix()
+					.equalsIgnoreCase("Houthakker")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
@@ -151,10 +129,9 @@ public class NPCClickListener implements Listener {
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
 			} else {
-				clicker.sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>",
-						"boer, mijnwerker, visser of houthakker"));
+				clicker.sendMessage(
+						Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer, mijnwerker of houthakker"));
 				e.setCancelled(true);
-				return;
 			}
 		}
 	}

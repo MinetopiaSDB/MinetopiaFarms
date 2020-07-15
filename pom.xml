@@ -22,20 +22,20 @@
 		<repository>
 			<id>spigot-repo</id>
 			<url>
-https://hub.spigotmc.org/nexus/content/repositories/snapshots/
-</url>
+				https://hub.spigotmc.org/nexus/content/repositories/snapshots/
+			</url>
 		</repository>
 		<repository>
 			<id>bungeecord-repo</id>
 			<url>
-https://oss.sonatype.org/content/repositories/snapshots
-</url>
+				https://oss.sonatype.org/content/repositories/snapshots
+			</url>
 		</repository>
 		<repository>
 			<id>vault-repo</id>
 			<url>
-http://nexus.hc.to/content/repositories/pub_releases
-</url>
+				http://nexus.hc.to/content/repositories/pub_releases
+			</url>
 		</repository>
 		<repository>
 			<id>sk89q-repo</id>
@@ -54,7 +54,7 @@ http://nexus.hc.to/content/repositories/pub_releases
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.14.4-R0.1-SNAPSHOT</version>
+			<version>1.16.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -83,9 +83,9 @@ http://nexus.hc.to/content/repositories/pub_releases
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>nl.mrwouter</groupId>
-			<artifactId>minetopiasdb</artifactId>
-			<version>1.28.1</version>
+			<groupId>nl.minetopiasdb</groupId>
+			<artifactId>plugin</artifactId>
+			<version>2.1</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>

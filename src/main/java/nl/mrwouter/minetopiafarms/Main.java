@@ -1,7 +1,7 @@
 package nl.mrwouter.minetopiafarms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
@@ -13,11 +13,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.cryptomorin.xseries.XMaterial;
+
 import nl.mrwouter.minetopiafarms.commands.KiesCMD;
 import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
 import nl.mrwouter.minetopiafarms.events.BlockBreaker;
 import nl.mrwouter.minetopiafarms.events.FarmListener;
-import nl.mrwouter.minetopiafarms.events.FishListener;
 import nl.mrwouter.minetopiafarms.events.InventoryClickListener;
 import nl.mrwouter.minetopiafarms.events.NPCClickListener;
 import nl.mrwouter.minetopiafarms.events.TreeFarmer;
@@ -37,7 +38,6 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new FarmListener(), this);
 		Bukkit.getPluginManager().registerEvents(new TreeFarmer(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
-		Bukkit.getPluginManager().registerEvents(new FishListener(), this);
 
 		if (Bukkit.getPluginManager().getPlugin("Citizens") != null) {
 			Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
@@ -48,6 +48,13 @@ public class Main extends JavaPlugin {
 
 		getConfig().addDefault("KostenVoorEenBaan", 2500);
 		getConfig().addDefault("KrijgItemsBijBaanSelect", true);
+
+		getConfig().addDefault("Banen.Mijnwerker.Enabled", true);
+		getConfig().addDefault("Banen.Mijnwerker.Item", XMaterial.DIAMOND_PICKAXE.name());
+		getConfig().addDefault("Banen.Boer.Enabled", true);
+		getConfig().addDefault("Banen.Boer.Item", XMaterial.DIAMOND_HOE.name());
+		getConfig().addDefault("Banen.Houthakker.Enabled", true);
+		getConfig().addDefault("Banen.Houthakker.Item", XMaterial.DIAMOND_AXE.name());
 
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.COAL_ORE", 10);
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.IRON_ORE", 25);
@@ -63,23 +70,20 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("TerugverkoopPrijs.Boer.CARROTS", 20);
 		getConfig().addDefault("TerugverkoopPrijs.Boer.POTATOES", 20);
 		getConfig().addDefault("TerugverkoopPrijs.Houthakker", 25);
-		getConfig().addDefault("TerugverkoopPrijs.Visser", 35);
 
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer", Arrays.asList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Arrays.asList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Arrays.asList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer",
+				Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker",
+				Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker",
+				Collections.singletonList("Typ hier jouw commands"));
 
-		getConfig().addDefault("ItemsBijBaanSelect.Boer", Arrays.asList("DIAMOND_HOE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Mijnwerker", Arrays.asList("DIAMOND_PICKAXE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Houthakker", Arrays.asList("DIAMOND_AXE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Visser", Arrays.asList("FISHING_ROD"));
+		getConfig().addDefault("ItemsBijBaanSelect.Boer", Collections.singletonList("DIAMOND_HOE"));
+		getConfig().addDefault("ItemsBijBaanSelect.Mijnwerker", Collections.singletonList("DIAMOND_PICKAXE"));
+		getConfig().addDefault("ItemsBijBaanSelect.Houthakker", Collections.singletonList("DIAMOND_AXE"));
 
-		getConfig().addDefault("MogelijkeItemsBijVangst", Arrays.asList("Typ hier welke materials de persoon krijgt."));
-		getConfig().addDefault("VangstItemNaam", "&6Vangst");
-		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
 		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4� <Bedrag>,-&c.");
+				"&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -92,10 +96,10 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag> &cnodig!");
+				"&4ERROR: &cOm van baan te veranderen heb je &4\u20ac <Bedrag> &cnodig!");
 
 		getConfig().addDefault("Messages.GeldBetaald",
-				"&3Gelukt! Wij hebben jou &b€ <Bedrag> &3betaald voor jouw opgehaalde spullen!");
+				"&3Gelukt! Wij hebben jou &b\u20ac <Bedrag> &3betaald voor jouw opgehaalde spullen!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
@@ -116,6 +120,15 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("scheduler.miner.IRON_ORE", 2400);
 		getConfig().addDefault("scheduler.miner.LAPIS_ORE", 2400);
 		getConfig().addDefault("scheduler.miner.REDSTONE_ORE", 2400);
+
+		getConfig().set("ItemsBijBaanSelect.Visser", null);
+		getConfig().set("MogelijkeItemsBijVangst", null);
+		getConfig().set("VangstItemNaam", null);
+		getConfig().set("VangstItemLore", null);
+		getConfig().set("Banen.Visser.Enabled", null);
+		getConfig().set("Banen.Visser.Item", null);
+		getConfig().set("TerugverkoopPrijs.Visser", null);
+		getConfig().set("CommandsUitvoerenBijBaanWissel.Visser", null);
 
 		getConfig().options().copyDefaults(true);
 		saveConfig();
@@ -150,7 +163,7 @@ public class Main extends JavaPlugin {
 			for (Location l : Utils.blockReplaces.keySet()) {
 				l.getBlock().setType(Utils.blockReplaces.get(l));
 			}
-		}, 40 * 20l, 40 * 20l);
+		}, 40 * 20L, 40 * 20L);
 
 		Updat3r.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {
