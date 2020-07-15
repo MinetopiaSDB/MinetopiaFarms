@@ -8,6 +8,9 @@ import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 import nl.mrwouter.minetopiafarms.utils.Utils.GrowingCrop;
 import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
+import java.util.ArrayList;
+import java.util.Arrays;
+import nl.mrwouter.minetopiafarms.utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
 import org.bukkit.Location;
@@ -43,6 +46,15 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("KostenVoorEenBaan", 2500);
 		getConfig().addDefault("KrijgItemsBijBaanSelect", true);
 
+		getConfig().addDefault("Banen.Mijnwerker.Enabled", true);
+		getConfig().addDefault("Banen.Mijnwerker.Item", XMaterial.DIAMOND_PICKAXE.name());
+		getConfig().addDefault("Banen.Boer.Enabled", true);
+		getConfig().addDefault("Banen.Boer.Item", XMaterial.DIAMOND_HOE.name());
+		getConfig().addDefault("Banen.Houthakker.Enabled", true);
+		getConfig().addDefault("Banen.Houthakker.Item", XMaterial.DIAMOND_AXE.name());
+		getConfig().addDefault("Banen.Visser.Enabled", true);
+		getConfig().addDefault("Banen.Visser.Item", XMaterial.FISHING_ROD.name());
+
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.COAL_ORE", 10);
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.IRON_ORE", 25);
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.EMERALD_ORE", 30);
@@ -72,8 +84,7 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("MogelijkeItemsBijVangst", Collections.singletonList("Typ hier welke materials de persoon krijgt."));
 		getConfig().addDefault("VangstItemNaam", "&6Vangst");
 		getConfig().addDefault("VangstItemLore", Collections.singletonList("&3Jouw visvangst!"));
-		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4\u20ac <Bedrag>,-&c.");
+		getConfig().addDefault("Messages.VeranderenVanEenBaan", "&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
