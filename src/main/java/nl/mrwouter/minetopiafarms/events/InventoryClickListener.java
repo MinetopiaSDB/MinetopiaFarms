@@ -21,6 +21,9 @@ public class InventoryClickListener implements Listener {
 	public void onClick(InventoryClickEvent e) {
 		if (e.getView().getTitle().equalsIgnoreCase(Main.getMessage("InventoryTitle"))) {
 			e.setCancelled(true);
+			if (e.getCurrentItem() == null) {
+				return;
+			}
 			String beroep = "none";
 			if (e.getCurrentItem().getType().equals(Material.DIAMOND_HOE)) {
 				beroep = "Boer";
