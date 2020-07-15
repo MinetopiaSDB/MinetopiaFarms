@@ -85,7 +85,7 @@ public class FarmListener implements Listener {
 				} else if (e.getBlock().getType() == XMaterial.POTATOES.parseMaterial()) {
 					e.getPlayer().getInventory().addItem(new ItemStack(Utils.getPotatoItem(), 1));
 				} else if (e.getBlock().getType() == Utils.getBeetrootMaterial()) {
-					e.getPlayer().getInventory().addItem(XMaterial.BEETROOTS.parseItem());
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.BEETROOT));
 				}
 				e.setCancelled(true);
 				crops.setState(CropState.SEEDED);

@@ -1,5 +1,6 @@
 package nl.mrwouter.minetopiafarms.events;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,7 +28,7 @@ public class NPCClickListener implements Listener {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
-						if (item.getType() == XMaterial.BEETROOTS.parseMaterial()) {
+						if (item.getType() == Material.BEETROOT) {
 							clicker.getInventory().removeItem(item);
 							paymentAmount = paymentAmount
 									+ (Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Boer.BEETROOTS")
