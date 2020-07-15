@@ -19,7 +19,6 @@ import nl.mrwouter.minetopiafarms.commands.KiesCMD;
 import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
 import nl.mrwouter.minetopiafarms.events.BlockBreaker;
 import nl.mrwouter.minetopiafarms.events.FarmListener;
-import nl.mrwouter.minetopiafarms.events.FishListener;
 import nl.mrwouter.minetopiafarms.events.InventoryClickListener;
 import nl.mrwouter.minetopiafarms.events.NPCClickListener;
 import nl.mrwouter.minetopiafarms.events.TreeFarmer;
@@ -39,7 +38,6 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new FarmListener(), this);
 		Bukkit.getPluginManager().registerEvents(new TreeFarmer(), this);
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
-		Bukkit.getPluginManager().registerEvents(new FishListener(), this);
 
 		if (Bukkit.getPluginManager().getPlugin("Citizens") != null) {
 			Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
@@ -57,8 +55,6 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Banen.Boer.Item", XMaterial.DIAMOND_HOE.name());
 		getConfig().addDefault("Banen.Houthakker.Enabled", true);
 		getConfig().addDefault("Banen.Houthakker.Item", XMaterial.DIAMOND_AXE.name());
-		getConfig().addDefault("Banen.Visser.Enabled", true);
-		getConfig().addDefault("Banen.Visser.Item", XMaterial.FISHING_ROD.name());
 
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.COAL_ORE", 10);
 		getConfig().addDefault("TerugverkoopPrijs.Mijnwerker.IRON_ORE", 25);
@@ -74,22 +70,20 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("TerugverkoopPrijs.Boer.CARROTS", 20);
 		getConfig().addDefault("TerugverkoopPrijs.Boer.POTATOES", 20);
 		getConfig().addDefault("TerugverkoopPrijs.Houthakker", 25);
-		getConfig().addDefault("TerugverkoopPrijs.Visser", 35);
 
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer", Collections.singletonList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Collections.singletonList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Collections.singletonList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer",
+				Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker",
+				Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker",
+				Collections.singletonList("Typ hier jouw commands"));
 
 		getConfig().addDefault("ItemsBijBaanSelect.Boer", Collections.singletonList("DIAMOND_HOE"));
 		getConfig().addDefault("ItemsBijBaanSelect.Mijnwerker", Collections.singletonList("DIAMOND_PICKAXE"));
 		getConfig().addDefault("ItemsBijBaanSelect.Houthakker", Collections.singletonList("DIAMOND_AXE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Visser", Collections.singletonList("FISHING_ROD"));
 
-		getConfig().addDefault("MogelijkeItemsBijVangst", Collections.singletonList("Typ hier welke materials de persoon krijgt."));
-		getConfig().addDefault("VangstItemNaam", "&6Vangst");
-		getConfig().addDefault("VangstItemLore", Collections.singletonList("&3Jouw visvangst!"));
-		getConfig().addDefault("Messages.VeranderenVanEenBaan", "&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
+		getConfig().addDefault("Messages.VeranderenVanEenBaan",
+				"&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -126,6 +120,15 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("scheduler.miner.IRON_ORE", 2400);
 		getConfig().addDefault("scheduler.miner.LAPIS_ORE", 2400);
 		getConfig().addDefault("scheduler.miner.REDSTONE_ORE", 2400);
+
+		getConfig().set("ItemsBijBaanSelect.Visser", null);
+		getConfig().set("MogelijkeItemsBijVangst", null);
+		getConfig().set("VangstItemNaam", null);
+		getConfig().set("VangstItemLore", null);
+		getConfig().set("Banen.Visser.Enabled", null);
+		getConfig().set("Banen.Visser.Item", null);
+		getConfig().set("TerugverkoopPrijs.Visser", null);
+		getConfig().set("CommandsUitvoerenBijBaanWissel.Visser", null);
 
 		getConfig().options().copyDefaults(true);
 		saveConfig();
