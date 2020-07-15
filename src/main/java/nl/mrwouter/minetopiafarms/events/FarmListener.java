@@ -1,5 +1,6 @@
 package nl.mrwouter.minetopiafarms.events;
 
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.CropState;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -10,7 +11,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Crops;
 
-import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.Utils;
@@ -32,7 +32,7 @@ public class FarmListener implements Listener {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
 			}
-			if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Boer")) {
+			if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer"));
 				e.setCancelled(true);
 				return;
@@ -50,7 +50,7 @@ public class FarmListener implements Listener {
 
 			if (!(e.getBlock().getState().getData() instanceof Crops)) {
 				if (e.getBlock().getType() == XMaterial.PUMPKIN.parseMaterial()) {
-					p.getInventory().addItem(new ItemStack(XMaterial.PUMPKIN.parseMaterial(), 1));
+					p.getInventory().addItem(XMaterial.PUMPKIN.parseItem());
 				} else if (e.getBlock().getType() == Utils.getMelonMaterial()) {
 					p.getInventory().addItem(new ItemStack(e.getBlock().getType(), 1));
 				}

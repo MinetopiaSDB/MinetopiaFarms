@@ -1,8 +1,15 @@
 package nl.mrwouter.minetopiafarms;
 
+import nl.mrwouter.minetopiafarms.commands.KiesCMD;
+import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
+import nl.mrwouter.minetopiafarms.events.*;
+import nl.mrwouter.minetopiafarms.utils.CustomFlags;
+import nl.mrwouter.minetopiafarms.utils.Updat3r;
+import nl.mrwouter.minetopiafarms.utils.Utils;
+import nl.mrwouter.minetopiafarms.utils.Utils.GrowingCrop;
+import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import nl.mrwouter.minetopiafarms.utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
@@ -14,19 +21,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import nl.mrwouter.minetopiafarms.commands.KiesCMD;
-import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
-import nl.mrwouter.minetopiafarms.events.BlockBreaker;
-import nl.mrwouter.minetopiafarms.events.FarmListener;
-import nl.mrwouter.minetopiafarms.events.FishListener;
-import nl.mrwouter.minetopiafarms.events.InventoryClickListener;
-import nl.mrwouter.minetopiafarms.events.NPCClickListener;
-import nl.mrwouter.minetopiafarms.events.TreeFarmer;
-import nl.mrwouter.minetopiafarms.utils.CustomFlags;
-import nl.mrwouter.minetopiafarms.utils.Updat3r;
-import nl.mrwouter.minetopiafarms.utils.Utils;
-import nl.mrwouter.minetopiafarms.utils.Utils.GrowingCrop;
-import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @SuppressWarnings("deprecation")
 public class Main extends JavaPlugin {
@@ -75,21 +71,20 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("TerugverkoopPrijs.Houthakker", 25);
 		getConfig().addDefault("TerugverkoopPrijs.Visser", 35);
 
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer", Arrays.asList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Arrays.asList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Arrays.asList("Typ hier jouw commands"));
-		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Arrays.asList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Boer", Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Houthakker", Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Mijnwerker", Collections.singletonList("Typ hier jouw commands"));
+		getConfig().addDefault("CommandsUitvoerenBijBaanWissel.Visser", Collections.singletonList("Typ hier jouw commands"));
 
-		getConfig().addDefault("ItemsBijBaanSelect.Boer", Arrays.asList("DIAMOND_HOE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Mijnwerker", Arrays.asList("DIAMOND_PICKAXE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Houthakker", Arrays.asList("DIAMOND_AXE"));
-		getConfig().addDefault("ItemsBijBaanSelect.Visser", Arrays.asList("FISHING_ROD"));
+		getConfig().addDefault("ItemsBijBaanSelect.Boer", Collections.singletonList("DIAMOND_HOE"));
+		getConfig().addDefault("ItemsBijBaanSelect.Mijnwerker", Collections.singletonList("DIAMOND_PICKAXE"));
+		getConfig().addDefault("ItemsBijBaanSelect.Houthakker", Collections.singletonList("DIAMOND_AXE"));
+		getConfig().addDefault("ItemsBijBaanSelect.Visser", Collections.singletonList("FISHING_ROD"));
 
-		getConfig().addDefault("MogelijkeItemsBijVangst", Arrays.asList("Typ hier welke materials de persoon krijgt."));
+		getConfig().addDefault("MogelijkeItemsBijVangst", Collections.singletonList("Typ hier welke materials de persoon krijgt."));
 		getConfig().addDefault("VangstItemNaam", "&6Vangst");
-		getConfig().addDefault("VangstItemLore", Arrays.asList("&3Jouw visvangst!"));
-		getConfig().addDefault("Messages.VeranderenVanEenBaan",
-				"&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
+		getConfig().addDefault("VangstItemLore", Collections.singletonList("&3Jouw visvangst!"));
+		getConfig().addDefault("Messages.VeranderenVanEenBaan", "&4Let op! &cHet veranderen van beroep kost &4€ <Bedrag>,-&c.");
 		getConfig().addDefault("Messages.InventoryTitle", "&3Kies een &bberoep&3!");
 		getConfig().addDefault("Messages.ItemName", "&3<Beroep>");
 		getConfig().addDefault("Messages.ItemLore", "&3Kies het beroep &b<Beroep>");
@@ -102,10 +97,10 @@ public class Main extends JavaPlugin {
 		getConfig().addDefault("Messages.AardappelNietVolgroeid", "&4ERROR: &cDeze aardappel is niet volgroeid!");
 
 		getConfig().addDefault("Messages.TeWeinigGeld",
-				"&4ERROR: &cOm van baan te veranderen heb je &4€ <Bedrag> &cnodig!");
+				"&4ERROR: &cOm van baan te veranderen heb je &4\u20ac <Bedrag> &cnodig!");
 
 		getConfig().addDefault("Messages.GeldBetaald",
-				"&3Gelukt! Wij hebben jou &b€ <Bedrag> &3betaald voor jouw opgehaalde spullen!");
+				"&3Gelukt! Wij hebben jou &b\u20ac <Bedrag> &3betaald voor jouw opgehaalde spullen!");
 
 		getConfig().addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 
@@ -160,7 +155,7 @@ public class Main extends JavaPlugin {
 			for (Location l : Utils.blockReplaces.keySet()) {
 				l.getBlock().setType(Utils.blockReplaces.get(l));
 			}
-		}, 40 * 20l, 40 * 20l);
+		}, 40 * 20L, 40 * 20L);
 
 		Updat3r.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {

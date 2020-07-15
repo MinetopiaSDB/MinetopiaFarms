@@ -1,5 +1,6 @@
 package nl.mrwouter.minetopiafarms.events;
 
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -8,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.Utils;
@@ -29,7 +29,8 @@ public class BlockBreaker implements Listener {
                 p.sendMessage(Main.getMessage("Creative"));
                 return;
             }
-            if (!SDBPlayer.createSDBPlayer(e.getPlayer()).getPrefix().equalsIgnoreCase("Mijnwerker")) {
+
+            if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Mijnwerker")) {
                 e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "mijnwerker"));
                 e.setCancelled(true);
                 return;

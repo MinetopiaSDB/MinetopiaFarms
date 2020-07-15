@@ -1,5 +1,6 @@
 package nl.mrwouter.minetopiafarms.events;
 
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import nl.minetopiasdb.api.API;
-import nl.minetopiasdb.api.SDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 import nl.mrwouter.minetopiafarms.utils.XMaterial;
@@ -23,7 +23,7 @@ public class NPCClickListener implements Listener {
 		NPC clicked = e.getNPC();
 		if (Main.getMessage("NPC.Name").equals(clicked.getName())) {
 
-			if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Boer")) {
+			if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
@@ -65,7 +65,7 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
-			} else if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Mijnwerker")) {
+			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix().equalsIgnoreCase("Mijnwerker")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
@@ -112,7 +112,7 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
-			} else if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Visser")) {
+			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix().equalsIgnoreCase("Visser")) {
 
 				double paymentAmount = 0;
 				if (e.getClicker().getInventory().contains(XMaterial.PUFFERFISH.parseMaterial())
@@ -134,7 +134,7 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
-			} else if (SDBPlayer.createSDBPlayer(clicker).getPrefix().equalsIgnoreCase("Houthakker")) {
+			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix().equalsIgnoreCase("Houthakker")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
@@ -154,7 +154,6 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>",
 						"boer, mijnwerker, visser of houthakker"));
 				e.setCancelled(true);
-				return;
 			}
 		}
 	}
