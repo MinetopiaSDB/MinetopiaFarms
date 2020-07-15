@@ -38,20 +38,20 @@
 		<repository>
 			<id>spigot-repo</id>
 			<url>
-https://hub.spigotmc.org/nexus/content/repositories/snapshots/
-</url>
+				https://hub.spigotmc.org/nexus/content/repositories/snapshots/
+			</url>
 		</repository>
 		<repository>
 			<id>bungeecord-repo</id>
 			<url>
-https://oss.sonatype.org/content/repositories/snapshots
-</url>
+				https://oss.sonatype.org/content/repositories/snapshots
+			</url>
 		</repository>
 		<repository>
 			<id>vault-repo</id>
 			<url>
-http://nexus.hc.to/content/repositories/pub_releases
-</url>
+				http://nexus.hc.to/content/repositories/pub_releases
+			</url>
 		</repository>
 		<repository>
 			<id>sk89q-repo</id>
