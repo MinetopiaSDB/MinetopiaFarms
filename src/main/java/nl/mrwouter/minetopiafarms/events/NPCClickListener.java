@@ -27,7 +27,7 @@ public class NPCClickListener implements Listener {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
-						if (item.getType() == XMaterial.BEETROOT.parseMaterial()) {
+						if (item.getType() == XMaterial.BEETROOTS.parseMaterial()) {
 							clicker.getInventory().removeItem(item);
 							paymentAmount = paymentAmount
 									+ (Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Boer.BEETROOTS")
