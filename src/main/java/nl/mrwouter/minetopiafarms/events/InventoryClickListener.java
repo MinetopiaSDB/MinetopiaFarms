@@ -1,7 +1,5 @@
 package nl.mrwouter.minetopiafarms.events;
 
-import nl.minetopiasdb.api.playerdata.PlayerManager;
-import nl.minetopiasdb.api.playerdata.objects.OnlineSDBPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -10,9 +8,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import com.cryptomorin.xseries.XMaterial;
+
 import nl.minetopiasdb.api.API;
+import nl.minetopiasdb.api.playerdata.PlayerManager;
+import nl.minetopiasdb.api.playerdata.objects.OnlineSDBPlayer;
 import nl.mrwouter.minetopiafarms.Main;
-import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 public class InventoryClickListener implements Listener {
 

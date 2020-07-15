@@ -1,6 +1,5 @@
 package nl.mrwouter.minetopiafarms.events;
 
-import nl.minetopiasdb.api.playerdata.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -9,10 +8,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import com.cryptomorin.xseries.XMaterial;
+
+import nl.minetopiasdb.api.playerdata.PlayerManager;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.Utils;
-import nl.mrwouter.minetopiafarms.utils.XMaterial;
 
 public class BlockBreaker implements Listener {
 

@@ -1,16 +1,8 @@
 package nl.mrwouter.minetopiafarms;
 
-import nl.mrwouter.minetopiafarms.commands.KiesCMD;
-import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
-import nl.mrwouter.minetopiafarms.events.*;
-import nl.mrwouter.minetopiafarms.utils.CustomFlags;
-import nl.mrwouter.minetopiafarms.utils.Updat3r;
-import nl.mrwouter.minetopiafarms.utils.Utils;
-import nl.mrwouter.minetopiafarms.utils.Utils.GrowingCrop;
-import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
 import java.util.ArrayList;
-import java.util.Arrays;
-import nl.mrwouter.minetopiafarms.utils.XMaterial;
+import java.util.Collections;
+
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
 import org.bukkit.Location;
@@ -21,8 +13,21 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.cryptomorin.xseries.XMaterial;
+
+import nl.mrwouter.minetopiafarms.commands.KiesCMD;
+import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
+import nl.mrwouter.minetopiafarms.events.BlockBreaker;
+import nl.mrwouter.minetopiafarms.events.FarmListener;
+import nl.mrwouter.minetopiafarms.events.FishListener;
+import nl.mrwouter.minetopiafarms.events.InventoryClickListener;
+import nl.mrwouter.minetopiafarms.events.NPCClickListener;
+import nl.mrwouter.minetopiafarms.events.TreeFarmer;
+import nl.mrwouter.minetopiafarms.utils.CustomFlags;
+import nl.mrwouter.minetopiafarms.utils.Updat3r;
+import nl.mrwouter.minetopiafarms.utils.Utils;
+import nl.mrwouter.minetopiafarms.utils.Utils.GrowingCrop;
+import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
 
 @SuppressWarnings("deprecation")
 public class Main extends JavaPlugin {
