@@ -30,7 +30,7 @@ public class BlockBreaker implements Listener {
 				return;
 			}
 
-			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled") && (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Mijnwerker"))) {
+			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled") && !PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Mijnwerker")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "mijnwerker"));
 				e.setCancelled(true);
 				return;
