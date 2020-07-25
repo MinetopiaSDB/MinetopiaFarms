@@ -33,10 +33,12 @@ public class FarmListener implements Listener {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
 			}
-			if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
-				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer"));
-				e.setCancelled(true);
-				return;
+			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled")) {
+				if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
+					e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer"));
+					e.setCancelled(true);
+					return;
+				}
 			}
 			if (!p.getInventory().getItemInMainHand().getType().toString().contains("HOE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "hoe"));

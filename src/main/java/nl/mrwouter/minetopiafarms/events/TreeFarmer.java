@@ -21,10 +21,12 @@ public class TreeFarmer implements Listener {
 		Player p = e.getPlayer();
 
 		if (e.getBlock().getType().toString().contains("LOG") && CustomFlags.hasFlag(p, e.getBlock().getLocation())) {
-			if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Houthakker")) {
-				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "houthakker"));
-				e.setCancelled(true);
-				return;
+			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled")) {
+				if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Houthakker")) {
+					e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "houthakker"));
+					e.setCancelled(true);
+					return;
+				}
 			}
 			if (!e.getPlayer().getInventory().getItemInMainHand().getType().toString().contains("_AXE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "bijl"));

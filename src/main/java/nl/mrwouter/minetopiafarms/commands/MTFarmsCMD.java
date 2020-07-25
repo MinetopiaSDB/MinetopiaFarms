@@ -26,16 +26,18 @@ public class MTFarmsCMD implements CommandExecutor {
 			return true;
 		}
 
-		sender.sendMessage(
-				Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
-
-		sender.sendMessage(Utils.color("&3Houthakkers: \n&3&3/rg flag &b<Region> &3minetopiafarms houthakker"));
-		sender.sendMessage(Utils.color("&3Mijnwerker: \n&3&3/rg flag &b<Region> &3minetopiafarms mijn"));
-		sender.sendMessage(Utils.color("&3Boer: \n&3&3/rg flag &b<Region> &3minetopiafarms farm"));
-		sender.sendMessage(" ");
-		sender.sendMessage(Utils.color("&3Spawn een verkoop NPC: \n&b/mtfarms spawnnpc"));
-		sender.sendMessage(" ");
-		sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
+		if (args.length == 0 || args.length == 1 && args[0].equalsIgnoreCase("help")) {
+			sender.sendMessage(Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
+			sender.sendMessage(Utils.color("&3Houthakkers: \n&3&3/rg flag &b<Region> &3minetopiafarms houthakker"));
+			sender.sendMessage(Utils.color("&3Mijnwerker: \n&3&3/rg flag &b<Region> &3minetopiafarms mijn"));
+			sender.sendMessage(Utils.color("&3Boer: \n&3&3/rg flag &b<Region> &3minetopiafarms farm"));
+			sender.sendMessage(" ");
+			sender.sendMessage(Utils.color("&3Spawn een verkoop NPC: \n&b/mtfarms spawnnpc"));
+			sender.sendMessage(" ");
+			sender.sendMessage(Utils.color("&3Reload Minetopia Farms: \n&b/mtfarms reload"));
+			sender.sendMessage(" ");
+			sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
+		}
 
 		// More or less just for debug reasons.
 		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
@@ -74,8 +76,7 @@ public class MTFarmsCMD implements CommandExecutor {
 
 			npc.spawn(player.getLocation());
 
-			((SkinnableEntity) npc.getEntity())
-					.setSkinName(Bukkit.getOfflinePlayer(UUID.fromString(Main.getMessage("NPC.Skin.UUID"))).getName());
+			((SkinnableEntity) npc.getEntity()).setSkinName(Bukkit.getOfflinePlayer(UUID.fromString(Main.getMessage("NPC.Skin.UUID"))).getName());
 
 			npc.despawn(DespawnReason.PENDING_RESPAWN);
 			npc.setName(Colorizer.parseColors(Main.getMessage("NPC.Name")));

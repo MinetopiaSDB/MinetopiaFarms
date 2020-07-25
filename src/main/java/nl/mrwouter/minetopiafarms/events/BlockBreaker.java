@@ -30,11 +30,13 @@ public class BlockBreaker implements Listener {
 				return;
 			}
 
-			if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix()
-					.equalsIgnoreCase("Mijnwerker")) {
-				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "mijnwerker"));
-				e.setCancelled(true);
-				return;
+			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled")) {
+				if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix()
+						.equalsIgnoreCase("Mijnwerker")) {
+					e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "mijnwerker"));
+					e.setCancelled(true);
+					return;
+				}
 			}
 			if (!e.getPlayer().getInventory().getItemInMainHand().getType().toString().contains("PICKAXE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "houweel"));
