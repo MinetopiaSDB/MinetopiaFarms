@@ -12,7 +12,6 @@ import com.cryptomorin.xseries.XMaterial;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import nl.minetopiasdb.api.API;
-import nl.minetopiasdb.api.playerdata.PlayerManager;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 
