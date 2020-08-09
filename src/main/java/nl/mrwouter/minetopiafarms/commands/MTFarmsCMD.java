@@ -25,18 +25,6 @@ public class MTFarmsCMD implements CommandExecutor {
 			sender.sendMessage(Utils.color("&4ERROR: &cJe mist de permissie minetopiafarms.hulp"));
 			return true;
 		}
-
-		sender.sendMessage(
-				Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
-
-		sender.sendMessage(Utils.color("&3Houthakkers: \n&3&3/rg flag &b<Region> &3minetopiafarms houthakker"));
-		sender.sendMessage(Utils.color("&3Mijnwerker: \n&3&3/rg flag &b<Region> &3minetopiafarms mijn"));
-		sender.sendMessage(Utils.color("&3Boer: \n&3&3/rg flag &b<Region> &3minetopiafarms farm"));
-		sender.sendMessage(" ");
-		sender.sendMessage(Utils.color("&3Spawn een verkoop NPC: \n&b/mtfarms spawnnpc"));
-		sender.sendMessage(" ");
-		sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
-
 		// More or less just for debug reasons.
 		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
 			sender.sendMessage(
@@ -44,8 +32,7 @@ public class MTFarmsCMD implements CommandExecutor {
 			sender.sendMessage(Utils.color("&3Latest: &b"
 					+ Updat3r.getInstance().getLatestUpdate(Updat3r.PROJECT_NAME, Updat3r.API_KEY).getVersion()));
 			sender.sendMessage(Utils.color("&3Actual version: &b" + Main.getPlugin().getDescription().getVersion()));
-		}
-		if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
+		} else if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
 			if (!Updat3r.getInstance().getLatestCached().isNewer()) {
 				sender.sendMessage(Utils.color("&cEr is geen update beschikbaar!"));
 				return true;
@@ -54,8 +41,7 @@ public class MTFarmsCMD implements CommandExecutor {
 			Updat3r.getInstance().downloadLatest(Updat3r.getInstance().getLatestCached().getDownloadLink(),
 					"MinetopiaFarms", Main.getPlugin());
 			Bukkit.reload();
-		}
-		if (args.length == 1 && args[0].equalsIgnoreCase("spawnnpc")) {
+		} else if (args.length == 1 && args[0].equalsIgnoreCase("spawnnpc")) {
 
 			if (Bukkit.getPluginManager().getPlugin("Citizens") == null) {
 				sender.sendMessage(Utils.color("&4ERROR: &cCitizens is hiervoor benodigd!"));
@@ -74,14 +60,24 @@ public class MTFarmsCMD implements CommandExecutor {
 
 			npc.spawn(player.getLocation());
 
-			((SkinnableEntity) npc.getEntity())
-					.setSkinName(Bukkit.getOfflinePlayer(UUID.fromString(Main.getMessage("NPC.Skin.UUID"))).getName());
+			((SkinnableEntity) npc.getEntity()).setSkinName(Bukkit.getOfflinePlayer(UUID.fromString(Main.getMessage("NPC.Skin.UUID"))).getName());
 
 			npc.despawn(DespawnReason.PENDING_RESPAWN);
 			npc.setName(Colorizer.parseColors(Main.getMessage("NPC.Name")));
 			npc.spawn(player.getLocation());
 
 			sender.sendMessage(Utils.color("&3NPC gespanwed op jouw huidige locatie!"));
+		} else {
+			sender.sendMessage(Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
+			sender.sendMessage(Utils.color("&3Houthakkers: \n&3&3/rg flag &b<Region> &3minetopiafarms houthakker"));
+			sender.sendMessage(Utils.color("&3Mijnwerker: \n&3&3/rg flag &b<Region> &3minetopiafarms mijn"));
+			sender.sendMessage(Utils.color("&3Boer: \n&3&3/rg flag &b<Region> &3minetopiafarms farm"));
+			sender.sendMessage(" ");
+			sender.sendMessage(Utils.color("&3Spawn een verkoop NPC: \n&b/mtfarms spawnnpc"));
+			sender.sendMessage(" ");
+			sender.sendMessage(Utils.color("&3Reload Minetopia Farms: \n&b/mtfarms reload"));
+			sender.sendMessage(" ");
+			sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
 		}
 		return true;
 	}

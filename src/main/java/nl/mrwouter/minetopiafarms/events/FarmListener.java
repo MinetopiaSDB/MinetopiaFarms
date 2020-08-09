@@ -33,7 +33,7 @@ public class FarmListener implements Listener {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
 			}
-			if (!PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
+			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled") && !PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer"));
 				e.setCancelled(true);
 				return;

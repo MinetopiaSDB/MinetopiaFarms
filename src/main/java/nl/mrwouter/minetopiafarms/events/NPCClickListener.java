@@ -24,7 +24,6 @@ public class NPCClickListener implements Listener {
 		NPC clicked = e.getNPC();
 		if (Main.getMessage("NPC.Name").equals(clicked.getName())) {
 
-			if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix().equalsIgnoreCase("Boer")) {
 				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
@@ -62,13 +61,6 @@ public class NPCClickListener implements Listener {
 					}
 				}
 
-				API.getEcon().depositPlayer(clicker, paymentAmount);
-				clicker.sendMessage(
-						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
-				API.updateScoreboard(clicker);
-			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix()
-					.equalsIgnoreCase("Mijnwerker")) {
-				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
 						if (item.getType() == XMaterial.COAL_ORE.parseMaterial()) {
@@ -107,13 +99,6 @@ public class NPCClickListener implements Listener {
 					}
 				}
 
-				API.getEcon().depositPlayer(clicker, paymentAmount);
-				clicker.sendMessage(
-						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
-				API.updateScoreboard(clicker);
-			} else if (PlayerManager.getOnlinePlayer(clicker.getUniqueId()).getPrefix()
-					.equalsIgnoreCase("Houthakker")) {
-				double paymentAmount = 0;
 				for (ItemStack item : clicker.getInventory().getContents()) {
 					if (item != null && item.getType() != null) {
 						if (item.getType().toString().contains("LOG")) {
@@ -128,11 +113,7 @@ public class NPCClickListener implements Listener {
 				clicker.sendMessage(
 						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
 				API.updateScoreboard(clicker);
-			} else {
-				clicker.sendMessage(
-						Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "boer, mijnwerker of houthakker"));
-				e.setCancelled(true);
-			}
+
 		}
 	}
 }

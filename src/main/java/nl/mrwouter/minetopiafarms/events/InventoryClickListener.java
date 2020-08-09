@@ -46,7 +46,10 @@ public class InventoryClickListener implements Listener {
 						Main.getPlugin().getConfig().getInt("KostenVoorEenBaan"));
 
 				OnlineSDBPlayer sdbPlayer = PlayerManager.getOnlinePlayer(e.getWhoClicked().getUniqueId());
-				sdbPlayer.setPrefix(beroep);
+
+				if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled")) {
+					sdbPlayer.setPrefix(beroep);
+				}
 
 				API.updateScoreboard(((Player) e.getWhoClicked()));
 

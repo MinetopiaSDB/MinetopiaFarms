@@ -48,6 +48,7 @@ public class Main extends JavaPlugin {
 
 		getConfig().addDefault("KostenVoorEenBaan", 2500);
 		getConfig().addDefault("KrijgItemsBijBaanSelect", true);
+		getConfig().addDefault("PrefixEnabled", true);
 
 		getConfig().addDefault("Banen.Mijnwerker.Enabled", true);
 		getConfig().addDefault("Banen.Mijnwerker.Item", XMaterial.DIAMOND_PICKAXE.name());
