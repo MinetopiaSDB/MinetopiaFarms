@@ -75,8 +75,6 @@ public class MTFarmsCMD implements CommandExecutor {
 			sender.sendMessage(" ");
 			sender.sendMessage(Utils.color("&3Spawn een verkoop NPC: \n&b/mtfarms spawnnpc"));
 			sender.sendMessage(" ");
-			sender.sendMessage(Utils.color("&3Reload Minetopia Farms: \n&b/mtfarms reload"));
-			sender.sendMessage(" ");
 			sender.sendMessage(Utils.color("&3Sloop op regions met MinetopiaFarms flag: &bminetopiafarms.bypassregions"));
 		}
 		return true;
