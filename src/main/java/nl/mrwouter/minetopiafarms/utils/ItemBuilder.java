@@ -13,6 +13,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import io.github.bananapuncher714.nbteditor.NBTEditor;
+
 /**
  * Easily create itemstacks, without messing your hands. <i>Note that if you do
  * use this in one of your projects, leave this notice.</i> <i>Please do credit
@@ -80,6 +82,11 @@ public class ItemBuilder {
 		return new ItemBuilder(is);
 	}
 
+	public ItemBuilder addNBTTag(Object value, Object... keys) {
+		is = NBTEditor.set(is, value, keys);
+		return this;
+	}
+	
 	/**
 	 * Change the durability of the item.
 	 * 

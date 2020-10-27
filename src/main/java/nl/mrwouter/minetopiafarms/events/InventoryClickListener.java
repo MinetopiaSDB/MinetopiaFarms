@@ -1,8 +1,6 @@
 package nl.mrwouter.minetopiafarms.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.cryptomorin.xseries.XMaterial;
 
+import io.github.bananapuncher714.nbteditor.NBTEditor;
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.playerdata.PlayerManager;
 import nl.minetopiasdb.api.playerdata.objects.OnlineSDBPlayer;
@@ -24,34 +23,28 @@ public class InventoryClickListener implements Listener {
 			if (e.getCurrentItem() == null) {
 				return;
 			}
-			String beroep = "none";
-			if (e.getCurrentItem().getType().equals(Material.DIAMOND_HOE)) {
-				beroep = "Boer";
-			} else if (e.getCurrentItem().getType().equals(Material.DIAMOND_AXE)) {
-				beroep = "Houthakker";
-			} else if (e.getCurrentItem().getType().equals(Material.DIAMOND_PICKAXE)) {
-				beroep = "Mijnwerker";
-			}
-			if (!beroep.equalsIgnoreCase("none")) {
-				if (API.getEcon().getBalance(((Player) e.getWhoClicked())) < Main.getPlugin().getConfig()
-						.getInt("KostenVoorEenBaan")) {
-					e.getWhoClicked().sendMessage(Main.getMessage("TeWeinigGeld").replaceAll("<Bedrag>",
+
+			if (NBTEditor.contains(e.getCurrentItem(), "mtfarms_beroep")) {
+				Player player = (Player) e.getWhoClicked();
+				String beroep = NBTEditor.getString(e.getCurrentItem(), "mtfarms_beroep");
+
+				if (API.getEcon().getBalance(player) < Main.getPlugin().getConfig().getInt("KostenVoorEenBaan")) {
+					player.sendMessage(Main.getMessage("TeWeinigGeld").replaceAll("<Bedrag>",
 							"" + Main.getPlugin().getConfig().getInt("KostenVoorEenBaan")));
 					return;
 				}
-				e.getWhoClicked().closeInventory();
-				e.getWhoClicked().sendMessage(Main.getMessage("BaanVeranderd").replaceAll("<Baan>", beroep));
+				player.closeInventory();
+				player.sendMessage(Main.getMessage("BaanVeranderd").replaceAll("<Baan>", beroep));
 
-				API.getEcon().withdrawPlayer(((OfflinePlayer) e.getWhoClicked()),
-						Main.getPlugin().getConfig().getInt("KostenVoorEenBaan"));
+				API.getEcon().withdrawPlayer(player, Main.getPlugin().getConfig().getInt("KostenVoorEenBaan"));
 
-				OnlineSDBPlayer sdbPlayer = PlayerManager.getOnlinePlayer(e.getWhoClicked().getUniqueId());
+				OnlineSDBPlayer sdbPlayer = PlayerManager.getOnlinePlayer(player.getUniqueId());
 
 				if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled")) {
 					sdbPlayer.setPrefix(beroep);
 				}
 
-				API.updateScoreboard(((Player) e.getWhoClicked()));
+				API.updateScoreboard(player);
 
 				if (Main.getPlugin().getConfig().getBoolean("KrijgItemsBijBaanSelect")) {
 					for (String material : Main.getPlugin().getConfig().getStringList("ItemsBijBaanSelect." + beroep))
