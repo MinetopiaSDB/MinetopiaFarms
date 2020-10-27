@@ -89,6 +89,7 @@ public class FarmListener implements Listener {
 				}
 				e.setCancelled(true);
 				crops.setState(CropState.SEEDED);
+				Utils.handleToolDurability(p);
 				Utils.cropPlaces.add(new Utils.GrowingCrop(e.getBlock().getLocation()));
 				e.getBlock().setType(e.getBlock().getType());
 			}
