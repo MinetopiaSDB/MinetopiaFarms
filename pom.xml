@@ -49,6 +49,10 @@
 			<id>mrwouter-repo</id>
 			<url>https://repo.mrwouter.nl/</url>
 		</repository>
+		<repository>
+			<id>CodeMC</id>
+			<url>https://repo.codemc.org/repository/maven-public</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -85,7 +89,7 @@
 		<dependency>
 			<groupId>nl.minetopiasdb</groupId>
 			<artifactId>plugin</artifactId>
-			<version>2.1</version>
+			<version>2.2</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -94,6 +98,11 @@
 			<artifactId>VaultAPI</artifactId>
 			<version>1.7</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.bananapuncher714</groupId>
+			<artifactId>NBTEditor</artifactId>
+			<version>7.16</version>
 		</dependency>
 	</dependencies>
 </project>
