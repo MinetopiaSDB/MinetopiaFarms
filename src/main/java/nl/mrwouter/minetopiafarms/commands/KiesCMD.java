@@ -44,6 +44,7 @@ public class KiesCMD implements CommandExecutor {
 						new ItemBuilder(beroepen.get(beroep).parseItem())
 								.setName(Main.getMessage("ItemName").replace("<Beroep>", beroep))
 								.addLoreLine(Main.getMessage("ItemLore").replace("<Beroep>", beroep.toLowerCase()))
+								.addNBTTag(beroep, "mtfarms_beroep")
 								.toItemStack());
 				index++;
 			}
