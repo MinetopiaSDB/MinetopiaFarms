@@ -14,7 +14,7 @@ import nl.mrwouter.minetopiafarms.utils.CustomFlags;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
 
-public class    TreeFarmer implements Listener {
+public class TreeFarmer implements Listener {
 
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
