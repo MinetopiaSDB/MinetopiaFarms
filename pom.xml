@@ -10,32 +10,67 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<filters>
+								<filter>
+									<artifact>*</artifact>
+									<excludes>
+										<exclude>META-INF/*.MF</exclude>
+									</excludes>
+								</filter>
+								<filter>
+									<artifact>com.github.cryptomorin:XSeries</artifact>
+									<includes>
+										<!-- Include XMaterial and child classes -->
+										<include>com/cryptomorin/xseries/XMaterial*.class</include>
+									</includes>
+								</filter>
+							</filters>
+
+							<relocations>
+								<relocation>
+									<pattern>com.cryptomorin.xseries</pattern>
+									<shadedPattern>nl.mrwouter.minetopiafarms.shaded.xseries</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>io.github.bananapuncher714</pattern>
+									<shadedPattern>nl.mrwouter.minetopiafarms.shaded.bananapuncher714</shadedPattern>
+								</relocation>
+							</relocations>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
-			<url>
-				https://hub.spigotmc.org/nexus/content/repositories/snapshots/
-			</url>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
 			<id>bungeecord-repo</id>
-			<url>
-				https://oss.sonatype.org/content/repositories/snapshots
-			</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 		<repository>
 			<id>vault-repo</id>
-			<url>
-				https://nexus.hc.to/content/repositories/pub_releases
-			</url>
+			<url>https://nexus.hc.to/content/repositories/pub_releases</url>
 		</repository>
 		<repository>
 			<id>enginehub-maven</id>
@@ -59,12 +94,6 @@
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
 			<version>1.16.1-R0.1-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sk89q.worldguard</groupId>
-			<artifactId>worldguard-legacy</artifactId>
-			<version>6.2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

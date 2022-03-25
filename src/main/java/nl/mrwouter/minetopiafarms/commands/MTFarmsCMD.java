@@ -1,5 +1,6 @@
 package nl.mrwouter.minetopiafarms.commands;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import net.citizensnpcs.npc.skin.SkinnableEntity;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
+import org.bukkit.util.StringUtil;
 
 public class MTFarmsCMD implements CommandExecutor, TabCompleter {
 
@@ -28,14 +30,8 @@ public class MTFarmsCMD implements CommandExecutor, TabCompleter {
 			sender.sendMessage(Utils.color("&4ERROR: &cJe mist de permissie minetopiafarms.hulp"));
 			return true;
 		}
-		// More or less just for debug reasons.
-		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
-			sender.sendMessage(
-					Utils.color("&3Cached 'latest': &b" + Updat3r.getInstance().getLatestCached().getVersion()));
-			sender.sendMessage(Utils.color("&3Latest: &b"
-					+ Updat3r.getInstance().getLatestUpdate(Updat3r.PROJECT_NAME, Updat3r.API_KEY).getVersion()));
-			sender.sendMessage(Utils.color("&3Actual version: &b" + Main.getPlugin().getDescription().getVersion()));
-		} else if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
+
+		if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
 			if (!Updat3r.getInstance().getLatestCached().isNewer()) {
 				sender.sendMessage(Utils.color("&cEr is geen update beschikbaar!"));
 				return true;
@@ -79,7 +75,15 @@ public class MTFarmsCMD implements CommandExecutor, TabCompleter {
 	}
 
 	@Override
-	public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-		return Arrays.asList("update", "updateinfo", "spawnnpc");
+	public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
+		if(args.length == 1){
+			return getApplicableTabCompleters(args[0], Arrays.asList("spawnnpc", "update"));
+		}
+
+		return null;
+	}
+
+	public ArrayList<String> getApplicableTabCompleters(String arg, List<String> completions) {
+		return StringUtil.copyPartialMatches(arg, completions, new ArrayList<String>(completions.size()));
 	}
 }

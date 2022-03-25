@@ -47,7 +47,7 @@ public class NPCClickListener implements Listener {
 			if (configPrice.doubleValue() == 0 &&
 					item.getType().toString().contains("LOG") &&
 					clicker.getInventory().removeItem(item).size() == 0)
-				return (item.getAmount() * Main.getPlugin().getConfig().getInt("TerugverkoopPrijs.Houthakker"));
+				return (item.getAmount() * Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Houthakker"));
 		}
 
 		if (configPrice.doubleValue() == 0 || XMaterial.matchXMaterial(item).parseItem() == null)
@@ -60,6 +60,6 @@ public class NPCClickListener implements Listener {
 	}
 
 	private double getJobItemPrice(String job, String itemName){
-		return Double.valueOf(Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs." + job + "." + itemName));
+		return Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs." + job + "." + itemName);
 	}
 }
