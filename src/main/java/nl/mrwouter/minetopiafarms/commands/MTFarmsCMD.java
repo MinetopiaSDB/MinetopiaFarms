@@ -1,11 +1,14 @@
 package nl.mrwouter.minetopiafarms.commands;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -18,7 +21,7 @@ import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 
-public class MTFarmsCMD implements CommandExecutor {
+public class MTFarmsCMD implements CommandExecutor, TabCompleter {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!sender.hasPermission("minetopiafarms.hulp")) {
@@ -56,14 +59,9 @@ public class MTFarmsCMD implements CommandExecutor {
 
 			NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, Main.getMessage("NPC.Name"));
 
-			npc.data().set(NPC.PLAYER_SKIN_UUID_METADATA, Main.getMessage("NPC.Skin.UUID"));
+			npc.data().setPersistent("player-skin-name", Main.getMessage("NPC.Skin.Name"));
+			npc.data().setPersistent("player-skin-use-latest", false);
 
-			npc.spawn(player.getLocation());
-
-			((SkinnableEntity) npc.getEntity()).setSkinName(Bukkit.getOfflinePlayer(UUID.fromString(Main.getMessage("NPC.Skin.UUID"))).getName());
-
-			npc.despawn(DespawnReason.PENDING_RESPAWN);
-			npc.setName(Colorizer.parseColors(Main.getMessage("NPC.Name")));
 			npc.spawn(player.getLocation());
 
 			sender.sendMessage(Utils.color("&3NPC gespanwed op jouw huidige locatie!"));
@@ -80,4 +78,8 @@ public class MTFarmsCMD implements CommandExecutor {
 		return true;
 	}
 
+	@Override
+	public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+		return Arrays.asList("update", "updateinfo", "spawnnpc");
+	}
 }

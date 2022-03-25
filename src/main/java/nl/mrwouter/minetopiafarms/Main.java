@@ -43,8 +43,11 @@ public class Main extends JavaPlugin {
 			Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
 		}
 
+		MTFarmsCMD mtFarmsCMD = new MTFarmsCMD();
+
 		getCommand("kies").setExecutor(new KiesCMD());
-		getCommand("minetopiafarms").setExecutor(new MTFarmsCMD());
+		getCommand("minetopiafarms").setExecutor(mtFarmsCMD);
+		getCommand("minetopiafarms").setTabCompleter(mtFarmsCMD);
 
 		getConfig().set("ItemsBijBaanSelect.Visser", null);
 		getConfig().set("MogelijkeItemsBijVangst", null);
