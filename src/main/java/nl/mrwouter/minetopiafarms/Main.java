@@ -49,6 +49,7 @@ public class Main extends JavaPlugin {
 		getCommand("minetopiafarms").setExecutor(mtFarmsCMD);
 		getCommand("minetopiafarms").setTabCompleter(mtFarmsCMD);
 
+		Utils.buildConfig(getConfig());
 		getConfig().set("ItemsBijBaanSelect.Visser", null);
 		getConfig().set("MogelijkeItemsBijVangst", null);
 		getConfig().set("VangstItemNaam", null);
