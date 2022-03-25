@@ -36,9 +36,8 @@ public class NPCClickListener implements Listener {
 		}
 	}
 
-	private double calculateItemPrice(ItemStack item, Player clicker){
-		XMaterial xMaterialItem = XMaterial.valueOf(item.getType().name());
-		String itemName = xMaterialItem.name();
+	private double calculateItemPrice(ItemStack item, Player clicker){;
+		String itemName = XMaterial.matchXMaterial(item).name();
 
 		Double configPrice = getJobItemPrice("Boer", itemName);
 
@@ -51,7 +50,7 @@ public class NPCClickListener implements Listener {
 				return (item.getAmount() * Main.getPlugin().getConfig().getInt("TerugverkoopPrijs.Houthakker"));
 		}
 
-		if (configPrice.doubleValue() == 0 || xMaterialItem.parseItem() == null)
+		if (configPrice.doubleValue() == 0 || XMaterial.matchXMaterial(item).parseItem() == null)
 			return 0;
 
 		if (clicker.getInventory().removeItem(item).size() == 0)
