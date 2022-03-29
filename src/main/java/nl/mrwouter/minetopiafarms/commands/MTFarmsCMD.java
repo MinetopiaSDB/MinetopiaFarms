@@ -1,11 +1,15 @@
 package nl.mrwouter.minetopiafarms.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -17,22 +21,17 @@ import net.citizensnpcs.npc.skin.SkinnableEntity;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
+import org.bukkit.util.StringUtil;
 
-public class MTFarmsCMD implements CommandExecutor {
+public class MTFarmsCMD implements CommandExecutor, TabCompleter {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!sender.hasPermission("minetopiafarms.hulp")) {
 			sender.sendMessage(Utils.color("&4ERROR: &cJe mist de permissie minetopiafarms.hulp"));
 			return true;
 		}
-		// More or less just for debug reasons.
-		if (args.length == 1 && args[0].equalsIgnoreCase("updateinfo")) {
-			sender.sendMessage(
-					Utils.color("&3Cached 'latest': &b" + Updat3r.getInstance().getLatestCached().getVersion()));
-			sender.sendMessage(Utils.color("&3Latest: &b"
-					+ Updat3r.getInstance().getLatestUpdate(Updat3r.PROJECT_NAME, Updat3r.API_KEY).getVersion()));
-			sender.sendMessage(Utils.color("&3Actual version: &b" + Main.getPlugin().getDescription().getVersion()));
-		} else if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
+
+		if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
 			if (!Updat3r.getInstance().getLatestCached().isNewer()) {
 				sender.sendMessage(Utils.color("&cEr is geen update beschikbaar!"));
 				return true;
@@ -56,14 +55,9 @@ public class MTFarmsCMD implements CommandExecutor {
 
 			NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, Main.getMessage("NPC.Name"));
 
-			npc.data().set(NPC.PLAYER_SKIN_UUID_METADATA, Main.getMessage("NPC.Skin.UUID"));
+			npc.data().setPersistent("player-skin-name", Main.getMessage("NPC.Skin.Name"));
+			npc.data().setPersistent("player-skin-use-latest", false);
 
-			npc.spawn(player.getLocation());
-
-			((SkinnableEntity) npc.getEntity()).setSkinName(Bukkit.getOfflinePlayer(UUID.fromString(Main.getMessage("NPC.Skin.UUID"))).getName());
-
-			npc.despawn(DespawnReason.PENDING_RESPAWN);
-			npc.setName(Colorizer.parseColors(Main.getMessage("NPC.Name")));
 			npc.spawn(player.getLocation());
 
 			sender.sendMessage(Utils.color("&3NPC gespanwed op jouw huidige locatie!"));
@@ -80,4 +74,16 @@ public class MTFarmsCMD implements CommandExecutor {
 		return true;
 	}
 
+	@Override
+	public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
+		if(args.length == 1){
+			return getApplicableTabCompleters(args[0], Arrays.asList("spawnnpc", "update"));
+		}
+
+		return null;
+	}
+
+	public ArrayList<String> getApplicableTabCompleters(String arg, List<String> completions) {
+		return StringUtil.copyPartialMatches(arg, completions, new ArrayList<String>(completions.size()));
+	}
 }

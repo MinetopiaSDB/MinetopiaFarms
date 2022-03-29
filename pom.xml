@@ -4,46 +4,85 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.mrwouter</groupId>
 	<artifactId>minetopiafarms</artifactId>
-	<version>2.11</version>
+	<version>2.11.2</version>
 	<name>MinetopiaFarms</name>
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<filters>
+								<filter>
+									<artifact>*</artifact>
+									<excludes>
+										<exclude>META-INF/*.MF</exclude>
+									</excludes>
+								</filter>
+								<filter>
+									<artifact>com.github.cryptomorin:XSeries</artifact>
+									<includes>
+										<!-- Include XMaterial and child classes -->
+										<include>com/cryptomorin/xseries/XMaterial*.class</include>
+									</includes>
+								</filter>
+							</filters>
+
+							<relocations>
+								<relocation>
+									<pattern>com.cryptomorin.xseries</pattern>
+									<shadedPattern>nl.mrwouter.minetopiafarms.shaded.xseries</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>io.github.bananapuncher714</pattern>
+									<shadedPattern>nl.mrwouter.minetopiafarms.shaded.bananapuncher714</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>nl.mrwouter.worldguard_</pattern>
+									<shadedPattern>nl.mrwouter.minetopiafarms.shaded.worldguard_</shadedPattern>
+								</relocation>
+							</relocations>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
-			<url>
-				https://hub.spigotmc.org/nexus/content/repositories/snapshots/
-			</url>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
 			<id>bungeecord-repo</id>
-			<url>
-				https://oss.sonatype.org/content/repositories/snapshots
-			</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 		<repository>
 			<id>vault-repo</id>
-			<url>
-				http://nexus.hc.to/content/repositories/pub_releases
-			</url>
+			<url>https://nexus.hc.to/content/repositories/pub_releases</url>
 		</repository>
 		<repository>
-			<id>sk89q-repo</id>
-			<url>http://maven.sk89q.com/repo/</url>
+			<id>enginehub-maven</id>
+			<url>https://maven.enginehub.org/repo/</url>
 		</repository>
 		<repository>
 			<id>everything</id>
-			<url>http://repo.citizensnpcs.co/</url>
+			<url>https://repo.citizensnpcs.co/</url>
 		</repository>
 		<repository>
 			<id>mrwouter-repo</id>
@@ -51,7 +90,7 @@
 		</repository>
 		<repository>
 			<id>CodeMC</id>
-			<url>https://repo.codemc.org/repository/maven-public</url>
+			<url>https://repo.codemc.org/repository/maven-public/</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -60,6 +99,24 @@
 			<artifactId>spigot-api</artifactId>
 			<version>1.16.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.mrwouter</groupId>
+			<artifactId>worldguard_core</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.mrwouter</groupId>
+			<artifactId>worldguard_6</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.mrwouter</groupId>
+			<artifactId>worldguard_7</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sk89q.worldguard</groupId>
@@ -89,7 +146,7 @@
 		<dependency>
 			<groupId>nl.minetopiasdb</groupId>
 			<artifactId>plugin</artifactId>
-			<version>2.2</version>
+			<version>2.4.4</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -101,8 +158,15 @@
 		</dependency>
 		<dependency>
 			<groupId>io.github.bananapuncher714</groupId>
-			<artifactId>NBTEditor</artifactId>
-			<version>7.16</version>
+			<artifactId>nbteditor</artifactId>
+			<version>7.18.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.cryptomorin</groupId>
+			<artifactId>XSeries</artifactId>
+			<version>8.7.0</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>

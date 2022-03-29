@@ -29,3 +29,5 @@
 hs_err_pid*
 /bin/
 /target/
+
+dependency-reduced-pom.xml
