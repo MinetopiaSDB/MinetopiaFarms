@@ -129,7 +129,7 @@ public class Updat3r {
 		p.sendMessage("§3Je maakt nu gebruik van versie §b" + Main.getPlugin().getDescription().getVersion() + "§3.");
 		p.sendMessage("§3De nieuwste versie is §b" + update.getVersion());
 		if (update.isCritical()) {
-			p.sendMessage("§3§lLet op, deze build is gemarkeert als belangrijk. Installeer hem zo snel mogelijk!");
+			p.sendMessage("§3§lLet op, deze build is gemarkeerd als belangrijk. Installeer hem zo snel mogelijk!");
 		}
 		p.sendMessage("§3Om deze update te installeren, type §b/mtfarms update.");
 		p.sendMessage("   §3-=-=-=[§bMinetopiaFarms§3]=-=-=-   ");
@@ -147,8 +147,8 @@ public class Updat3r {
 
 	public static class Update {
 
-		private String version, downloadlink, releaseDate;
-		private boolean critical;
+		private final String version, downloadlink, releaseDate;
+		private final boolean critical;
 
 		public Update(String version, String downloadlink, String releaseDate, boolean critical) {
 			this.version = version;
