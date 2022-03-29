@@ -58,8 +58,8 @@ public class Updat3r {
 
 			int errorcode = rootobj.get("status").getAsInt();
 			if (errorcode != 200) {
-				System.out.println(
-						"[Updat3r] [" + project + "] An error has occured: " + rootobj.get("message").getAsString());
+				Main.getPlugin().getLogger().warning(
+						"[Updat3r] An error has occured: " + rootobj.get("message").getAsString());
 				return null;
 			}
 			JsonArray updates = rootobj.get("updates").getAsJsonArray();
@@ -73,8 +73,8 @@ public class Updat3r {
 			}
 			return null;
 		} catch (Exception ex) {
-			System.out.println("[Updat3r] [" + project
-					+ "] An error has occured. Please report the stacktrace below to the developer of " + project);
+			Main.getPlugin().getLogger().warning("[Updat3r] " +
+					"An error has occured. Please report the stacktrace below to the developer of " + project);
 			ex.printStackTrace();
 			return null;
 		}
@@ -110,14 +110,14 @@ public class Updat3r {
 				outputStream.close();
 				inputStream.close();
 			} else {
-				System.out.println("[Updat3r] [" + project
-						+ "] An error has occured whilst downloading this resource. Please report the stacktrace below to the developer of "
+				Main.getPlugin().getLogger().warning("[Updat3r] " +
+						"An error has occured whilst downloading this resource. Please report the stacktrace below to the developer of "
 						+ project + " (resp. code: " + responseCode + ")");
 			}
 			httpConn.disconnect();
 		} catch (Exception ex) {
-			System.out.println("[Updat3r] [" + project
-					+ "] An error has occured whilst downloading this resource. Please report the stacktrace below to the developer of "
+			Main.getPlugin().getLogger().warning("[Updat3r] " +
+					"An error has occured whilst downloading this resource. Please report the stacktrace below to the developer of "
 					+ project);
 			ex.printStackTrace();
 		}
