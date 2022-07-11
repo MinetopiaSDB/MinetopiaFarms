@@ -47,7 +47,6 @@ public class Main extends JavaPlugin {
 
 		getCommand("kies").setExecutor(new KiesCMD());
 		getCommand("minetopiafarms").setExecutor(mtFarmsCMD);
-		getCommand("minetopiafarms").setTabCompleter(mtFarmsCMD);
 
 		Utils.buildConfig(getConfig());
 		getConfig().set("ItemsBijBaanSelect.Visser", null);

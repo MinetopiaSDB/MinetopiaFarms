@@ -7,9 +7,8 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -23,7 +22,7 @@ import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 import org.bukkit.util.StringUtil;
 
-public class MTFarmsCMD implements CommandExecutor, TabCompleter {
+public class MTFarmsCMD implements TabExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (!sender.hasPermission("minetopiafarms.hulp")) {
