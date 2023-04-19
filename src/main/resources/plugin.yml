@@ -1,10 +1,10 @@
 name: MinetopiaFarms
-version: '2.11.2'
+version: ${project.version}
 api-version: 1.13
 author: MrWouter
 description: 'MinetopiaFarms is een gemakkelijke manier om beroepen aan jouw server toe te voegen!'
 main: nl.mrwouter.minetopiafarms.Main
-soft-depend: [Citizens, MinetopiaSDB, WorldGuard, WorldEdit, Vault]
+softdepend: [Citizens, MinetopiaSDB, WorldGuard, WorldEdit, Vault]
 loadbefore: [WorldGuard]
 commands:
      kies:

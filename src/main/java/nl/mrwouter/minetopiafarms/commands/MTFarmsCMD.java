@@ -3,8 +3,11 @@ package nl.mrwouter.minetopiafarms.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
+import net.citizensnpcs.api.event.DespawnReason;
+import net.citizensnpcs.npc.skin.Skin;
+import net.citizensnpcs.npc.skin.SkinnableEntity;
+import net.citizensnpcs.trait.SkinTrait;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,10 +16,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.util.Colorizer;
-import net.citizensnpcs.npc.skin.SkinnableEntity;
 import nl.mrwouter.minetopiafarms.Main;
 import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
@@ -54,9 +54,12 @@ public class MTFarmsCMD implements TabExecutor {
 
 			NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, Main.getMessage("NPC.Name"));
 
-			npc.data().setPersistent("player-skin-name", Main.getMessage("NPC.Skin.Name"));
-			npc.data().setPersistent("player-skin-use-latest", false);
 
+			npc.spawn(player.getLocation());
+
+			SkinTrait trait = npc.getOrAddTrait(SkinTrait.class);
+			trait.setSkinName(Main.getMessage("NPC.Skin.Name"), true);
+			npc.despawn(DespawnReason.PENDING_RESPAWN);
 			npc.spawn(player.getLocation());
 
 			sender.sendMessage(Utils.color("&3NPC gespanwed op jouw huidige locatie!"));
