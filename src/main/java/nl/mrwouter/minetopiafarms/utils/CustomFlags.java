@@ -20,8 +20,6 @@ public class CustomFlags {
 		} catch (FlagConflictException e) {
 			farmFlag = (StringFlag) registry.get("minetopiafarms");
 		}
-
-
 	}
 	
 	public static boolean isAllowed(Player p, Location loc, String name) {

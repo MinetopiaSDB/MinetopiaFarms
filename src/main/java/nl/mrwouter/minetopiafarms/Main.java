@@ -1,7 +1,6 @@
 package nl.mrwouter.minetopiafarms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
@@ -12,8 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.material.Crops;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.cryptomorin.xseries.XMaterial;
 
 import nl.mrwouter.minetopiafarms.commands.KiesCMD;
 import nl.mrwouter.minetopiafarms.commands.MTFarmsCMD;
@@ -33,6 +30,10 @@ public class Main extends JavaPlugin {
 
 	private static Main pl;
 
+    public void onLoad() {
+        CustomFlags.loadCustomFlag();
+    }
+
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new BlockBreaker(), this);
 		Bukkit.getPluginManager().registerEvents(new FarmListener(), this);
@@ -43,10 +44,8 @@ public class Main extends JavaPlugin {
 			Bukkit.getPluginManager().registerEvents(new NPCClickListener(), this);
 		}
 
-		MTFarmsCMD mtFarmsCMD = new MTFarmsCMD();
-
 		getCommand("kies").setExecutor(new KiesCMD());
-		getCommand("minetopiafarms").setExecutor(mtFarmsCMD);
+		getCommand("minetopiafarms").setExecutor(new MTFarmsCMD());
 
 		Utils.buildConfig(getConfig());
 		getConfig().set("ItemsBijBaanSelect.Visser", null);
@@ -62,8 +61,6 @@ public class Main extends JavaPlugin {
 		saveConfig();
 
 		pl = this;
-
-		CustomFlags.loadCustomFlag();
 
 		final int cropgrowschedulertime = getConfig().getInt("scheduler.cropgrow");
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
