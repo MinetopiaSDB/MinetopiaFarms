@@ -48,14 +48,14 @@ public class NPCClickListener implements Listener {
 
 			if (configPrice == 0 &&
 					item.getType().toString().contains("LOG") &&
-					clicker.getInventory().removeItem(item).size() == 0)
+                    clicker.getInventory().removeItem(item).isEmpty())
 				return (item.getAmount() * Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Houthakker"));
 		}
 
 		if (configPrice == 0 || XMaterial.matchXMaterial(item).parseItem() == null)
 			return 0;
 
-		if (clicker.getInventory().removeItem(item).size() == 0)
+		if (clicker.getInventory().removeItem(item).isEmpty())
 			return configPrice * item.getAmount();
 
 		return 0;

@@ -31,14 +31,31 @@ public class MTFarmsCMD implements TabExecutor {
 		}
 
 		if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
-			if (!Updat3r.getInstance().getLatestCached().isNewer()) {
+			Updat3r.Update update;
+			try {
+				update = Updat3r.getInstance().getLatestCached().get();
+			} catch (Exception ex) {
+				ex.printStackTrace();
 				sender.sendMessage(Utils.color("&cEr is geen update beschikbaar!"));
 				return true;
 			}
+
+			if (update == null || !update.isNewer()) {
+				sender.sendMessage(Utils.color("&cEr is geen update beschikbaar!"));
+				return true;
+			}
+
 			sender.sendMessage(Utils.color("&3We gaan de update nu installeren!"));
-			Updat3r.getInstance().downloadLatest(Updat3r.getInstance().getLatestCached().getDownloadLink(),
-					"MinetopiaFarms", Main.getPlugin());
-			Bukkit.reload();
+
+			Updat3r.getInstance().downloadLatest(update.getDownloadLink(),
+					Main.getPlugin());
+
+			for (Player player : Bukkit.getOnlinePlayers()) {
+				player.kickPlayer("Installing update..");
+			}
+
+			Bukkit.getScheduler().runTask(Main.getPlugin(), Bukkit::reload);
+			return true;
 		} else if (args.length == 1 && args[0].equalsIgnoreCase("spawnnpc")) {
 
 			if (Bukkit.getPluginManager().getPlugin("Citizens") == null) {

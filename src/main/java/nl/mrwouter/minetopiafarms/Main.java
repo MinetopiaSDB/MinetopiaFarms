@@ -11,6 +11,7 @@ import org.bukkit.CropState;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -111,11 +112,29 @@ public class Main extends JavaPlugin {
 			}
 		}, cropScheduleTime, cropScheduleTime);
 
-		Updat3r.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {
 			@EventHandler
-			public void onJoin(PlayerJoinEvent e) {
-				Updat3r.getInstance().sendUpdateMessageLater(e.getPlayer());
+			public void onJoin(PlayerJoinEvent event) {
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(), () -> {
+					Player player = event.getPlayer();
+					if (!player.isOnline()) {
+						return;
+					}
+
+					if (player.hasPermission("minetopiasdb.sdb")) {
+						Updat3r.getInstance().getLatestCached()
+								.thenAccept(update -> {
+									if (update != null && update.isNewer()) {
+										player.sendMessage("   §3-=-=-=[§bMinetopiaFarms§3]=-=-=-   ");
+										player.sendMessage("§3Er is een update beschikbaar voor §bMinetopiaFarms§3!");
+										player.sendMessage("§3Je maakt nu gebruik van versie §b" + Main.getPlugin().getDescription().getVersion() + "§3.");
+										player.sendMessage("§3De nieuwste versie is §b" + update.getVersion());
+										player.sendMessage("§3Om deze update te installeren, type §b/mtfarms update.");
+										player.sendMessage("   §3-=-=-=[§bMinetopiaFarms§3]=-=-=-   ");
+									}
+								});
+					}
+				}, 20 * 3L);
 			}
 		}, this);
 	}
@@ -139,13 +158,6 @@ public class Main extends JavaPlugin {
 		for (Location l : Utils.treePlaces.keySet()) {
 			TreeObj obj = Utils.treePlaces.get(l);
 			l.getBlock().setType(obj.getMaterial());
-			if (!Utils.is113orUp()) {
-				try {
-					l.getBlock().getClass().getMethod("setData", byte.class).invoke(l.getBlock(), obj.getData());
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
 		}
 	}
 
