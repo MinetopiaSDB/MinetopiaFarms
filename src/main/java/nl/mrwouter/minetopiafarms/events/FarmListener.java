@@ -23,7 +23,8 @@ public class FarmListener implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if ((e.getBlock().getType() == Utils.getBeetrootMaterial() || e.getBlock().getType() == Utils.getCropsMaterial()
+		if ((e.getBlock().getType() == Utils.getBeetrootMaterial()
+				|| e.getBlock().getType() == Utils.getCropsMaterial()
 				|| e.getBlock().getType() == Utils.getMelonMaterial()
 				|| e.getBlock().getType() == XMaterial.PUMPKIN.parseMaterial()
 				|| e.getBlock().getType() == XMaterial.CARROTS.parseMaterial()

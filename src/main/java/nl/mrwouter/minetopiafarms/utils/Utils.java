@@ -157,11 +157,22 @@ public class Utils {
 
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.COAL_ORE", 10);
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.IRON_ORE", 25);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.COPPER_ORE", 25);
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.EMERALD_ORE", 30);
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.GOLD_ORE", 25);
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.LAPIS_ORE", 35);
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.REDSTONE_ORE", 25);
 		config.addDefault("TerugverkoopPrijs.Mijnwerker.DIAMOND_ORE", 80);
+
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_COAL_ORE", 10);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_IRON_ORE", 25);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_COPPER_ORE", 25);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_EMERALD_ORE", 30);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_GOLD_ORE", 25);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_LAPIS_ORE", 35);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_REDSTONE_ORE", 25);
+		config.addDefault("TerugverkoopPrijs.Mijnwerker.DEEPSLATE_DIAMOND_ORE", 80);
+
 		config.addDefault("TerugverkoopPrijs.Boer.BEETROOTS", 35);
 		config.addDefault("TerugverkoopPrijs.Boer.WHEAT", 10);
 		config.addDefault("TerugverkoopPrijs.Boer.MELON", 30);
@@ -216,9 +227,18 @@ public class Utils {
 		config.addDefault("scheduler.miner.DIAMOND_ORE", 2400);
 		config.addDefault("scheduler.miner.EMERALD_ORE", 2400);
 		config.addDefault("scheduler.miner.GOLD_ORE", 2400);
+		config.addDefault("scheduler.miner.COPPER_ORE", 2400);
 		config.addDefault("scheduler.miner.IRON_ORE", 2400);
 		config.addDefault("scheduler.miner.LAPIS_ORE", 2400);
 		config.addDefault("scheduler.miner.REDSTONE_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_COAL_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_DIAMOND_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_EMERALD_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_GOLD_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_COPPER_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_IRON_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_LAPIS_ORE", 2400);
+		config.addDefault("scheduler.miner.DEEPSLATE_REDSTONE_ORE", 2400);
 
 		config.set("ItemsBijBaanSelect.Visser", null);
 		config.set("MogelijkeItemsBijVangst", null);
