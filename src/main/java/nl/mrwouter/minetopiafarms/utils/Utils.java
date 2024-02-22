@@ -204,14 +204,14 @@ public class Utils {
 
 		config.addDefault("Messages.GeenRegion", "&4ERROR: &cDeze region moet de tag &4'<Tag>' &chebben.");
 		config.addDefault("Messages.Creative",
-				"&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass..");
+				"&3Omdat jij in &bCREATIVE &3zit heb jij een MinetopiaFarms bypass.");
+		config.addDefault("Messages.MateriaalOnbekend", "&4ERROR: &cJe mag dit blok niet slopen.");
 
 		config.addDefault("Messages.NPC.Name", "&6Verkooppunt");
 		config.addDefault("Messages.NPC.Skin.Name", "MrWouter");
 		config.addDefault("Messages.NPC.Skin.UUID", "836ce767-0e25-45a0-8012-fa1864d2b6aa");
 
 		config.addDefault("scheduler.cropgrow", 120);
-		config.addDefault("scheduler.perstatetime", 120);
 		config.addDefault("scheduler.miner.COAL_ORE", 2400);
 		config.addDefault("scheduler.miner.DIAMOND_ORE", 2400);
 		config.addDefault("scheduler.miner.EMERALD_ORE", 2400);

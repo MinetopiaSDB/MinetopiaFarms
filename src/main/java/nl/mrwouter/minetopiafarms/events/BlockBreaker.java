@@ -19,12 +19,12 @@ public class BlockBreaker implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if (CustomFlags.hasFlag(p, e.getBlock().getLocation())
+		if (CustomFlags.hasFlag(e.getBlock().getLocation())
 				&& (!p.hasPermission("minetopiafarms.bypassregions") && p.getGameMode() != GameMode.CREATIVE)) {
 			e.setCancelled(true);
 		}
 
-		if (e.getBlock().getType().toString().contains("_ORE") && CustomFlags.hasFlag(p, e.getBlock().getLocation())) {
+		if (e.getBlock().getType().toString().contains("_ORE") && CustomFlags.hasFlag(e.getBlock().getLocation())) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
@@ -46,9 +46,16 @@ public class BlockBreaker implements Listener {
 				return;
 			}
 
-			Material blockType = e.getBlock().getType().toString().contains("REDSTONE_ORE") ? Material.REDSTONE_ORE
+			Material blockType = e.getBlock().getType().toString().contains("REDSTONE_ORE")
+					? Material.REDSTONE_ORE
 					: e.getBlock().getType();
 			e.setCancelled(true);
+
+			if (Main.getPlugin().getConfig().get("scheduler.miner." + blockType.name()) == null) {
+				p.sendMessage(Main.getMessage("MateriaalOnbekend"));
+				e.setCancelled(true);
+				return;
+			}
 
 			e.getPlayer().getInventory().addItem(new ItemStack(blockType, 1));
 

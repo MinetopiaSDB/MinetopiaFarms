@@ -28,7 +28,7 @@ public class FarmListener implements Listener {
 				|| e.getBlock().getType() == XMaterial.PUMPKIN.parseMaterial()
 				|| e.getBlock().getType() == XMaterial.CARROTS.parseMaterial()
 				|| e.getBlock().getType() == XMaterial.POTATOES.parseMaterial())
-				&& CustomFlags.hasFlag(p, e.getBlock().getLocation())) {
+				&& CustomFlags.hasFlag(e.getBlock().getLocation())) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;

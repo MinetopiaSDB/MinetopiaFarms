@@ -2,9 +2,14 @@ package nl.mrwouter.minetopiafarms;
 
 import java.util.ArrayList;
 
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
+import nl.mrwouter.worldguard_6.WorldGuard6;
+import nl.mrwouter.worldguard_7.WorldGuard7;
+import nl.mrwouter.worldguard_core.WorldGuard;
 import org.bukkit.Bukkit;
 import org.bukkit.CropState;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,15 +29,30 @@ import nl.mrwouter.minetopiafarms.utils.Updat3r;
 import nl.mrwouter.minetopiafarms.utils.Utils;
 import nl.mrwouter.minetopiafarms.utils.Utils.GrowingCrop;
 import nl.mrwouter.minetopiafarms.utils.Utils.TreeObj;
+import sun.security.pkcs11.wrapper.CK_SSL3_KEY_MAT_OUT;
 
 @SuppressWarnings("deprecation")
 public class Main extends JavaPlugin {
 
-	private static Main pl;
+	private static Main plugin;
+	private WorldGuard worldGuardPlugin;
 
-    public void onLoad() {
-        CustomFlags.loadCustomFlag();
-    }
+	public WorldGuard getWorldGuard() {
+		return worldGuardPlugin;
+	}
+
+	public void onLoad() {
+		if (Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion().startsWith("6.")) {
+			worldGuardPlugin = new WorldGuard6();
+			getLogger().info("Using WorldGuard v6 (" + worldGuardPlugin.getClass().getName() + ")");
+		} else {
+			worldGuardPlugin = new WorldGuard7();
+			getLogger().info("Using WorldGuard v7 (" + worldGuardPlugin.getClass().getName() + ")");
+		}
+
+		FlagRegistry registry = getWorldGuard().getFlagRegistry();
+		CustomFlags.loadCustomFlag(registry);
+	}
 
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new BlockBreaker(), this);
@@ -48,6 +68,7 @@ public class Main extends JavaPlugin {
 		getCommand("minetopiafarms").setExecutor(new MTFarmsCMD());
 
 		Utils.buildConfig(getConfig());
+		getConfig().set("scheduler.perstatetime", null);
 		getConfig().set("ItemsBijBaanSelect.Visser", null);
 		getConfig().set("MogelijkeItemsBijVangst", null);
 		getConfig().set("VangstItemNaam", null);
@@ -60,35 +81,35 @@ public class Main extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 
-		pl = this;
+		plugin = this;
 
-		final int cropgrowschedulertime = getConfig().getInt("scheduler.cropgrow");
+		final int cropScheduleTime = getConfig().getInt("scheduler.cropgrow");
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-			int growtime = getConfig().getInt("scheduler.perstatetime");
 			for (GrowingCrop gcrop : new ArrayList<>(Utils.cropPlaces)) {
-				BlockState state = gcrop.location.getBlock().getState();
-				if (state.getData() instanceof Crops) {
-					gcrop.time += cropgrowschedulertime;
-					Crops crop = (Crops) state.getData();
-					if ((crop.getState().ordinal() + 1) * growtime <= gcrop.time) {
-						if (crop.getState() == CropState.RIPE) {
-							Utils.cropPlaces.remove(gcrop);
-							continue;
-						}
-
-						crop.setState(CropState.values()[crop.getState().ordinal() + 1]);
-						state.update();
-					}
-				} else {
+				Block block = gcrop.location.getBlock();
+				BlockState state = block.getState();
+				if (!(state.getData() instanceof Crops)) {
 					Utils.cropPlaces.remove(gcrop);
+
 				}
+
+				Crops crop = (Crops) state.getData();
+				if (crop.getState() == CropState.RIPE) {
+					Utils.cropPlaces.remove(gcrop);
+					continue;
+				}
+
+				crop.setState(CropState.values()[crop.getState().ordinal() + 1]);
+				state.setData(crop);
+				state.update(true);
 			}
-		}, cropgrowschedulertime, cropgrowschedulertime);
+		}, cropScheduleTime, cropScheduleTime);
+
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 			for (Location l : Utils.blockReplaces.keySet()) {
 				l.getBlock().setType(Utils.blockReplaces.get(l));
 			}
-		}, 40 * 20L, 40 * 20L);
+		}, cropScheduleTime, cropScheduleTime);
 
 		Updat3r.getInstance().startTask();
 		Bukkit.getPluginManager().registerEvents(new Listener() {
@@ -108,7 +129,8 @@ public class Main extends JavaPlugin {
 			if (state.getData() instanceof Crops) {
 				Crops crop = (Crops) state.getData();
 				crop.setState(CropState.RIPE);
-				state.update();
+				state.setData(crop);
+				state.update(true);
 			}
 		}
 		for (Location l : Utils.blockReplaces.keySet()) {
@@ -128,10 +150,10 @@ public class Main extends JavaPlugin {
 	}
 
 	public static Main getPlugin() {
-		return pl;
+		return plugin;
 	}
 
 	public static String getMessage(String path) {
-		return Utils.color(pl.getConfig().getString("Messages." + path));
+		return Utils.color(getPlugin().getConfig().getString("Messages." + path));
 	}
 }

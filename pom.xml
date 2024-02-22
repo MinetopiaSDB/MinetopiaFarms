@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.mrwouter</groupId>
 	<artifactId>minetopiafarms</artifactId>
-	<version>2.11.4</version>
+	<version>2.12</version>
 	<name>MinetopiaFarms</name>
 	<build>
 		<resources>
@@ -103,9 +103,10 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.16.1-R0.1-SNAPSHOT</version>
+			<version>1.20.4-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- <world*>  -->
 		<dependency>
 			<groupId>nl.mrwouter</groupId>
 			<artifactId>worldguard_core</artifactId>
@@ -142,6 +143,7 @@
 			<version>6.1.4-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- </world*> )-->
 		<dependency>
 			<groupId>net.citizensnpcs</groupId>
 			<artifactId>citizens-main</artifactId>
@@ -152,7 +154,7 @@
 		<dependency>
 			<groupId>nl.minetopiasdb</groupId>
 			<artifactId>plugin</artifactId>
-			<version>2.4.4</version>
+			<version>2.6</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -165,13 +167,13 @@
 		<dependency>
 			<groupId>io.github.bananapuncher714</groupId>
 			<artifactId>nbteditor</artifactId>
-			<version>7.18.5</version>
+			<version>7.19.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.cryptomorin</groupId>
 			<artifactId>XSeries</artifactId>
-			<version>9.3.1</version>
+			<version>9.8.0</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>

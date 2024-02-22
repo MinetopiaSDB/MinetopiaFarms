@@ -20,7 +20,7 @@ public class TreeFarmer implements Listener {
 	public void onBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
 
-		if (e.getBlock().getType().toString().contains("LOG") && CustomFlags.hasFlag(p, e.getBlock().getLocation())) {
+		if (e.getBlock().getType().toString().contains("LOG") && CustomFlags.hasFlag(e.getBlock().getLocation())) {
 			if (Main.getPlugin().getConfig().getBoolean("PrefixEnabled") && !PlayerManager.getOnlinePlayer(e.getPlayer().getUniqueId()).getPrefix().equalsIgnoreCase("Houthakker")) {
 				e.getPlayer().sendMessage(Main.getMessage("BeroepNodig").replaceAll("<Beroep>", "houthakker"));
 				e.setCancelled(true);
