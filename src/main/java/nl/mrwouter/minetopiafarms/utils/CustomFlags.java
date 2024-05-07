@@ -26,14 +26,13 @@ public class CustomFlags {
 		}
 	}
 
-	public static boolean isAllowed(Player player, Location location, String name) {
+	public static boolean isAllowed(Location location, String name) {
 		List<ProtectedRegion> regions = Main.getPlugin().getWorldGuard().getRegions(location);
 
 		return regions.stream()
-				.map(protectedRegion -> Optional.ofNullable(protectedRegion.getFlag(farmFlag))
+				.anyMatch(protectedRegion -> Optional.ofNullable(protectedRegion.getFlag(farmFlag))
 						.orElse("")
-						.equalsIgnoreCase(name))
-				.findAny().isPresent();
+						.equalsIgnoreCase(name));
 	}
 
 	public static boolean hasFlag(Location location) {

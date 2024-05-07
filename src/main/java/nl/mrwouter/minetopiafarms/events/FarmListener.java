@@ -45,7 +45,7 @@ public class FarmListener implements Listener {
 				return;
 			}
 
-			if (!CustomFlags.isAllowed(p, e.getBlock().getLocation(), "farm")) {
+			if (!CustomFlags.isAllowed(e.getBlock().getLocation(), "farm")) {
 				p.sendMessage(Main.getMessage("GeenRegion").replaceAll("<Tag>", "farm"));
 				return;
 			}
