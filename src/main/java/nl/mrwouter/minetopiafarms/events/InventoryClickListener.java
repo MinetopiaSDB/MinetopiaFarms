@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.cryptomorin.xseries.XMaterial;
 
-import io.github.bananapuncher714.nbteditor.NBTEditor;
+import nl.mrwouter.minetopiafarms.utils.NBTEditor;
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.playerdata.PlayerManager;
 import nl.minetopiasdb.api.playerdata.objects.OnlineSDBPlayer;

@@ -39,7 +39,7 @@ public class FarmListener implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			if (!p.getInventory().getItemInMainHand().getType().toString().contains("HOE")) {
+			if (!p.getInventory().getItemInMainHand().getType().name().contains("_HOE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "hoe"));
 				e.setCancelled(true);
 				return;

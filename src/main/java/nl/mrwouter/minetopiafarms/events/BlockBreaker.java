@@ -24,7 +24,7 @@ public class BlockBreaker implements Listener {
 			e.setCancelled(true);
 		}
 
-		if (e.getBlock().getType().toString().contains("_ORE") && CustomFlags.hasFlag(e.getBlock().getLocation())) {
+		if (e.getBlock().getType().name().contains("_ORE") && CustomFlags.hasFlag(e.getBlock().getLocation())) {
 			if (p.getGameMode() == GameMode.CREATIVE) {
 				p.sendMessage(Main.getMessage("Creative"));
 				return;
@@ -35,7 +35,7 @@ public class BlockBreaker implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			if (!e.getPlayer().getInventory().getItemInMainHand().getType().toString().contains("PICKAXE")) {
+			if (!e.getPlayer().getInventory().getItemInMainHand().getType().name().contains("_PICKAXE")) {
 				e.getPlayer().sendMessage(Main.getMessage("ToolNodig").replaceAll("<Tool>", "houweel"));
 				e.setCancelled(true);
 				return;
@@ -46,7 +46,7 @@ public class BlockBreaker implements Listener {
 				return;
 			}
 
-			Material blockType = e.getBlock().getType().toString().contains("REDSTONE_ORE")
+			Material blockType = e.getBlock().getType().name().contains("REDSTONE_ORE")
 					? Material.REDSTONE_ORE
 					: e.getBlock().getType();
 			e.setCancelled(true);

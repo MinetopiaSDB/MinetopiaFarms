@@ -47,7 +47,7 @@ public class NPCClickListener implements Listener {
 			configPrice = getJobItemPrice("Mijnwerker", itemName);
 
 			if (configPrice == 0 &&
-					item.getType().toString().contains("LOG") &&
+					item.getType().name().contains("_LOG") &&
                     clicker.getInventory().removeItem(item).isEmpty())
 				return (item.getAmount() * Main.getPlugin().getConfig().getDouble("TerugverkoopPrijs.Houthakker"));
 		}
