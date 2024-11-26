@@ -20,8 +20,11 @@ public class NPCClickListener implements Listener {
 	public void onNPCRightClick(NPCRightClickEvent e) {
 		Player clicker = e.getClicker();
 		NPC clicked = e.getNPC();
-		if (ChatColor.stripColor(Main.getMessage("NPC.Name"))
-				.equals(ChatColor.stripColor(clicked.getName()))) {
+		String expectedNpcName = ChatColor.stripColor(Main.getMessage("NPC.Name"))
+				.replaceAll("<.*>", "");
+		String actualNpcName = ChatColor.stripColor(clicked.getName())
+				.replaceAll("<.*>", "");
+		if (expectedNpcName.equals(actualNpcName)) {
 			double paymentAmount = 0;
 			for (ItemStack item : clicker.getInventory().getContents()) {
 				if (item != null) {
@@ -29,12 +32,14 @@ public class NPCClickListener implements Listener {
 				}
 			}
 
-			if(paymentAmount != 0) {
-				API.getEcon().depositPlayer(clicker, paymentAmount);
-				clicker.sendMessage(
-						Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
-				API.updateScoreboard(clicker);
+			if(paymentAmount == 0) {
+				clicker.sendMessage(Main.getMessage("NietsVanWaarde"));
+				return;
 			}
+			API.getEcon().depositPlayer(clicker, paymentAmount);
+			clicker.sendMessage(
+					Main.getMessage("GeldBetaald").replaceAll("<Bedrag>", Utils.formatMoney(paymentAmount)));
+			API.updateScoreboard(clicker);
 		}
 	}
 

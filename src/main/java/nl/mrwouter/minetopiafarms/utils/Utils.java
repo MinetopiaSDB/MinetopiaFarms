@@ -209,7 +209,9 @@ public class Utils {
 				"&4ERROR: &cOm van baan te veranderen heb je &4\u20ac <Bedrag> &cnodig!");
 
 		config.addDefault("Messages.GeldBetaald",
-				"&3Gelukt! Wij hebben jou &b\u20ac <Bedrag> &3betaald voor jouw opgehaalde spullen!");
+				"&cIk kan je helaas niet verder helpen. Jij hebt geen ");
+		config.addDefault("Messages.NietsVanWaarde",
+					"&4Oeps! &cJij hebt geen verkoopbare spullen bij je. Kom terug als je meer verzameld hebt!");
 
 		config.addDefault("Messages.BaanVeranderd", "&3Jouw baan is succesvol veranderd naar &b<Baan>&3.");
 

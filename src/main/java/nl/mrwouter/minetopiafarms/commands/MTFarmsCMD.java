@@ -79,7 +79,7 @@ public class MTFarmsCMD implements TabExecutor {
 			npc.despawn(DespawnReason.PENDING_RESPAWN);
 			npc.spawn(player.getLocation());
 
-			sender.sendMessage(Utils.color("&3NPC gespanwed op jouw huidige locatie!"));
+			sender.sendMessage(Utils.color("&3NPC gespawned op jouw huidige locatie!"));
 		} else {
 			sender.sendMessage(Utils.color("&bUitleg: &3Voer de command uit bij een region die (bijv.) een farm moet worden."));
 			sender.sendMessage(Utils.color("&3Houthakkers: \n&3&3/rg flag &b<Region> &3minetopiafarms houthakker"));
