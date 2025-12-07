@@ -25,7 +25,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.4</version>
+				<version>3.6.0</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -35,7 +35,7 @@
 						<configuration>
 							<filters>
 								<filter>
-									<artifact>*</artifact>
+                                    <artifact>*:*</artifact>
 									<excludes>
 										<exclude>META-INF/*.MF</exclude>
 									</excludes>
@@ -44,6 +44,7 @@
 									<artifact>com.github.cryptomorin:XSeries</artifact>
 									<includes>
 										<!-- Include XMaterial and child classes -->
+                                        <include>com/cryptomorin/xseries/base/XBase.class</include>
 										<include>com/cryptomorin/xseries/XMaterial*.class</include>
 									</includes>
 								</filter>
@@ -107,7 +108,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.20.6-R0.1-SNAPSHOT</version>
+			<version>1.21.10-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- <world*>  -->
@@ -151,7 +152,7 @@
 		<dependency>
 			<groupId>net.citizensnpcs</groupId>
 			<artifactId>citizens-main</artifactId>
-			<version>2.0.31-SNAPSHOT</version>
+			<version>2.0.40-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -171,19 +172,19 @@
 		<dependency>
 			<groupId>com.github.cryptomorin</groupId>
 			<artifactId>XSeries</artifactId>
-			<version>11.2.0</version>
+			<version>13.5.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.saicone.rtag</groupId>
 			<artifactId>rtag</artifactId>
-			<version>1.5.4</version>
+			<version>da59ab7bc2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.saicone.rtag</groupId>
 			<artifactId>rtag-item</artifactId>
-			<version>1.5.4</version>
+			<version>da59ab7bc2</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
